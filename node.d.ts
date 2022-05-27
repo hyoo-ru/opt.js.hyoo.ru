@@ -2555,11 +2555,11 @@ declare namespace $ {
         Theme(): $$.$mol_theme_auto;
         Source(): $mol_link_source;
         Lights(): $$.$mol_lights_toggle;
-        Hint(): $$.$mol_text;
         file_uri(id: any): string;
         File(id: any): $$.$mol_link;
         menu_content(): readonly any[];
         Menu(): $$.$mol_list;
+        Hint(): $$.$mol_text;
         Menu_page(): $mol_page;
         script_title(id: any): string;
         script(id: any): string;

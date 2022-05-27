@@ -8557,11 +8557,6 @@ var $;
             const obj = new this.$.$mol_lights_toggle();
             return obj;
         }
-        Hint() {
-            const obj = new this.$.$mol_text();
-            obj.text = () => "### Analyze your script\n\tnpx turbotracer path/to/script.js\n### Other tools\n- [JS Benchmarking](https://perf.js.hyoo.ru)\n- [JS Sandbox](https://eval.js.hyoo.ru)";
-            return obj;
-        }
         file_uri(id) {
             return "";
         }
@@ -8584,6 +8579,11 @@ var $;
             obj.rows = () => this.menu_content();
             return obj;
         }
+        Hint() {
+            const obj = new this.$.$mol_text();
+            obj.text = () => "### Analyze your script\n\tnpx turbotracer path/to/script.js\n### Other tools\n- [JS Benchmarking](https://perf.js.hyoo.ru)\n- [JS Sandbox](https://eval.js.hyoo.ru)";
+            return obj;
+        }
         Menu_page() {
             const obj = new this.$.$mol_page();
             obj.title = () => "Modules";
@@ -8591,11 +8591,9 @@ var $;
                 this.Source(),
                 this.Lights()
             ];
-            obj.foot = () => [
-                this.Hint()
-            ];
             obj.body = () => [
-                this.Menu()
+                this.Menu(),
+                this.Hint()
             ];
             return obj;
         }
@@ -8642,14 +8640,14 @@ var $;
         $mol_mem
     ], $hyoo_js_opt.prototype, "Lights", null);
     __decorate([
-        $mol_mem
-    ], $hyoo_js_opt.prototype, "Hint", null);
-    __decorate([
         $mol_mem_key
     ], $hyoo_js_opt.prototype, "File", null);
     __decorate([
         $mol_mem
     ], $hyoo_js_opt.prototype, "Menu", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_js_opt.prototype, "Hint", null);
     __decorate([
         $mol_mem
     ], $hyoo_js_opt.prototype, "Menu_page", null);
@@ -8805,7 +8803,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_marker] {\n\tcolor: var(--mol_theme_special);\n\tpadding: var(--mol_gap_text);\n}\n");
+    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu_page_body] {\n\tjustify-content: space-between;\n}\n\n[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_marker] {\n\tcolor: var(--mol_theme_special);\n\tpadding: var(--mol_gap_text);\n}\n");
 })($ || ($ = {}));
 //hyoo/js/opt/-css/opt.view.css.ts
 ;
