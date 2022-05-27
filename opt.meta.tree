@@ -1,0 +1,3 @@
+include \/mol/offline/install
+
+deploy \/hyoo/js/opt/logo/logo.svg
