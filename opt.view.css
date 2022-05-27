@@ -2,8 +2,12 @@
 	padding: var(--mol_gap_block);
 }
 
+[hyoo_js_opt_hint] {
+	padding: var(--mol_gap_block);
+}
+
 [hyoo_js_opt_script] {
-	flex: 1 0 40rem;
+	flex: 1 0 60rem;
 }
 
 [hyoo_js_opt_script_body] {
