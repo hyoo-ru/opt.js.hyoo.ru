@@ -8589,7 +8589,7 @@ var $;
         }
         Menu_page() {
             const obj = new this.$.$mol_page();
-            obj.title = () => "Functions";
+            obj.title = () => "Files";
             obj.tools = () => [
                 this.Source(),
                 this.Lights()
@@ -8600,7 +8600,7 @@ var $;
             return obj;
         }
         script_title(id) {
-            return "Script";
+            return "";
         }
         script() {
             return "";
