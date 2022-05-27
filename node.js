@@ -4648,7 +4648,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/list/list.view.css", "[mol_list] {\n\twill-change: contents;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex-shrink: 0;\n\tmax-width: 100%;\n\t/* display: flex;\n\talign-items: stretch;\n\talign-content: stretch; */\n\ttransition: none;\n\tmin-height: .5rem;\n}\n\n[mol_list_gap_before] ,\n[mol_list_gap_after] {\n\tdisplay: block !important;\n\tflex: none;\n\ttransition: none;\n\toverflow-anchor: none;\n}\n \n[mol_list] > * {\n\tdisplay: flex;\n}\n");
+    $mol_style_attach("mol/list/list.view.css", "[mol_list] {\n\twill-change: contents;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex-shrink: 0;\n\tmax-width: 100%;\n\t/* display: flex;\n\talign-items: stretch;\n\talign-content: stretch; */\n\ttransition: none;\n\tmin-height: .5rem;\n}\n\n[mol_list_gap_before] ,\n[mol_list_gap_after] {\n\tdisplay: block !important;\n\tflex: none;\n\ttransition: none;\n\toverflow-anchor: none;\n}\n");
 })($ || ($ = {}));
 //mol/list/-css/list.view.css.ts
 ;
@@ -8506,7 +8506,7 @@ var $;
                     - (self_rect?.width ?? 0) / 2
                     + (anchor_rect?.left ?? 0)
                     + this.offset()[0] * (anchor_rect?.width ?? 0);
-                return next;
+                return Math.floor(next);
             }
             top() {
                 const self_rect = this.view_rect();
@@ -8517,7 +8517,7 @@ var $;
                     - (self_rect?.height ?? 0) / 2
                     + (anchor_rect?.top ?? 0)
                     + this.offset()[1] * (anchor_rect?.height ?? 0);
-                return next;
+                return Math.floor(next);
             }
         }
         __decorate([
