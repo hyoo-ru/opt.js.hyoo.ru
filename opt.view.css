@@ -12,4 +12,5 @@
 
 [hyoo_js_opt_script_native_marker] {
 	color: var(--mol_theme_special);
+	padding: var(--mol_gap_text);
 }
