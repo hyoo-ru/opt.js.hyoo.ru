@@ -8603,7 +8603,7 @@ var $;
         }
         Menu_page() {
             const obj = new this.$.$mol_page();
-            obj.title = () => "Files";
+            obj.title = () => "Modules";
             obj.tools = () => [
                 this.Source(),
                 this.Lights()
