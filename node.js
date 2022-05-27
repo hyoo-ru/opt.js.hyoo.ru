@@ -8567,7 +8567,7 @@ var $;
         }
         Hint() {
             const obj = new this.$.$mol_text();
-            obj.text = () => "### Analize your script\n\tnpx turbotracer path/to/script.js\n### Other tools\n- [JS Benchmarking](https://perf.js.hyoo.ru)\n- [JS Sandbox](https://eval.js.hyoo.ru)";
+            obj.text = () => "### Analyze your script\n\tnpx turbotracer path/to/script.js\n### Other tools\n- [JS Benchmarking](https://perf.js.hyoo.ru)\n- [JS Sandbox](https://eval.js.hyoo.ru)";
             return obj;
         }
         file_uri(id) {

@@ -548,7 +548,7 @@ $hyoo_js_opt $mol_book2
 				<= Lights $mol_lights_toggle
 			foot /
 				<= Hint $mol_text text \
-					\### Analize your script
+					\### Analyze your script
 					\	npx turbotracer path/to/script.js
 					\### Other tools
 					\- [JS Benchmarking](https://perf.js.hyoo.ru)
