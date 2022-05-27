@@ -1,0 +1,60 @@
+<!doctype html>
+<html mol_view_root>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<link href="hyoo/js/opt/logo/logo.svg" rel="icon" />
+	</head>
+	<body mol_view_root>
+		<div mol_view_root="$hyoo_js_opt"></div>
+		<script src="web.js" charset="utf-8"></script>
+		<script>
+			$hyoo_js_opt.Root(0).data([
+				{
+					uri: 'foo.js',
+					code: 'function foo(x) {console.log(x)};\nfoo(1);\nfoo(null);',
+					functions: [{
+						source: { start: 0, end: 52 },
+						optimized: true,
+						name: 'foo',
+						versions: [{
+							nativeCalls: [],
+							inlinedFuns: [
+								{
+									pos: 25,
+									name: 'foo',
+									source: {uri: 'foo.js', start: 0, end: 32},
+									nativeCalls: [{pos: 29, reasons: ['Lookup']}],
+								},
+								{
+									pos: 42,
+									name: 'foo',
+									source: {uri: 'foo.js', start: 0, end: 32},
+									nativeCalls: [{pos: 25, reasons: ['NativeCall']}],
+								},
+							],
+						}],
+					}],
+				},
+			])
+		</script>
+	
+				<script src="/mol/build/client/client.js" charset="utf-8"></script>
+				<script>
+					addEventListener( 'load', ()=> {
+
+						const test = document.createElement( 'script' )
+						test.src = 'web.test.js'
+						
+						const audit =  document.createElement( 'script' )
+						audit.src = 'web.audit.js'
+						
+						test.onload = ()=> document.head.appendChild( audit )
+						document.head.appendChild( test )
+
+					} )
+				</script>
+				</body>
+</html>
