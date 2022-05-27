@@ -10,6 +10,15 @@ $hyoo_js_opt $mol_book2
 				<= Source $mol_link_source
 					uri \https://github.com/hyoo-ru/opt.js.hyoo.ru
 				<= Lights $mol_lights_toggle
+			foot /
+				<= Perf $mol_link_iconed
+					title \
+					hint \JS Benchmarking
+					uri \https://perf.js.hyoo.ru
+				<= Eval $mol_link_iconed
+					title \
+					hint \JS Sandbox
+					uri \https://eval.js.hyoo.ru
 			body /
 				<= Menu $mol_list
 					rows <= menu_content /
