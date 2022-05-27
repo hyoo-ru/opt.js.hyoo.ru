@@ -125,6 +125,145 @@ $mol_lights_toggle $mol_check_icon
 	hint @ \Toggle lights
 	checked?val <=> lights?val false
 
+$mol_list $mol_view
+	render_visible_only true
+	render_over 0
+	sub <= rows /$mol_view
+	Empty $mol_view
+	Gap_before $mol_view style * paddingTop <= gap_before 0
+	Gap_after $mol_view style * paddingTop <= gap_after 0
+	view_window /
+		0
+		0
+
+$mol_paragraph $mol_view
+	line_height 24
+	letter_width 7
+	width_limit Infinity
+	sub / <= title
+
+$mol_dimmer $mol_paragraph
+	haystack \
+	needle \
+	sub <= parts /$mol_view_content
+	Low* $mol_paragraph
+		sub /
+			<= string* \
+	High* $mol_paragraph
+		sub /
+			<= string* \
+
+$mol_text_code_token $mol_dimmer
+	attr *
+		^
+		mol_text_code_token_type <= type \
+
+$mol_text_code_token_link $mol_text_code_token
+	dom_name \a
+	type \code-link
+	attr *
+		^
+		href <= haystack \
+		target \_blank
+
+$mol_text_code_row $mol_paragraph
+	text \
+	minimal_height 24
+	numb_showed true
+	Numb $mol_view
+		sub /
+			<= numb 0
+	Token* $mol_text_code_token
+		type <= token_type* \
+		haystack <= token_text* \
+		needle <= highlight \
+	Token_link* $mol_text_code_token_link
+		haystack <= token_text* \
+		needle <= highlight \
+	find_pos* null
+
+$mol_text_code $mol_list
+	attr *
+		^
+		mol_text_code_sidebar_showed <= sidebar_showed false
+	text \
+	text_lines /string
+	find_pos* null
+	Row* $mol_text_code_row
+		numb_showed <= sidebar_showed
+		numb <= row_numb* 0
+		text <= row_text* \
+		highlight <= highlight \
+
+$mol_float $mol_view
+	style *
+		^
+		minHeight \auto
+
+$mol_icon_chevron $mol_icon path \M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z
+
+$mol_check_expand $mol_check
+	Icon $mol_icon_chevron
+	level 0
+	style *
+		^
+		paddingLeft <= level_style \0px
+	checked?val <=> expanded?val false
+	enabled <= expandable false
+
+$mol_grid $mol_view
+	row_height 32
+	row_ids /string[]
+	row_id* null
+	col_ids /
+	records *
+	record* null
+	hierarchy null
+	hierarchy_col \
+	minimal_width 0
+	-
+	sub /
+		<= Head
+		<= Table $mol_grid_table
+			sub <= rows /$mol_view
+	Head $mol_grid_row
+		cells <= head_cells /$mol_view
+	Row* $mol_grid_row
+		minimal_height <= row_height
+		minimal_width <= minimal_width
+		cells <= cells* /$mol_view
+	-
+	Cell* $mol_view
+	cell* null
+	Cell_text* $mol_grid_cell
+		sub <= cell_content_text* <= cell_content* /$mol_view_content
+	Cell_number* $mol_grid_number
+		sub <= cell_content_number* <= cell_content* /$mol_view_content
+	Col_head* $mol_float
+		dom_name \th
+		sub <= col_head_content* /$mol_view_content
+	Cell_branch* $mol_check_expand
+		level <= cell_level* 0
+		label <= cell_content* /$mol_view_content
+		expanded?val <=> cell_expanded*?val false
+	Cell_content* /
+		<= Cell_dimmer* $mol_dimmer
+			needle <= needle \
+			haystack <= cell_value* \
+
+$mol_grid_table $mol_list
+	dom_name \table
+
+$mol_grid_row $mol_view
+	dom_name \tr
+	sub <= cells /$mol_view
+
+$mol_grid_cell $mol_view
+	dom_name \td
+	minimal_height 40
+
+$mol_grid_number $mol_grid_cell
+
 $mol_image $mol_view
 	dom_name \img
 	field *
@@ -142,16 +281,75 @@ $mol_link_iconed $mol_link
 		<= title <= uri
 	host \
 
-$mol_list $mol_view
-	render_visible_only true
-	render_over 0
-	sub <= rows /$mol_view
-	Empty $mol_view
-	Gap_before $mol_view style * paddingTop <= gap_before 0
-	Gap_after $mol_view style * paddingTop <= gap_after 0
-	view_window /
-		0
-		0
+$mol_embed_native $mol_scroll
+	dom_name \object
+	window null
+	attr *
+		^
+		data <= uri?val \
+		type <= mime \
+	sub /
+		<= Fallback_link $mol_link
+			uri <= uri
+			sub /
+				<= Fallback_image $mol_image
+					uri <= uri
+					title <= title?val \
+
+$mol_text $mol_list
+	uri_base \
+	text \
+	flow_tokens /
+	- \Blocks
+	Paragraph* $mol_paragraph
+		sub <= block_content* /
+	Quote* $mol_text
+		text <= quote_text* \
+	List* $mol_text
+		text <= list_text* \
+	Header* $mol_paragraph
+		dom_name <= header_level* \h
+		sub <= block_content* /
+	Code* $mol_text_code
+		text <= code_text* \
+		highlight <= highlight \
+		sidebar_showed <= code_sidebar_showed true
+	- \Table
+	Table* $mol_grid
+		head_cells <= table_head_cells* /
+		rows <= table_rows* /
+	Table_row* $mol_grid_row
+		cells <= table_cells* /
+	Table_cell* $mol_text
+		text <= table_cell_text* \
+	- \Lines
+	String* $mol_dimmer
+		dom_name \span
+		needle <= highlight \
+		haystack <= line_text* \
+	Span* $mol_text_span
+		dom_name \span
+		type <= line_type* \
+		sub <= line_content* /
+	Code_line* $mol_text_code_row
+		numb_showed false
+		highlight <= highlight \
+		text <= line_text* \
+	Link* $mol_link_iconed
+		uri <= link_uri* \
+		content <= line_content* /
+	Link_http* $mol_link_iconed
+		uri <= link_uri* \
+		content / <= String*
+	Image* $mol_embed_native
+		uri <= link_uri* \
+		title <= line_text* \
+
+$mol_text_span $mol_paragraph
+	dom_name \span
+	attr *
+		^
+		mol_text_type <= type \
 
 $mol_page $mol_view
 	dom_name \article
@@ -257,23 +455,6 @@ $mol_string $mol_view
 
 $mol_icon_cross $mol_icon path \M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z
 
-$mol_paragraph $mol_view
-	line_height 24
-	letter_width 7
-	width_limit Infinity
-	sub / <= title
-
-$mol_dimmer $mol_paragraph
-	haystack \
-	needle \
-	sub <= parts /$mol_view_content
-	Low* $mol_paragraph
-		sub /
-			<= string* \
-	High* $mol_paragraph
-		sub /
-			<= string* \
-
 $mol_search $mol_pop
 	query?val \
 	suggests /string
@@ -308,8 +489,6 @@ $mol_search $mol_pop
 				haystack <= suggest_label* \
 				needle <= query?val \
 
-$mol_icon_chevron $mol_icon path \M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z
-
 $mol_icon_chevron_left $mol_icon path \M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z
 
 $mol_icon_chevron_right $mol_icon path \M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z
@@ -342,48 +521,6 @@ $mol_search_jumper $mol_search
 				enter?event <=> forward?event
 				escape?val <=> escape?val null
 
-$mol_text_code_token $mol_dimmer
-	attr *
-		^
-		mol_text_code_token_type <= type \
-
-$mol_text_code_token_link $mol_text_code_token
-	dom_name \a
-	type \code-link
-	attr *
-		^
-		href <= haystack \
-		target \_blank
-
-$mol_text_code_row $mol_paragraph
-	text \
-	minimal_height 24
-	numb_showed true
-	Numb $mol_view
-		sub /
-			<= numb 0
-	Token* $mol_text_code_token
-		type <= token_type* \
-		haystack <= token_text* \
-		needle <= highlight \
-	Token_link* $mol_text_code_token_link
-		haystack <= token_text* \
-		needle <= highlight \
-	find_pos* null
-
-$mol_text_code $mol_list
-	attr *
-		^
-		mol_text_code_sidebar_showed <= sidebar_showed false
-	text \
-	text_lines /string
-	find_pos* null
-	Row* $mol_text_code_row
-		numb_showed <= sidebar_showed
-		numb <= row_numb* 0
-		text <= row_text* \
-		highlight <= highlight \
-
 $mol_ghost $mol_view
 	Sub $mol_view
 
@@ -396,143 +533,6 @@ $mol_follower $mol_ghost
 		^
 		top <= top 0
 		left <= left 0
-
-$mol_float $mol_view
-	style *
-		^
-		minHeight \auto
-
-$mol_check_expand $mol_check
-	Icon $mol_icon_chevron
-	level 0
-	style *
-		^
-		paddingLeft <= level_style \0px
-	checked?val <=> expanded?val false
-	enabled <= expandable false
-
-$mol_grid $mol_view
-	row_height 32
-	row_ids /string[]
-	row_id* null
-	col_ids /
-	records *
-	record* null
-	hierarchy null
-	hierarchy_col \
-	minimal_width 0
-	-
-	sub /
-		<= Head
-		<= Table $mol_grid_table
-			sub <= rows /$mol_view
-	Head $mol_grid_row
-		cells <= head_cells /$mol_view
-	Row* $mol_grid_row
-		minimal_height <= row_height
-		minimal_width <= minimal_width
-		cells <= cells* /$mol_view
-	-
-	Cell* $mol_view
-	cell* null
-	Cell_text* $mol_grid_cell
-		sub <= cell_content_text* <= cell_content* /$mol_view_content
-	Cell_number* $mol_grid_number
-		sub <= cell_content_number* <= cell_content* /$mol_view_content
-	Col_head* $mol_float
-		dom_name \th
-		sub <= col_head_content* /$mol_view_content
-	Cell_branch* $mol_check_expand
-		level <= cell_level* 0
-		label <= cell_content* /$mol_view_content
-		expanded?val <=> cell_expanded*?val false
-	Cell_content* /
-		<= Cell_dimmer* $mol_dimmer
-			needle <= needle \
-			haystack <= cell_value* \
-
-$mol_grid_table $mol_list
-	dom_name \table
-
-$mol_grid_row $mol_view
-	dom_name \tr
-	sub <= cells /$mol_view
-
-$mol_grid_cell $mol_view
-	dom_name \td
-	minimal_height 40
-
-$mol_grid_number $mol_grid_cell
-
-$mol_embed_native $mol_scroll
-	dom_name \object
-	window null
-	attr *
-		^
-		data <= uri?val \
-		type <= mime \
-	sub /
-		<= Fallback_link $mol_link
-			uri <= uri
-			sub /
-				<= Fallback_image $mol_image
-					uri <= uri
-					title <= title?val \
-
-$mol_text $mol_list
-	uri_base \
-	text \
-	flow_tokens /
-	- \Blocks
-	Paragraph* $mol_paragraph
-		sub <= block_content* /
-	Quote* $mol_text
-		text <= quote_text* \
-	List* $mol_text
-		text <= list_text* \
-	Header* $mol_paragraph
-		dom_name <= header_level* \h
-		sub <= block_content* /
-	Code* $mol_text_code
-		text <= code_text* \
-		highlight <= highlight \
-		sidebar_showed <= code_sidebar_showed true
-	- \Table
-	Table* $mol_grid
-		head_cells <= table_head_cells* /
-		rows <= table_rows* /
-	Table_row* $mol_grid_row
-		cells <= table_cells* /
-	Table_cell* $mol_text
-		text <= table_cell_text* \
-	- \Lines
-	String* $mol_dimmer
-		dom_name \span
-		needle <= highlight \
-		haystack <= line_text* \
-	Span* $mol_text_span
-		dom_name \span
-		type <= line_type* \
-		sub <= line_content* /
-	Code_line* $mol_text_code_row
-		numb_showed false
-		highlight <= highlight \
-		text <= line_text* \
-	Link* $mol_link_iconed
-		uri <= link_uri* \
-		content <= line_content* /
-	Link_http* $mol_link_iconed
-		uri <= link_uri* \
-		content / <= String*
-	Image* $mol_embed_native
-		uri <= link_uri* \
-		title <= line_text* \
-
-$mol_text_span $mol_paragraph
-	dom_name \span
-	attr *
-		^
-		mol_text_type <= type \
 
 $hyoo_js_opt $mol_book2
 	Placeholder null
@@ -547,14 +547,12 @@ $hyoo_js_opt $mol_book2
 					uri \https://github.com/hyoo-ru/opt.js.hyoo.ru
 				<= Lights $mol_lights_toggle
 			foot /
-				<= Perf $mol_link_iconed
-					title \
-					hint \JS Benchmarking
-					uri \https://perf.js.hyoo.ru
-				<= Eval $mol_link_iconed
-					title \
-					hint \JS Sandbox
-					uri \https://eval.js.hyoo.ru
+				<= Hint $mol_text text \
+					\### Analize your script
+					\	npx turbotracer path/to/script.js
+					\### Other tools
+					\- [JS Benchmarking](https://perf.js.hyoo.ru)
+					\- [JS Sandbox](https://eval.js.hyoo.ru)
 			body /
 				<= Menu $mol_list
 					rows <= menu_content /
