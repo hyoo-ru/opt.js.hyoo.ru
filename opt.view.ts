@@ -174,8 +174,9 @@ namespace $.$$ {
 			return this.inline( deep ).name || `Inlined #${index}`
 		}
 		
-		script() {
-			return this.file()!.code
+		script( deep: number ) {
+			const source = this.script_source( deep )
+			return this.files().get( source.uri )!.code
 		}
 		
 		@ $mol_mem_key

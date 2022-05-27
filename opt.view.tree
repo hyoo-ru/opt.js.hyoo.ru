@@ -40,7 +40,7 @@ $hyoo_js_opt $mol_book2
 											arg <= ver_arg* *
 		<= Script*0 $hyoo_js_opt_script
 			title <= script_title* \
-			script <= script \
+			script <= script* \
 			source <= script_source* *
 				uri \
 				start 0
