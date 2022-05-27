@@ -2563,7 +2563,7 @@ declare namespace $ {
         Menu(): $$.$mol_list;
         Menu_page(): $mol_page;
         script_title(id: any): string;
-        script(): string;
+        script(id: any): string;
         script_source(id: any): {
             uri: string;
             start: number;
@@ -2663,7 +2663,7 @@ declare namespace $.$$ {
         inline_path(): number[];
         inline(deep: number): InlinedFun;
         script_title(deep: number): string;
-        script(): string;
+        script(deep: number): string;
         script_source(deep: number): {
             uri: string;
             start: number;

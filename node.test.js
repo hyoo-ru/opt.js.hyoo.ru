@@ -8612,7 +8612,7 @@ var $;
         script_title(id) {
             return "";
         }
-        script() {
+        script(id) {
             return "";
         }
         script_source(id) {
@@ -8634,7 +8634,7 @@ var $;
         Script(id) {
             const obj = new this.$.$hyoo_js_opt_script();
             obj.title = () => this.script_title(id);
-            obj.script = () => this.script();
+            obj.script = () => this.script(id);
             obj.source = () => this.script_source(id);
             obj.inlines = () => this.inlines(id);
             obj.natives = () => this.natives(id);
@@ -8909,8 +8909,9 @@ var $;
                 const index = this.inline_path()[deep - 1];
                 return this.inline(deep).name || `Inlined #${index}`;
             }
-            script() {
-                return this.file().code;
+            script(deep) {
+                const source = this.script_source(deep);
+                return this.files().get(source.uri).code;
             }
             script_source(deep) {
                 return this.inline(deep).source;

@@ -12,33 +12,1370 @@
 		<script src="web.js" charset="utf-8"></script>
 		<script>
 			$hyoo_js_opt.Root(0).data([
-				{
-					uri: 'foo.js',
-					code: 'function foo(x) {console.log(x)};\nfoo(1);\nfoo(null);',
-					functions: [{
-						source: { start: 0, end: 52 },
-						optimized: true,
-						name: 'foo',
-						versions: [{
-							nativeCalls: [],
-							inlinedFuns: [
-								{
-									pos: 25,
-									name: 'foo',
-									source: {uri: 'foo.js', start: 0, end: 32},
-									nativeCalls: [{pos: 29, reasons: ['Lookup']}],
-								},
-								{
-									pos: 42,
-									name: 'foo',
-									source: {uri: 'foo.js', start: 0, end: 32},
-									nativeCalls: [{pos: 25, reasons: ['NativeCall']}],
-								},
-							],
-						}],
-					}],
-				},
-			])
+  {
+    "uri": "./example/calc.js",
+    "code": "function calc(obj, type) {\n    if (type === '+') {\n        return plus(obj.a, obj.b);\n    }\n    if (type === '-') {\n        return minus(obj.a, obj.b);\n    }\n    if (type === '*') {\n        return multiply(obj.a, obj.b);\n    }\n    if (type === '/') {\n        return divide(obj.a, obj.b);\n    }\n    if (type === 'mod') {\n        return mod(obj.a, obj.b);\n    }\n}\n\nfunction plus(a, b) {\n    return a + b;\n}\nfunction minus(a, b) {\n    return a - b;\n}\nfunction multiply(a, b) {\n    return a * b;\n}\nfunction divide(a, b) {\n    return a / b;\n}\nfunction mod(a, b) {\n    return a % b;\n}\n\nmodule.exports = calc;\n",
+    "functions": [
+      {
+        "name": "calc",
+        "optimized": true,
+        "source": {
+          "start": 13,
+          "end": 361
+        },
+        "versions": [
+          {
+            "id": "0x1069879a1",
+            "deoptReason": "",
+            "inlinedFuns": [
+              {
+                "pos": 66,
+                "name": "plus",
+                "source": {
+                  "start": 376,
+                  "end": 404,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": []
+              },
+              {
+                "pos": 131,
+                "name": "minus",
+                "source": {
+                  "start": 419,
+                  "end": 447,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": []
+              },
+              {
+                "pos": 197,
+                "name": "multiply",
+                "source": {
+                  "start": 465,
+                  "end": 493,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": []
+              }
+            ],
+            "nativeCalls": []
+          },
+          {
+            "id": "0x106987f61",
+            "deoptReason": "",
+            "inlinedFuns": [
+              {
+                "pos": 66,
+                "name": "plus",
+                "source": {
+                  "start": 376,
+                  "end": 404,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": []
+              },
+              {
+                "pos": 131,
+                "name": "minus",
+                "source": {
+                  "start": 419,
+                  "end": 447,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": []
+              },
+              {
+                "pos": 197,
+                "name": "multiply",
+                "source": {
+                  "start": 465,
+                  "end": 493,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": []
+              },
+              {
+                "pos": 266,
+                "name": "divide",
+                "source": {
+                  "start": 509,
+                  "end": 537,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": []
+              }
+            ],
+            "nativeCalls": []
+          },
+          {
+            "id": "0x106988761",
+            "deoptReason": "",
+            "inlinedFuns": [
+              {
+                "pos": 66,
+                "name": "plus",
+                "source": {
+                  "start": 376,
+                  "end": 404,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": []
+              },
+              {
+                "pos": 131,
+                "name": "minus",
+                "source": {
+                  "start": 419,
+                  "end": 447,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": []
+              },
+              {
+                "pos": 197,
+                "name": "multiply",
+                "source": {
+                  "start": 465,
+                  "end": 493,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": []
+              },
+              {
+                "pos": 266,
+                "name": "divide",
+                "source": {
+                  "start": 509,
+                  "end": 537,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": []
+              },
+              {
+                "pos": 335,
+                "name": "mod",
+                "source": {
+                  "start": 550,
+                  "end": 578,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": []
+              }
+            ],
+            "nativeCalls": [
+              {
+                "pos": 75,
+                "reasons": [
+                  "Call[Code:Load Descriptor:r1s0i5f1]"
+                ]
+              },
+              {
+                "pos": 141,
+                "reasons": [
+                  "Call[Code:Load Descriptor:r1s0i5f1]"
+                ]
+              },
+              {
+                "pos": 210,
+                "reasons": [
+                  "Call[Code:Load Descriptor:r1s0i5f1]"
+                ]
+              },
+              {
+                "pos": 277,
+                "reasons": [
+                  "Call[Code:Load Descriptor:r1s0i5f1]"
+                ]
+              },
+              {
+                "pos": 343,
+                "reasons": [
+                  "Call[Code:Load Descriptor:r1s0i5f1]"
+                ]
+              },
+              {
+                "pos": 82,
+                "reasons": [
+                  "Call[Code:Load Descriptor:r1s0i5f1]"
+                ]
+              },
+              {
+                "pos": 148,
+                "reasons": [
+                  "Call[Code:Load Descriptor:r1s0i5f1]"
+                ]
+              },
+              {
+                "pos": 217,
+                "reasons": [
+                  "Call[Code:Load Descriptor:r1s0i5f1]"
+                ]
+              },
+              {
+                "pos": 284,
+                "reasons": [
+                  "Call[Code:Load Descriptor:r1s0i5f1]"
+                ]
+              },
+              {
+                "pos": 350,
+                "reasons": [
+                  "Call[Code:Load Descriptor:r1s0i5f1]"
+                ]
+              }
+            ]
+          }
+        ],
+        "root": false
+      }
+    ]
+  },
+  {
+    "uri": "./example/test.js",
+    "code": "const calc = require('./calc');\nconst obj = {};\nobj.a = 1;\nobj.b = 2;\n\nfunction test(type) {\n    obj[type] = 1; // to change map\n    let r;\n    for (let i = 0; i < 1e4; i++) {\n        r = calc(obj, type);\n    }\n    return r;\n}\n\nfunction testSum() {\n    let sum = 0;\n    for (let i = 0; i < 1e4; i++) {\n        sum += test('+') + test('-') + test('*') + test('/') + test('mod');\n    }\n    return sum;\n}\n\ntestSum();\ntestSum();\ntestSum();\n",
+    "functions": [
+      {
+        "name": "test",
+        "optimized": true,
+        "source": {
+          "start": 84,
+          "end": 226
+        },
+        "versions": [
+          {
+            "id": "0x106987481",
+            "deoptReason": "",
+            "inlinedFuns": [],
+            "nativeCalls": []
+          },
+          {
+            "id": "0x106987581",
+            "deoptReason": "",
+            "inlinedFuns": [
+              {
+                "pos": 188,
+                "name": "calc",
+                "source": {
+                  "start": 13,
+                  "end": 361,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": [
+                  {
+                    "pos": 66,
+                    "name": "plus",
+                    "source": {
+                      "start": 376,
+                      "end": 404,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 131,
+                    "name": "minus",
+                    "source": {
+                      "start": 419,
+                      "end": 447,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  }
+                ]
+              }
+            ],
+            "nativeCalls": []
+          },
+          {
+            "id": "0x106987ce1",
+            "deoptReason": "",
+            "inlinedFuns": [
+              {
+                "pos": 188,
+                "name": "calc",
+                "source": {
+                  "start": 13,
+                  "end": 361,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": [
+                  {
+                    "pos": 66,
+                    "name": "plus",
+                    "source": {
+                      "start": 376,
+                      "end": 404,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 131,
+                    "name": "minus",
+                    "source": {
+                      "start": 419,
+                      "end": 447,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 197,
+                    "name": "multiply",
+                    "source": {
+                      "start": 465,
+                      "end": 493,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  }
+                ]
+              }
+            ],
+            "nativeCalls": [
+              {
+                "pos": 107,
+                "reasons": [
+                  "Call[Code:Store Descriptor:r1s0i6f1]"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "0x106988421",
+            "deoptReason": "",
+            "inlinedFuns": [
+              {
+                "pos": 188,
+                "name": "calc",
+                "source": {
+                  "start": 13,
+                  "end": 361,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": [
+                  {
+                    "pos": 66,
+                    "name": "plus",
+                    "source": {
+                      "start": 376,
+                      "end": 404,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 131,
+                    "name": "minus",
+                    "source": {
+                      "start": 419,
+                      "end": 447,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 197,
+                    "name": "multiply",
+                    "source": {
+                      "start": 465,
+                      "end": 493,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 266,
+                    "name": "divide",
+                    "source": {
+                      "start": 509,
+                      "end": 537,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  }
+                ]
+              }
+            ],
+            "nativeCalls": [
+              {
+                "pos": 107,
+                "reasons": [
+                  "Call[Code:Store Descriptor:r1s0i6f1]"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "0x106988e41",
+            "deoptReason": "",
+            "inlinedFuns": [
+              {
+                "pos": 188,
+                "name": "calc",
+                "source": {
+                  "start": 13,
+                  "end": 361,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [
+                  {
+                    "pos": 75,
+                    "reasons": [
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
+                    ]
+                  },
+                  {
+                    "pos": 82,
+                    "reasons": [
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
+                    ]
+                  },
+                  {
+                    "pos": 350,
+                    "reasons": [
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
+                    ]
+                  },
+                  {
+                    "pos": 343,
+                    "reasons": [
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
+                    ]
+                  },
+                  {
+                    "pos": 284,
+                    "reasons": [
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
+                    ]
+                  },
+                  {
+                    "pos": 277,
+                    "reasons": [
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
+                    ]
+                  },
+                  {
+                    "pos": 217,
+                    "reasons": [
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
+                    ]
+                  },
+                  {
+                    "pos": 210,
+                    "reasons": [
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
+                    ]
+                  },
+                  {
+                    "pos": 148,
+                    "reasons": [
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
+                    ]
+                  },
+                  {
+                    "pos": 141,
+                    "reasons": [
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
+                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
+                    ]
+                  }
+                ],
+                "inlinedFuns": [
+                  {
+                    "pos": 66,
+                    "name": "plus",
+                    "source": {
+                      "start": 376,
+                      "end": 404,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 131,
+                    "name": "minus",
+                    "source": {
+                      "start": 419,
+                      "end": 447,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 197,
+                    "name": "multiply",
+                    "source": {
+                      "start": 465,
+                      "end": 493,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 266,
+                    "name": "divide",
+                    "source": {
+                      "start": 509,
+                      "end": 537,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 335,
+                    "name": "mod",
+                    "source": {
+                      "start": 550,
+                      "end": 578,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  }
+                ]
+              }
+            ],
+            "nativeCalls": []
+          },
+          {
+            "id": "0x106989e81",
+            "deoptReason": "",
+            "inlinedFuns": [
+              {
+                "pos": 188,
+                "name": "calc",
+                "source": {
+                  "start": 13,
+                  "end": 361,
+                  "uri": "./example/calc.js"
+                },
+                "nativeCalls": [],
+                "inlinedFuns": [
+                  {
+                    "pos": 66,
+                    "name": "plus",
+                    "source": {
+                      "start": 376,
+                      "end": 404,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 131,
+                    "name": "minus",
+                    "source": {
+                      "start": 419,
+                      "end": 447,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 197,
+                    "name": "multiply",
+                    "source": {
+                      "start": 465,
+                      "end": 493,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 266,
+                    "name": "divide",
+                    "source": {
+                      "start": 509,
+                      "end": 537,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  },
+                  {
+                    "pos": 335,
+                    "name": "mod",
+                    "source": {
+                      "start": 550,
+                      "end": 578,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": []
+                  }
+                ]
+              }
+            ],
+            "nativeCalls": [
+              {
+                "pos": 107,
+                "reasons": [
+                  "Call[Code:Store Descriptor:r1s0i6f1]"
+                ]
+              }
+            ]
+          }
+        ],
+        "root": false
+      },
+      {
+        "name": "testSum",
+        "optimized": true,
+        "source": {
+          "start": 244,
+          "end": 401
+        },
+        "versions": [
+          {
+            "id": "0x10698b001",
+            "deoptReason": "",
+            "inlinedFuns": [
+              {
+                "pos": 365,
+                "name": "test",
+                "source": {
+                  "start": 84,
+                  "end": 226,
+                  "uri": "./example/test.js"
+                },
+                "nativeCalls": [
+                  {
+                    "pos": 107,
+                    "reasons": [
+                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
+                    ]
+                  }
+                ],
+                "inlinedFuns": [
+                  {
+                    "pos": 188,
+                    "name": "calc",
+                    "source": {
+                      "start": 13,
+                      "end": 361,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": [
+                      {
+                        "pos": 66,
+                        "name": "plus",
+                        "source": {
+                          "start": 376,
+                          "end": 404,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 131,
+                        "name": "minus",
+                        "source": {
+                          "start": 419,
+                          "end": 447,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 197,
+                        "name": "multiply",
+                        "source": {
+                          "start": 465,
+                          "end": 493,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 266,
+                        "name": "divide",
+                        "source": {
+                          "start": 509,
+                          "end": 537,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 335,
+                        "name": "mod",
+                        "source": {
+                          "start": 550,
+                          "end": 578,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "pos": 353,
+                "name": "test",
+                "source": {
+                  "start": 84,
+                  "end": 226,
+                  "uri": "./example/test.js"
+                },
+                "nativeCalls": [
+                  {
+                    "pos": 107,
+                    "reasons": [
+                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
+                    ]
+                  }
+                ],
+                "inlinedFuns": [
+                  {
+                    "pos": 188,
+                    "name": "calc",
+                    "source": {
+                      "start": 13,
+                      "end": 361,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": [
+                      {
+                        "pos": 66,
+                        "name": "plus",
+                        "source": {
+                          "start": 376,
+                          "end": 404,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 131,
+                        "name": "minus",
+                        "source": {
+                          "start": 419,
+                          "end": 447,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 197,
+                        "name": "multiply",
+                        "source": {
+                          "start": 465,
+                          "end": 493,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 266,
+                        "name": "divide",
+                        "source": {
+                          "start": 509,
+                          "end": 537,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 335,
+                        "name": "mod",
+                        "source": {
+                          "start": 550,
+                          "end": 578,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "pos": 341,
+                "name": "test",
+                "source": {
+                  "start": 84,
+                  "end": 226,
+                  "uri": "./example/test.js"
+                },
+                "nativeCalls": [
+                  {
+                    "pos": 107,
+                    "reasons": [
+                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
+                    ]
+                  }
+                ],
+                "inlinedFuns": [
+                  {
+                    "pos": 188,
+                    "name": "calc",
+                    "source": {
+                      "start": 13,
+                      "end": 361,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": [
+                      {
+                        "pos": 66,
+                        "name": "plus",
+                        "source": {
+                          "start": 376,
+                          "end": 404,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 131,
+                        "name": "minus",
+                        "source": {
+                          "start": 419,
+                          "end": 447,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 197,
+                        "name": "multiply",
+                        "source": {
+                          "start": 465,
+                          "end": 493,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 266,
+                        "name": "divide",
+                        "source": {
+                          "start": 509,
+                          "end": 537,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 335,
+                        "name": "mod",
+                        "source": {
+                          "start": 550,
+                          "end": 578,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "pos": 329,
+                "name": "test",
+                "source": {
+                  "start": 84,
+                  "end": 226,
+                  "uri": "./example/test.js"
+                },
+                "nativeCalls": [
+                  {
+                    "pos": 107,
+                    "reasons": [
+                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
+                    ]
+                  }
+                ],
+                "inlinedFuns": [
+                  {
+                    "pos": 188,
+                    "name": "calc",
+                    "source": {
+                      "start": 13,
+                      "end": 361,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": [
+                      {
+                        "pos": 66,
+                        "name": "plus",
+                        "source": {
+                          "start": 376,
+                          "end": 404,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 131,
+                        "name": "minus",
+                        "source": {
+                          "start": 419,
+                          "end": 447,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 197,
+                        "name": "multiply",
+                        "source": {
+                          "start": 465,
+                          "end": 493,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 266,
+                        "name": "divide",
+                        "source": {
+                          "start": 509,
+                          "end": 537,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 335,
+                        "name": "mod",
+                        "source": {
+                          "start": 550,
+                          "end": 578,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "nativeCalls": []
+          },
+          {
+            "id": "0x10698a761",
+            "deoptReason": "",
+            "inlinedFuns": [
+              {
+                "pos": 365,
+                "name": "test",
+                "source": {
+                  "start": 84,
+                  "end": 226,
+                  "uri": "./example/test.js"
+                },
+                "nativeCalls": [
+                  {
+                    "pos": 107,
+                    "reasons": [
+                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
+                    ]
+                  }
+                ],
+                "inlinedFuns": [
+                  {
+                    "pos": 188,
+                    "name": "calc",
+                    "source": {
+                      "start": 13,
+                      "end": 361,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": [
+                      {
+                        "pos": 66,
+                        "name": "plus",
+                        "source": {
+                          "start": 376,
+                          "end": 404,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 131,
+                        "name": "minus",
+                        "source": {
+                          "start": 419,
+                          "end": 447,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 197,
+                        "name": "multiply",
+                        "source": {
+                          "start": 465,
+                          "end": 493,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 266,
+                        "name": "divide",
+                        "source": {
+                          "start": 509,
+                          "end": 537,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 335,
+                        "name": "mod",
+                        "source": {
+                          "start": 550,
+                          "end": 578,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "pos": 353,
+                "name": "test",
+                "source": {
+                  "start": 84,
+                  "end": 226,
+                  "uri": "./example/test.js"
+                },
+                "nativeCalls": [
+                  {
+                    "pos": 107,
+                    "reasons": [
+                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
+                    ]
+                  }
+                ],
+                "inlinedFuns": [
+                  {
+                    "pos": 188,
+                    "name": "calc",
+                    "source": {
+                      "start": 13,
+                      "end": 361,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": [
+                      {
+                        "pos": 66,
+                        "name": "plus",
+                        "source": {
+                          "start": 376,
+                          "end": 404,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 131,
+                        "name": "minus",
+                        "source": {
+                          "start": 419,
+                          "end": 447,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 197,
+                        "name": "multiply",
+                        "source": {
+                          "start": 465,
+                          "end": 493,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 266,
+                        "name": "divide",
+                        "source": {
+                          "start": 509,
+                          "end": 537,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 335,
+                        "name": "mod",
+                        "source": {
+                          "start": 550,
+                          "end": 578,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "pos": 341,
+                "name": "test",
+                "source": {
+                  "start": 84,
+                  "end": 226,
+                  "uri": "./example/test.js"
+                },
+                "nativeCalls": [
+                  {
+                    "pos": 107,
+                    "reasons": [
+                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
+                    ]
+                  }
+                ],
+                "inlinedFuns": [
+                  {
+                    "pos": 188,
+                    "name": "calc",
+                    "source": {
+                      "start": 13,
+                      "end": 361,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": [
+                      {
+                        "pos": 66,
+                        "name": "plus",
+                        "source": {
+                          "start": 376,
+                          "end": 404,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 131,
+                        "name": "minus",
+                        "source": {
+                          "start": 419,
+                          "end": 447,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 197,
+                        "name": "multiply",
+                        "source": {
+                          "start": 465,
+                          "end": 493,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 266,
+                        "name": "divide",
+                        "source": {
+                          "start": 509,
+                          "end": 537,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 335,
+                        "name": "mod",
+                        "source": {
+                          "start": 550,
+                          "end": 578,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "pos": 329,
+                "name": "test",
+                "source": {
+                  "start": 84,
+                  "end": 226,
+                  "uri": "./example/test.js"
+                },
+                "nativeCalls": [
+                  {
+                    "pos": 107,
+                    "reasons": [
+                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
+                    ]
+                  }
+                ],
+                "inlinedFuns": [
+                  {
+                    "pos": 188,
+                    "name": "calc",
+                    "source": {
+                      "start": 13,
+                      "end": 361,
+                      "uri": "./example/calc.js"
+                    },
+                    "nativeCalls": [],
+                    "inlinedFuns": [
+                      {
+                        "pos": 66,
+                        "name": "plus",
+                        "source": {
+                          "start": 376,
+                          "end": 404,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 131,
+                        "name": "minus",
+                        "source": {
+                          "start": 419,
+                          "end": 447,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 197,
+                        "name": "multiply",
+                        "source": {
+                          "start": 465,
+                          "end": 493,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 266,
+                        "name": "divide",
+                        "source": {
+                          "start": 509,
+                          "end": 537,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      },
+                      {
+                        "pos": 335,
+                        "name": "mod",
+                        "source": {
+                          "start": 550,
+                          "end": 578,
+                          "uri": "./example/calc.js"
+                        },
+                        "nativeCalls": [],
+                        "inlinedFuns": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "nativeCalls": []
+          }
+        ],
+        "root": false
+      }
+    ]
+  }
+])
 		</script>
 	
 				<script src="/mol/build/client/client.js" charset="utf-8"></script>
