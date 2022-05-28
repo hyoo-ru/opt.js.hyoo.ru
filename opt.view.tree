@@ -71,7 +71,8 @@ $hyoo_js_opt_script $mol_page
 				Anchor <= Native_anchor* $mol_view
 				Sub <= Native_marker* $mol_button
 					hint <= native_reason* \
-					sub / \⎖
+					sub /
+						<= Native_icon* $mol_icon_chevron_double_down
 				offset <= native_offset* /
 					0
 					0
@@ -81,7 +82,8 @@ $hyoo_js_opt_script $mol_page
 					hint \Inlined Function
 					arg <= inline_arg* *
 					current <= inline_current* false
-					sub / \▼
+					sub /
+						<= Inline_icon* $mol_icon_arrow_down_thick
 				offset <= inline_offset* /
 					0
 					0
