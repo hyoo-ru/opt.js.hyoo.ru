@@ -535,8 +535,8 @@ declare namespace $ {
         maximal_width(): number;
         minimal_height(): number;
         static watchers: Set<$mol_view>;
-        view_rect(): ClientRect | null;
-        view_rect_cache(next?: ClientRect | null): ClientRect | null;
+        view_rect(): DOMRectReadOnly | null;
+        view_rect_cache(next?: DOMRectReadOnly | null): DOMRectReadOnly | null;
         view_rect_watcher(): {
             destructor: () => boolean;
         };
@@ -2508,11 +2508,9 @@ declare namespace $ {
         Anchor(): $mol_view;
         offset(): readonly any[];
         style(): {
-            top: number;
-            left: number;
+            transform: string;
         };
-        top(): number;
-        left(): number;
+        transform(): string;
     }
 }
 
@@ -2521,8 +2519,11 @@ declare namespace $ {
 
 declare namespace $.$$ {
     class $mol_follower extends $.$mol_follower {
-        left(): number;
-        top(): number;
+        pos(): {
+            left: number;
+            top: number;
+        } | null;
+        transform(): string;
     }
 }
 
@@ -2564,6 +2565,7 @@ declare namespace $ {
         menu_content(): readonly any[];
         Menu(): $$.$mol_list;
         Hint(): $$.$mol_text;
+        Menu_content(): $$.$mol_list;
         Menu_page(): $mol_page;
         script_title(id: any): string;
         script(id: any): string;
@@ -2608,8 +2610,6 @@ declare namespace $ {
         Inline_icon(id: any): $mol_icon_map_marker_check;
         Inline_button(id: any): $$.$mol_link;
         Inline(id: any): $$.$mol_follower;
-        point_views(): readonly any[];
-        Points(): $mol_view;
     }
     class $hyoo_js_opt_script_func_marker extends $mol_button {
         attr(): {
@@ -2686,7 +2686,7 @@ declare namespace $.$$ {
     }
     class $hyoo_js_opt_script extends $.$hyoo_js_opt_script {
         points(): readonly (Fun | NativeCall | InlinedFun)[];
-        point_views(): $mol_follower[];
+        body(): ($mol_text_code | $mol_follower)[];
         code(): string;
         point_pos(index: number): {
             token: $mol_text_code_token;

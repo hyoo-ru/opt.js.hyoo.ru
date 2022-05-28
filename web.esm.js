@@ -2171,7 +2171,16 @@ var $;
         function $mol_view_watch() {
             new $mol_after_frame($mol_view_watch);
             for (const view of $mol_view.watchers) {
-                view.view_rect_cache(view.dom_node().getBoundingClientRect().toJSON());
+                const prev = view.view_rect_cache();
+                const next = view.dom_node().getBoundingClientRect();
+                if (next.left === 0 && next.right === 0 && next.width === 0) {
+                    if (prev)
+                        view.view_rect_cache(null);
+                    continue;
+                }
+                if (!prev || prev.x !== next.x || prev.y !== next.y || prev.width !== next.width || prev.height !== next.height) {
+                    view.view_rect_cache(next);
+                }
             }
         }
         $mol_view_watch();
@@ -8180,15 +8189,11 @@ var $;
         style() {
             return {
                 ...super.style(),
-                top: this.top(),
-                left: this.left()
+                transform: this.transform()
             };
         }
-        top() {
-            return 0;
-        }
-        left() {
-            return 0;
+        transform() {
+            return "";
         }
     }
     __decorate([
@@ -8201,7 +8206,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/follower/follower.view.css", "[mol_follower] {\n\tposition: absolute;\n}\n");
+    $mol_style_attach("mol/follower/follower.view.css", "[mol_follower] {\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\ttransition: none;\n}\n");
 })($ || ($ = {}));
 //mol/follower/-css/follower.view.css.ts
 ;
@@ -8211,35 +8216,38 @@ var $;
     var $$;
     (function ($$) {
         class $mol_follower extends $.$mol_follower {
-            left() {
+            pos() {
                 const self_rect = this.view_rect();
+                const prev = $mol_wire_probe(() => this.pos());
                 const anchor_rect = this.Anchor().view_rect();
-                const prev = $mol_wire_probe(() => this.left()) ?? 0;
-                const next = prev
+                if (!anchor_rect)
+                    return null;
+                const left = Math.floor((prev?.left ?? 0)
                     - (self_rect?.left ?? 0)
                     - (self_rect?.width ?? 0) / 2
                     + (anchor_rect?.left ?? 0)
-                    + this.offset()[0] * (anchor_rect?.width ?? 0);
-                return Math.floor(next);
-            }
-            top() {
-                const self_rect = this.view_rect();
-                const anchor_rect = this.Anchor().view_rect();
-                const prev = $mol_wire_probe(() => this.top()) ?? 0;
-                const next = prev
+                    + this.offset()[0] * (anchor_rect?.width ?? 0));
+                const top = Math.floor((prev?.top ?? 0)
                     - (self_rect?.top ?? 0)
                     - (self_rect?.height ?? 0) / 2
                     + (anchor_rect?.top ?? 0)
-                    + this.offset()[1] * (anchor_rect?.height ?? 0);
-                return Math.floor(next);
+                    + this.offset()[1] * (anchor_rect?.height ?? 0));
+                return { left, top };
+            }
+            transform() {
+                const pos = this.pos();
+                if (!pos)
+                    return 'scale(0)';
+                const { left, top } = pos;
+                return `translate( ${left}px, ${top}px )`;
             }
         }
         __decorate([
             $mol_mem
-        ], $mol_follower.prototype, "left", null);
+        ], $mol_follower.prototype, "pos", null);
         __decorate([
             $mol_mem
-        ], $mol_follower.prototype, "top", null);
+        ], $mol_follower.prototype, "transform", null);
         $$.$mol_follower = $mol_follower;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -8354,6 +8362,14 @@ var $;
             obj.text = () => "### Analyze your script\n\tnpx turbotracer path/to/script.js\n\tnpx turbotracer https://example.org\n### Other tools\n- [JS Benchmarking](https://perf.js.hyoo.ru)\n- [JS Sandbox](https://eval.js.hyoo.ru)";
             return obj;
         }
+        Menu_content() {
+            const obj = new this.$.$mol_list();
+            obj.rows = () => [
+                this.Menu(),
+                this.Hint()
+            ];
+            return obj;
+        }
         Menu_page() {
             const obj = new this.$.$mol_page();
             obj.title = () => "Modules";
@@ -8362,8 +8378,7 @@ var $;
                 this.Lights()
             ];
             obj.body = () => [
-                this.Menu(),
-                this.Hint()
+                this.Menu_content()
             ];
             return obj;
         }
@@ -8416,6 +8431,9 @@ var $;
     ], $hyoo_js_opt.prototype, "Hint", null);
     __decorate([
         $mol_mem
+    ], $hyoo_js_opt.prototype, "Menu_content", null);
+    __decorate([
+        $mol_mem
     ], $hyoo_js_opt.prototype, "Menu_page", null);
     __decorate([
         $mol_mem_key
@@ -8453,7 +8471,9 @@ var $;
         body() {
             return [
                 this.Code(),
-                this.Points()
+                this.Func("0"),
+                this.Native("0"),
+                this.Inline("0")
             ];
         }
         jump(next) {
@@ -8560,18 +8580,6 @@ var $;
             obj.offset = () => this.point_offset(id);
             return obj;
         }
-        point_views() {
-            return [
-                this.Func("0"),
-                this.Native("0"),
-                this.Inline("0")
-            ];
-        }
-        Points() {
-            const obj = new this.$.$mol_view();
-            obj.sub = () => this.point_views();
-            return obj;
-        }
     }
     __decorate([
         $mol_mem
@@ -8615,9 +8623,6 @@ var $;
     __decorate([
         $mol_mem_key
     ], $hyoo_js_opt_script.prototype, "Inline", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_js_opt_script.prototype, "Points", null);
     $.$hyoo_js_opt_script = $hyoo_js_opt_script;
     class $hyoo_js_opt_script_func_marker extends $mol_button {
         attr() {
@@ -8645,7 +8650,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu_page_body] {\n\tjustify-content: space-between;\n}\n\n[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_marker],\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_focus);\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_func_marker] {\n\tfont-size: .75rem;\n\ttext-shadow: 0 0;\n}\n\n[hyoo_js_opt_script_func_marker_optimized=\"true\"] {\n\tcolor: var(--mol_theme_special);\n}\n");
+    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu_page_body] {\n\tjustify-content: space-between;\n}\n\n[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_menu_content] {\n\tjustify-content: space-between;\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_marker],\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_focus);\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_func_marker] {\n\tfont-size: .75rem;\n\ttext-shadow: 0 0;\n}\n\n[hyoo_js_opt_script_func_marker_optimized=\"true\"] {\n\tcolor: var(--mol_theme_special);\n}\n");
 })($ || ($ = {}));
 //hyoo/js/opt/-css/opt.view.css.ts
 ;
@@ -8753,14 +8758,17 @@ var $;
             points() {
                 return super.points();
             }
-            point_views() {
-                return this.points().map((point, index) => {
-                    switch (point.type) {
-                        case 'InlinedFun': return this.Inline(index);
-                        case 'NativeCall': return this.Native(index);
-                        case 'Fun': return this.Func(index);
-                    }
-                });
+            body() {
+                return [
+                    this.Code(),
+                    ...this.points().map((point, index) => {
+                        switch (point.type) {
+                            case 'InlinedFun': return this.Inline(index);
+                            case 'NativeCall': return this.Native(index);
+                            case 'Fun': return this.Func(index);
+                        }
+                    })
+                ];
             }
             code() {
                 const source = this.source();
@@ -8831,7 +8839,7 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $hyoo_js_opt_script.prototype, "point_views", null);
+        ], $hyoo_js_opt_script.prototype, "body", null);
         __decorate([
             $mol_mem_key
         ], $hyoo_js_opt_script.prototype, "point_pos", null);
