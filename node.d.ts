@@ -2499,7 +2499,7 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $mol_icon_chevron_double_down extends $mol_icon {
+    class $mol_icon_bolt extends $mol_icon {
         path(): string;
     }
 }
@@ -2554,6 +2554,12 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $mol_icon_chevron_double_down extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
     class $mol_icon_arrow_down extends $mol_icon {
         path(): string;
     }
@@ -2587,21 +2593,20 @@ declare namespace $ {
             start: number;
             end: number;
         };
-        inlines(id: any): readonly any[];
-        natives(id: any): readonly any[];
+        points(id: any): readonly any[];
         script_path(id: any): readonly number[];
         Script(id: any): $$.$hyoo_js_opt_script;
     }
     class $hyoo_js_opt_script extends $mol_page {
         path(): readonly number[];
-        natives(): readonly any[];
-        inlines(): readonly any[];
+        points(): readonly any[];
         script(): string;
         source(): {
             uri: string;
             start: number;
             end: number;
         };
+        point_offset(id: any): readonly any[];
         tools(): readonly any[];
         body(): readonly any[];
         jump(next?: any): number;
@@ -2610,20 +2615,20 @@ declare namespace $ {
         Search(): $$.$mol_search_jumper;
         code(): string;
         Code(): $$.$mol_text_code;
-        Native_anchor(id: any): $mol_view;
-        native_reason(id: any): string;
+        Point_anchor(id: any): $mol_view;
+        point_hint(id: any): string;
+        Func_icon(id: any): $mol_icon_bolt;
+        Func_marker(id: any): $$.$mol_button;
+        Func(id: any): $$.$mol_follower;
         Native_icon(id: any): $mol_icon_chevron_double_down;
         Native_marker(id: any): $$.$mol_button;
-        native_offset(id: any): readonly any[];
         Native(id: any): $$.$mol_follower;
-        Inline_anchor(id: any): $mol_view;
         inline_arg(id: any): {};
         inline_current(id: any): boolean;
         Inline_icon(id: any): $mol_icon_arrow_down_thick;
         Inline_button(id: any): $$.$mol_link;
-        inline_offset(id: any): readonly any[];
         Inline(id: any): $$.$mol_follower;
-        points(): readonly any[];
+        point_views(): readonly any[];
         Points(): $mol_view;
     }
 }
@@ -2635,57 +2640,47 @@ declare namespace $.$$ {
     type File = {
         uri: string;
         code: string;
-        functions: readonly Fun[];
+        points: (Fun | NativeCall | InlinedFun)[];
     };
     type Fun = {
-        source: {
-            start: number;
-            end: number;
-        };
-        optimized: boolean;
-        name: string;
-        root: boolean;
-        versions: {
-            deoptReason: string;
-            nativeCalls: readonly NativeCall[];
-            inlinedFuns: readonly InlinedFun[];
-        }[];
-    };
-    type NativeCall = {
-        reasons: string[];
+        type: 'Fun';
         pos: number;
-    };
-    type InlinedFun = {
-        pos: number;
-        name: string;
         source: {
             uri: string;
             start: number;
             end: number;
         };
-        nativeCalls: readonly NativeCall[];
-        inlinedFuns: readonly InlinedFun[];
+        optimizationCount: number;
+        reasons: string[];
+        optimized: boolean;
+        points: undefined;
     };
-    export class $hyoo_js_opt extends $.$hyoo_js_opt {
+    type NativeCall = {
+        type: 'NativeCall';
+        reasons: string[];
+        pos: number;
+        points: undefined;
+    };
+    type InlinedFun = {
+        type: 'InlinedFun';
+        points: (Fun | NativeCall | InlinedFun)[];
+        name: string;
+        pos: number;
+        reasons: undefined;
+        source: {
+            uri: string;
+            start: number;
+            end: number;
+        };
+    };
+    class $hyoo_js_opt extends $.$hyoo_js_opt {
         data(next?: File[]): File[];
         files(): Map<string, File>;
         menu_content(): $mol_link[];
         file_uri(uri: string): string;
         file(): File | null;
-        func_index(): number | null;
-        func(): Fun | null;
-        ver(): {
-            deoptReason: string;
-            nativeCalls: readonly NativeCall[];
-            inlinedFuns: readonly InlinedFun[];
-            source: {
-                start: number;
-                end: number;
-                uri: string;
-            };
-        } | null;
         inline_path(): number[];
-        inline(deep: number): InlinedFun;
+        point(deep: number): InlinedFun;
         script_title(deep: number): string;
         script(deep: number): string;
         script_source(deep: number): {
@@ -2693,39 +2688,29 @@ declare namespace $.$$ {
             start: number;
             end: number;
         };
-        natives(deep: number): readonly NativeCall[];
-        inlines(deep: number): readonly InlinedFun[];
+        points(deep: number): (Fun | NativeCall | InlinedFun)[];
         script_path(deep: number): number[];
         pages(): ($mol_page | $hyoo_js_opt_script)[];
     }
-    export class $hyoo_js_opt_script extends $.$hyoo_js_opt_script {
-        natives(): readonly NativeCall[];
-        inlines(): readonly InlinedFun[];
-        points(): $mol_follower[];
+    class $hyoo_js_opt_script extends $.$hyoo_js_opt_script {
+        points(): readonly (Fun | NativeCall | InlinedFun)[];
+        point_views(): $mol_follower[];
         code(): string;
-        native_pos(index: number): {
+        point_pos(index: number): {
             token: $mol_text_code_token;
             offset: number;
         } | null;
-        inline_pos(index: number): {
-            token: $mol_text_code_token;
-            offset: number;
-        } | null;
-        Native_anchor(index: number): $mol_text_code_token;
-        Inline_anchor(index: number): $mol_text_code_token;
-        native_offset(index: number): number[];
-        inline_offset(index: number): number[];
+        Point_anchor(index: number): $mol_text_code_token;
+        point_offset(index: number): number[];
         inline_arg(index: number): {
             inline: string;
         };
-        native_reason(index: number): string;
+        point_hint(index: number): string;
         inline_current(index: number): boolean;
-        anchors(): $mol_view[];
         jump_rows(): $mol_text_code_row[];
         jump(next?: number): number;
         tools(): ($mol_paginator | $mol_search_jumper)[];
     }
-    export {};
 }
 
 export = $;

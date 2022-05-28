@@ -13,1367 +13,611 @@
 		<script>
 			$hyoo_js_opt.Root(0).data([
   {
-    "uri": "./example/calc.js",
-    "code": "function calc(obj, type) {\n    if (type === '+') {\n        return plus(obj.a, obj.b);\n    }\n    if (type === '-') {\n        return minus(obj.a, obj.b);\n    }\n    if (type === '*') {\n        return multiply(obj.a, obj.b);\n    }\n    if (type === '/') {\n        return divide(obj.a, obj.b);\n    }\n    if (type === 'mod') {\n        return mod(obj.a, obj.b);\n    }\n}\n\nfunction plus(a, b) {\n    return a + b;\n}\nfunction minus(a, b) {\n    return a - b;\n}\nfunction multiply(a, b) {\n    return a * b;\n}\nfunction divide(a, b) {\n    return a / b;\n}\nfunction mod(a, b) {\n    return a % b;\n}\n\nmodule.exports = calc;\n",
-    "functions": [
+    "uri": "\\hyoo\\js\\opt\\example\\calc.js",
+    "code": "function calc(obj, type) {\n    if (type === '+') {\n        return plus(obj.a, obj.b);\n    }\n    if (type === '-') {\n        return minus(obj.a, obj.b);\n    }\n    if (type === '*') {\n        return multiply(obj.a, obj.b);\n    }\n    if (type === '/') {\n        return divide(obj.a, obj.b);\n    }\n    if (type === 'mod') {\n        return mod(obj.a, obj.b);\n    }\n}\nfunction plus(a, b) {\n    return a + b;\n}\nfunction minus(a, b) {\n    return a - b;\n}\nfunction multiply(a, b) {\n    return a * b;\n}\nfunction divide(a, b) {\n    return a / b;\n}\nfunction mod(a, b) {\n    return a % b;\n}\nmodule.exports = calc;\n",
+    "points": [
       {
-        "name": "calc",
-        "optimized": true,
+        "type": "Fun",
+        "reasons": [
+          "",
+          "",
+          ""
+        ],
+        "pos": 13,
         "source": {
           "start": 13,
           "end": 361
         },
-        "versions": [
+        "optimizationCount": 3,
+        "optimized": true,
+        "name": "calc"
+      },
+      {
+        "type": "InlinedFun",
+        "pos": 66,
+        "name": "plus",
+        "source": {
+          "start": 375,
+          "end": 403,
+          "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+        },
+        "points": []
+      },
+      {
+        "type": "NativeCall",
+        "pos": 75,
+        "reasons": [
+          "Call[Code:Load Descriptor:r1s0i5f1]"
+        ]
+      },
+      {
+        "type": "NativeCall",
+        "pos": 82,
+        "reasons": [
+          "Call[Code:Load Descriptor:r1s0i5f1]"
+        ]
+      },
+      {
+        "type": "InlinedFun",
+        "pos": 131,
+        "name": "minus",
+        "source": {
+          "start": 418,
+          "end": 446,
+          "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+        },
+        "points": []
+      },
+      {
+        "type": "NativeCall",
+        "pos": 141,
+        "reasons": [
+          "Call[Code:Load Descriptor:r1s0i5f1]"
+        ]
+      },
+      {
+        "type": "NativeCall",
+        "pos": 148,
+        "reasons": [
+          "Call[Code:Load Descriptor:r1s0i5f1]"
+        ]
+      },
+      {
+        "type": "InlinedFun",
+        "pos": 197,
+        "name": "multiply",
+        "source": {
+          "start": 464,
+          "end": 492,
+          "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+        },
+        "points": []
+      },
+      {
+        "type": "NativeCall",
+        "pos": 210,
+        "reasons": [
+          "Call[Code:Load Descriptor:r1s0i5f1]"
+        ]
+      },
+      {
+        "type": "NativeCall",
+        "pos": 217,
+        "reasons": [
+          "Call[Code:Load Descriptor:r1s0i5f1]"
+        ]
+      },
+      {
+        "type": "InlinedFun",
+        "pos": 266,
+        "name": "divide",
+        "source": {
+          "start": 508,
+          "end": 536,
+          "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+        },
+        "points": []
+      },
+      {
+        "type": "NativeCall",
+        "pos": 277,
+        "reasons": [
+          "Call[Code:Load Descriptor:r1s0i5f1]"
+        ]
+      },
+      {
+        "type": "NativeCall",
+        "pos": 284,
+        "reasons": [
+          "Call[Code:Load Descriptor:r1s0i5f1]"
+        ]
+      },
+      {
+        "type": "InlinedFun",
+        "pos": 335,
+        "name": "mod",
+        "source": {
+          "start": 549,
+          "end": 577,
+          "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+        },
+        "points": []
+      },
+      {
+        "type": "NativeCall",
+        "pos": 343,
+        "reasons": [
+          "Call[Code:Load Descriptor:r1s0i5f1]"
+        ]
+      },
+      {
+        "type": "NativeCall",
+        "pos": 350,
+        "reasons": [
+          "Call[Code:Load Descriptor:r1s0i5f1]"
+        ]
+      }
+    ],
+    "sourceMapJSON": null
+  },
+  {
+    "uri": "\\hyoo\\js\\opt\\example\\test.js",
+    "code": "const calc = require('./calc');\nconst obj = {};\nobj.a = 1;\nobj.b = 2;\nfunction test(type) {\n    obj[type] = 1; // to change map\n    let r;\n    for (let i = 0; i < 1e4; i++) {\n        r = calc(obj, type);\n    }\n    return r;\n}\nfunction testSum() {\n    let sum = 0;\n    for (let i = 0; i < 1e4; i++) {\n        sum += test('+') + test('-') + test('*') + test('/') + test('mod');\n    }\n    return sum;\n}\ntestSum();\ntestSum();\ntestSum();\n",
+    "points": [
+      {
+        "type": "Fun",
+        "reasons": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "pos": 83,
+        "source": {
+          "start": 83,
+          "end": 225
+        },
+        "optimizationCount": 6,
+        "optimized": true,
+        "name": "test"
+      },
+      {
+        "type": "NativeCall",
+        "pos": 106,
+        "reasons": [
+          "Call[Code:Store Descriptor:r1s0i6f1]"
+        ]
+      },
+      {
+        "type": "InlinedFun",
+        "pos": 187,
+        "name": "calc",
+        "source": {
+          "start": 13,
+          "end": 361,
+          "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+        },
+        "points": [
           {
-            "id": "0x1069879a1",
-            "deoptReason": "",
-            "inlinedFuns": [
-              {
-                "pos": 66,
-                "name": "plus",
-                "source": {
-                  "start": 376,
-                  "end": 404,
-                  "uri": "./example/calc.js"
-                },
-                "nativeCalls": [],
-                "inlinedFuns": []
-              },
-              {
-                "pos": 131,
-                "name": "minus",
-                "source": {
-                  "start": 419,
-                  "end": 447,
-                  "uri": "./example/calc.js"
-                },
-                "nativeCalls": [],
-                "inlinedFuns": []
-              },
-              {
-                "pos": 197,
-                "name": "multiply",
-                "source": {
-                  "start": 465,
-                  "end": 493,
-                  "uri": "./example/calc.js"
-                },
-                "nativeCalls": [],
-                "inlinedFuns": []
-              }
-            ],
-            "nativeCalls": []
+            "type": "InlinedFun",
+            "pos": 66,
+            "name": "plus",
+            "source": {
+              "start": 375,
+              "end": 403,
+              "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+            },
+            "points": []
           },
           {
-            "id": "0x106987f61",
-            "deoptReason": "",
-            "inlinedFuns": [
+            "type": "InlinedFun",
+            "pos": 131,
+            "name": "minus",
+            "source": {
+              "start": 418,
+              "end": 446,
+              "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+            },
+            "points": []
+          },
+          {
+            "type": "InlinedFun",
+            "pos": 197,
+            "name": "multiply",
+            "source": {
+              "start": 464,
+              "end": 492,
+              "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+            },
+            "points": []
+          },
+          {
+            "type": "InlinedFun",
+            "pos": 266,
+            "name": "divide",
+            "source": {
+              "start": 508,
+              "end": 536,
+              "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+            },
+            "points": []
+          },
+          {
+            "type": "InlinedFun",
+            "pos": 335,
+            "name": "mod",
+            "source": {
+              "start": 549,
+              "end": 577,
+              "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+            },
+            "points": []
+          }
+        ]
+      },
+      {
+        "type": "Fun",
+        "reasons": [
+          "",
+          ""
+        ],
+        "pos": 242,
+        "source": {
+          "start": 242,
+          "end": 399
+        },
+        "optimizationCount": 2,
+        "optimized": true,
+        "name": "testSum"
+      },
+      {
+        "type": "InlinedFun",
+        "pos": 327,
+        "name": "test",
+        "source": {
+          "start": 83,
+          "end": 225,
+          "uri": "\\hyoo\\js\\opt\\example\\test.js"
+        },
+        "points": [
+          {
+            "type": "NativeCall",
+            "pos": 106,
+            "reasons": [
+              "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
+            ]
+          },
+          {
+            "type": "InlinedFun",
+            "pos": 187,
+            "name": "calc",
+            "source": {
+              "start": 13,
+              "end": 361,
+              "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+            },
+            "points": [
               {
+                "type": "InlinedFun",
                 "pos": 66,
                 "name": "plus",
                 "source": {
-                  "start": 376,
-                  "end": 404,
-                  "uri": "./example/calc.js"
+                  "start": 375,
+                  "end": 403,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
                 },
-                "nativeCalls": [],
-                "inlinedFuns": []
+                "points": []
               },
               {
+                "type": "InlinedFun",
                 "pos": 131,
                 "name": "minus",
                 "source": {
-                  "start": 419,
-                  "end": 447,
-                  "uri": "./example/calc.js"
+                  "start": 418,
+                  "end": 446,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
                 },
-                "nativeCalls": [],
-                "inlinedFuns": []
+                "points": []
               },
               {
+                "type": "InlinedFun",
                 "pos": 197,
                 "name": "multiply",
                 "source": {
-                  "start": 465,
-                  "end": 493,
-                  "uri": "./example/calc.js"
+                  "start": 464,
+                  "end": 492,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
                 },
-                "nativeCalls": [],
-                "inlinedFuns": []
+                "points": []
               },
               {
+                "type": "InlinedFun",
                 "pos": 266,
                 "name": "divide",
                 "source": {
-                  "start": 509,
-                  "end": 537,
-                  "uri": "./example/calc.js"
+                  "start": 508,
+                  "end": 536,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
                 },
-                "nativeCalls": [],
-                "inlinedFuns": []
-              }
-            ],
-            "nativeCalls": []
-          },
-          {
-            "id": "0x106988761",
-            "deoptReason": "",
-            "inlinedFuns": [
-              {
-                "pos": 66,
-                "name": "plus",
-                "source": {
-                  "start": 376,
-                  "end": 404,
-                  "uri": "./example/calc.js"
-                },
-                "nativeCalls": [],
-                "inlinedFuns": []
+                "points": []
               },
               {
-                "pos": 131,
-                "name": "minus",
-                "source": {
-                  "start": 419,
-                  "end": 447,
-                  "uri": "./example/calc.js"
-                },
-                "nativeCalls": [],
-                "inlinedFuns": []
-              },
-              {
-                "pos": 197,
-                "name": "multiply",
-                "source": {
-                  "start": 465,
-                  "end": 493,
-                  "uri": "./example/calc.js"
-                },
-                "nativeCalls": [],
-                "inlinedFuns": []
-              },
-              {
-                "pos": 266,
-                "name": "divide",
-                "source": {
-                  "start": 509,
-                  "end": 537,
-                  "uri": "./example/calc.js"
-                },
-                "nativeCalls": [],
-                "inlinedFuns": []
-              },
-              {
+                "type": "InlinedFun",
                 "pos": 335,
                 "name": "mod",
                 "source": {
-                  "start": 550,
-                  "end": 578,
-                  "uri": "./example/calc.js"
+                  "start": 549,
+                  "end": 577,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
                 },
-                "nativeCalls": [],
-                "inlinedFuns": []
-              }
-            ],
-            "nativeCalls": [
-              {
-                "pos": 75,
-                "reasons": [
-                  "Call[Code:Load Descriptor:r1s0i5f1]"
-                ]
-              },
-              {
-                "pos": 141,
-                "reasons": [
-                  "Call[Code:Load Descriptor:r1s0i5f1]"
-                ]
-              },
-              {
-                "pos": 210,
-                "reasons": [
-                  "Call[Code:Load Descriptor:r1s0i5f1]"
-                ]
-              },
-              {
-                "pos": 277,
-                "reasons": [
-                  "Call[Code:Load Descriptor:r1s0i5f1]"
-                ]
-              },
-              {
-                "pos": 343,
-                "reasons": [
-                  "Call[Code:Load Descriptor:r1s0i5f1]"
-                ]
-              },
-              {
-                "pos": 82,
-                "reasons": [
-                  "Call[Code:Load Descriptor:r1s0i5f1]"
-                ]
-              },
-              {
-                "pos": 148,
-                "reasons": [
-                  "Call[Code:Load Descriptor:r1s0i5f1]"
-                ]
-              },
-              {
-                "pos": 217,
-                "reasons": [
-                  "Call[Code:Load Descriptor:r1s0i5f1]"
-                ]
-              },
-              {
-                "pos": 284,
-                "reasons": [
-                  "Call[Code:Load Descriptor:r1s0i5f1]"
-                ]
-              },
-              {
-                "pos": 350,
-                "reasons": [
-                  "Call[Code:Load Descriptor:r1s0i5f1]"
-                ]
+                "points": []
               }
             ]
           }
-        ],
-        "root": false
-      }
-    ]
-  },
-  {
-    "uri": "./example/test.js",
-    "code": "const calc = require('./calc');\nconst obj = {};\nobj.a = 1;\nobj.b = 2;\n\nfunction test(type) {\n    obj[type] = 1; // to change map\n    let r;\n    for (let i = 0; i < 1e4; i++) {\n        r = calc(obj, type);\n    }\n    return r;\n}\n\nfunction testSum() {\n    let sum = 0;\n    for (let i = 0; i < 1e4; i++) {\n        sum += test('+') + test('-') + test('*') + test('/') + test('mod');\n    }\n    return sum;\n}\n\ntestSum();\ntestSum();\ntestSum();\n",
-    "functions": [
-      {
-        "name": "test",
-        "optimized": true,
-        "source": {
-          "start": 84,
-          "end": 226
-        },
-        "versions": [
-          {
-            "id": "0x106987481",
-            "deoptReason": "",
-            "inlinedFuns": [],
-            "nativeCalls": []
-          },
-          {
-            "id": "0x106987581",
-            "deoptReason": "",
-            "inlinedFuns": [
-              {
-                "pos": 188,
-                "name": "calc",
-                "source": {
-                  "start": 13,
-                  "end": 361,
-                  "uri": "./example/calc.js"
-                },
-                "nativeCalls": [],
-                "inlinedFuns": [
-                  {
-                    "pos": 66,
-                    "name": "plus",
-                    "source": {
-                      "start": 376,
-                      "end": 404,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 131,
-                    "name": "minus",
-                    "source": {
-                      "start": 419,
-                      "end": 447,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  }
-                ]
-              }
-            ],
-            "nativeCalls": []
-          },
-          {
-            "id": "0x106987ce1",
-            "deoptReason": "",
-            "inlinedFuns": [
-              {
-                "pos": 188,
-                "name": "calc",
-                "source": {
-                  "start": 13,
-                  "end": 361,
-                  "uri": "./example/calc.js"
-                },
-                "nativeCalls": [],
-                "inlinedFuns": [
-                  {
-                    "pos": 66,
-                    "name": "plus",
-                    "source": {
-                      "start": 376,
-                      "end": 404,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 131,
-                    "name": "minus",
-                    "source": {
-                      "start": 419,
-                      "end": 447,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 197,
-                    "name": "multiply",
-                    "source": {
-                      "start": 465,
-                      "end": 493,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  }
-                ]
-              }
-            ],
-            "nativeCalls": [
-              {
-                "pos": 107,
-                "reasons": [
-                  "Call[Code:Store Descriptor:r1s0i6f1]"
-                ]
-              }
-            ]
-          },
-          {
-            "id": "0x106988421",
-            "deoptReason": "",
-            "inlinedFuns": [
-              {
-                "pos": 188,
-                "name": "calc",
-                "source": {
-                  "start": 13,
-                  "end": 361,
-                  "uri": "./example/calc.js"
-                },
-                "nativeCalls": [],
-                "inlinedFuns": [
-                  {
-                    "pos": 66,
-                    "name": "plus",
-                    "source": {
-                      "start": 376,
-                      "end": 404,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 131,
-                    "name": "minus",
-                    "source": {
-                      "start": 419,
-                      "end": 447,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 197,
-                    "name": "multiply",
-                    "source": {
-                      "start": 465,
-                      "end": 493,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 266,
-                    "name": "divide",
-                    "source": {
-                      "start": 509,
-                      "end": 537,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  }
-                ]
-              }
-            ],
-            "nativeCalls": [
-              {
-                "pos": 107,
-                "reasons": [
-                  "Call[Code:Store Descriptor:r1s0i6f1]"
-                ]
-              }
-            ]
-          },
-          {
-            "id": "0x106988e41",
-            "deoptReason": "",
-            "inlinedFuns": [
-              {
-                "pos": 188,
-                "name": "calc",
-                "source": {
-                  "start": 13,
-                  "end": 361,
-                  "uri": "./example/calc.js"
-                },
-                "nativeCalls": [
-                  {
-                    "pos": 75,
-                    "reasons": [
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
-                    ]
-                  },
-                  {
-                    "pos": 82,
-                    "reasons": [
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
-                    ]
-                  },
-                  {
-                    "pos": 350,
-                    "reasons": [
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
-                    ]
-                  },
-                  {
-                    "pos": 343,
-                    "reasons": [
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
-                    ]
-                  },
-                  {
-                    "pos": 284,
-                    "reasons": [
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
-                    ]
-                  },
-                  {
-                    "pos": 277,
-                    "reasons": [
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
-                    ]
-                  },
-                  {
-                    "pos": 217,
-                    "reasons": [
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
-                    ]
-                  },
-                  {
-                    "pos": 210,
-                    "reasons": [
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
-                    ]
-                  },
-                  {
-                    "pos": 148,
-                    "reasons": [
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
-                    ]
-                  },
-                  {
-                    "pos": 141,
-                    "reasons": [
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]",
-                      "Call[Code:LoadWithVector Descriptor:r1s0i6f1]"
-                    ]
-                  }
-                ],
-                "inlinedFuns": [
-                  {
-                    "pos": 66,
-                    "name": "plus",
-                    "source": {
-                      "start": 376,
-                      "end": 404,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 131,
-                    "name": "minus",
-                    "source": {
-                      "start": 419,
-                      "end": 447,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 197,
-                    "name": "multiply",
-                    "source": {
-                      "start": 465,
-                      "end": 493,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 266,
-                    "name": "divide",
-                    "source": {
-                      "start": 509,
-                      "end": 537,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 335,
-                    "name": "mod",
-                    "source": {
-                      "start": 550,
-                      "end": 578,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  }
-                ]
-              }
-            ],
-            "nativeCalls": []
-          },
-          {
-            "id": "0x106989e81",
-            "deoptReason": "",
-            "inlinedFuns": [
-              {
-                "pos": 188,
-                "name": "calc",
-                "source": {
-                  "start": 13,
-                  "end": 361,
-                  "uri": "./example/calc.js"
-                },
-                "nativeCalls": [],
-                "inlinedFuns": [
-                  {
-                    "pos": 66,
-                    "name": "plus",
-                    "source": {
-                      "start": 376,
-                      "end": 404,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 131,
-                    "name": "minus",
-                    "source": {
-                      "start": 419,
-                      "end": 447,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 197,
-                    "name": "multiply",
-                    "source": {
-                      "start": 465,
-                      "end": 493,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 266,
-                    "name": "divide",
-                    "source": {
-                      "start": 509,
-                      "end": 537,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  },
-                  {
-                    "pos": 335,
-                    "name": "mod",
-                    "source": {
-                      "start": 550,
-                      "end": 578,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": []
-                  }
-                ]
-              }
-            ],
-            "nativeCalls": [
-              {
-                "pos": 107,
-                "reasons": [
-                  "Call[Code:Store Descriptor:r1s0i6f1]"
-                ]
-              }
-            ]
-          }
-        ],
-        "root": false
+        ]
       },
       {
-        "name": "testSum",
-        "optimized": true,
+        "type": "InlinedFun",
+        "pos": 339,
+        "name": "test",
         "source": {
-          "start": 244,
-          "end": 401
+          "start": 83,
+          "end": 225,
+          "uri": "\\hyoo\\js\\opt\\example\\test.js"
         },
-        "versions": [
+        "points": [
           {
-            "id": "0x10698b001",
-            "deoptReason": "",
-            "inlinedFuns": [
-              {
-                "pos": 365,
-                "name": "test",
-                "source": {
-                  "start": 84,
-                  "end": 226,
-                  "uri": "./example/test.js"
-                },
-                "nativeCalls": [
-                  {
-                    "pos": 107,
-                    "reasons": [
-                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
-                    ]
-                  }
-                ],
-                "inlinedFuns": [
-                  {
-                    "pos": 188,
-                    "name": "calc",
-                    "source": {
-                      "start": 13,
-                      "end": 361,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": [
-                      {
-                        "pos": 66,
-                        "name": "plus",
-                        "source": {
-                          "start": 376,
-                          "end": 404,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 131,
-                        "name": "minus",
-                        "source": {
-                          "start": 419,
-                          "end": 447,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 197,
-                        "name": "multiply",
-                        "source": {
-                          "start": 465,
-                          "end": 493,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 266,
-                        "name": "divide",
-                        "source": {
-                          "start": 509,
-                          "end": 537,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 335,
-                        "name": "mod",
-                        "source": {
-                          "start": 550,
-                          "end": 578,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "pos": 353,
-                "name": "test",
-                "source": {
-                  "start": 84,
-                  "end": 226,
-                  "uri": "./example/test.js"
-                },
-                "nativeCalls": [
-                  {
-                    "pos": 107,
-                    "reasons": [
-                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
-                    ]
-                  }
-                ],
-                "inlinedFuns": [
-                  {
-                    "pos": 188,
-                    "name": "calc",
-                    "source": {
-                      "start": 13,
-                      "end": 361,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": [
-                      {
-                        "pos": 66,
-                        "name": "plus",
-                        "source": {
-                          "start": 376,
-                          "end": 404,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 131,
-                        "name": "minus",
-                        "source": {
-                          "start": 419,
-                          "end": 447,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 197,
-                        "name": "multiply",
-                        "source": {
-                          "start": 465,
-                          "end": 493,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 266,
-                        "name": "divide",
-                        "source": {
-                          "start": 509,
-                          "end": 537,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 335,
-                        "name": "mod",
-                        "source": {
-                          "start": 550,
-                          "end": 578,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "pos": 341,
-                "name": "test",
-                "source": {
-                  "start": 84,
-                  "end": 226,
-                  "uri": "./example/test.js"
-                },
-                "nativeCalls": [
-                  {
-                    "pos": 107,
-                    "reasons": [
-                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
-                    ]
-                  }
-                ],
-                "inlinedFuns": [
-                  {
-                    "pos": 188,
-                    "name": "calc",
-                    "source": {
-                      "start": 13,
-                      "end": 361,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": [
-                      {
-                        "pos": 66,
-                        "name": "plus",
-                        "source": {
-                          "start": 376,
-                          "end": 404,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 131,
-                        "name": "minus",
-                        "source": {
-                          "start": 419,
-                          "end": 447,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 197,
-                        "name": "multiply",
-                        "source": {
-                          "start": 465,
-                          "end": 493,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 266,
-                        "name": "divide",
-                        "source": {
-                          "start": 509,
-                          "end": 537,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 335,
-                        "name": "mod",
-                        "source": {
-                          "start": 550,
-                          "end": 578,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "pos": 329,
-                "name": "test",
-                "source": {
-                  "start": 84,
-                  "end": 226,
-                  "uri": "./example/test.js"
-                },
-                "nativeCalls": [
-                  {
-                    "pos": 107,
-                    "reasons": [
-                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
-                    ]
-                  }
-                ],
-                "inlinedFuns": [
-                  {
-                    "pos": 188,
-                    "name": "calc",
-                    "source": {
-                      "start": 13,
-                      "end": 361,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": [
-                      {
-                        "pos": 66,
-                        "name": "plus",
-                        "source": {
-                          "start": 376,
-                          "end": 404,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 131,
-                        "name": "minus",
-                        "source": {
-                          "start": 419,
-                          "end": 447,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 197,
-                        "name": "multiply",
-                        "source": {
-                          "start": 465,
-                          "end": 493,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 266,
-                        "name": "divide",
-                        "source": {
-                          "start": 509,
-                          "end": 537,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 335,
-                        "name": "mod",
-                        "source": {
-                          "start": 550,
-                          "end": 578,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "nativeCalls": []
+            "type": "NativeCall",
+            "pos": 106,
+            "reasons": [
+              "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
+            ]
           },
           {
-            "id": "0x10698a761",
-            "deoptReason": "",
-            "inlinedFuns": [
+            "type": "InlinedFun",
+            "pos": 187,
+            "name": "calc",
+            "source": {
+              "start": 13,
+              "end": 361,
+              "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+            },
+            "points": [
               {
-                "pos": 365,
-                "name": "test",
+                "type": "InlinedFun",
+                "pos": 66,
+                "name": "plus",
                 "source": {
-                  "start": 84,
-                  "end": 226,
-                  "uri": "./example/test.js"
+                  "start": 375,
+                  "end": 403,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
                 },
-                "nativeCalls": [
-                  {
-                    "pos": 107,
-                    "reasons": [
-                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
-                    ]
-                  }
-                ],
-                "inlinedFuns": [
-                  {
-                    "pos": 188,
-                    "name": "calc",
-                    "source": {
-                      "start": 13,
-                      "end": 361,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": [
-                      {
-                        "pos": 66,
-                        "name": "plus",
-                        "source": {
-                          "start": 376,
-                          "end": 404,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 131,
-                        "name": "minus",
-                        "source": {
-                          "start": 419,
-                          "end": 447,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 197,
-                        "name": "multiply",
-                        "source": {
-                          "start": 465,
-                          "end": 493,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 266,
-                        "name": "divide",
-                        "source": {
-                          "start": 509,
-                          "end": 537,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 335,
-                        "name": "mod",
-                        "source": {
-                          "start": 550,
-                          "end": 578,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      }
-                    ]
-                  }
-                ]
+                "points": []
               },
               {
-                "pos": 353,
-                "name": "test",
+                "type": "InlinedFun",
+                "pos": 131,
+                "name": "minus",
                 "source": {
-                  "start": 84,
-                  "end": 226,
-                  "uri": "./example/test.js"
+                  "start": 418,
+                  "end": 446,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
                 },
-                "nativeCalls": [
-                  {
-                    "pos": 107,
-                    "reasons": [
-                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
-                    ]
-                  }
-                ],
-                "inlinedFuns": [
-                  {
-                    "pos": 188,
-                    "name": "calc",
-                    "source": {
-                      "start": 13,
-                      "end": 361,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": [
-                      {
-                        "pos": 66,
-                        "name": "plus",
-                        "source": {
-                          "start": 376,
-                          "end": 404,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 131,
-                        "name": "minus",
-                        "source": {
-                          "start": 419,
-                          "end": 447,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 197,
-                        "name": "multiply",
-                        "source": {
-                          "start": 465,
-                          "end": 493,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 266,
-                        "name": "divide",
-                        "source": {
-                          "start": 509,
-                          "end": 537,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 335,
-                        "name": "mod",
-                        "source": {
-                          "start": 550,
-                          "end": 578,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      }
-                    ]
-                  }
-                ]
+                "points": []
               },
               {
-                "pos": 341,
-                "name": "test",
+                "type": "InlinedFun",
+                "pos": 197,
+                "name": "multiply",
                 "source": {
-                  "start": 84,
-                  "end": 226,
-                  "uri": "./example/test.js"
+                  "start": 464,
+                  "end": 492,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
                 },
-                "nativeCalls": [
-                  {
-                    "pos": 107,
-                    "reasons": [
-                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
-                    ]
-                  }
-                ],
-                "inlinedFuns": [
-                  {
-                    "pos": 188,
-                    "name": "calc",
-                    "source": {
-                      "start": 13,
-                      "end": 361,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": [
-                      {
-                        "pos": 66,
-                        "name": "plus",
-                        "source": {
-                          "start": 376,
-                          "end": 404,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 131,
-                        "name": "minus",
-                        "source": {
-                          "start": 419,
-                          "end": 447,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 197,
-                        "name": "multiply",
-                        "source": {
-                          "start": 465,
-                          "end": 493,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 266,
-                        "name": "divide",
-                        "source": {
-                          "start": 509,
-                          "end": 537,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 335,
-                        "name": "mod",
-                        "source": {
-                          "start": 550,
-                          "end": 578,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      }
-                    ]
-                  }
-                ]
+                "points": []
               },
               {
-                "pos": 329,
-                "name": "test",
+                "type": "InlinedFun",
+                "pos": 266,
+                "name": "divide",
                 "source": {
-                  "start": 84,
-                  "end": 226,
-                  "uri": "./example/test.js"
+                  "start": 508,
+                  "end": 536,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
                 },
-                "nativeCalls": [
-                  {
-                    "pos": 107,
-                    "reasons": [
-                      "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
-                    ]
-                  }
-                ],
-                "inlinedFuns": [
-                  {
-                    "pos": 188,
-                    "name": "calc",
-                    "source": {
-                      "start": 13,
-                      "end": 361,
-                      "uri": "./example/calc.js"
-                    },
-                    "nativeCalls": [],
-                    "inlinedFuns": [
-                      {
-                        "pos": 66,
-                        "name": "plus",
-                        "source": {
-                          "start": 376,
-                          "end": 404,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 131,
-                        "name": "minus",
-                        "source": {
-                          "start": 419,
-                          "end": 447,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 197,
-                        "name": "multiply",
-                        "source": {
-                          "start": 465,
-                          "end": 493,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 266,
-                        "name": "divide",
-                        "source": {
-                          "start": 509,
-                          "end": 537,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      },
-                      {
-                        "pos": 335,
-                        "name": "mod",
-                        "source": {
-                          "start": 550,
-                          "end": 578,
-                          "uri": "./example/calc.js"
-                        },
-                        "nativeCalls": [],
-                        "inlinedFuns": []
-                      }
-                    ]
-                  }
-                ]
+                "points": []
+              },
+              {
+                "type": "InlinedFun",
+                "pos": 335,
+                "name": "mod",
+                "source": {
+                  "start": 549,
+                  "end": 577,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+                },
+                "points": []
               }
-            ],
-            "nativeCalls": []
+            ]
           }
-        ],
-        "root": false
+        ]
+      },
+      {
+        "type": "InlinedFun",
+        "pos": 351,
+        "name": "test",
+        "source": {
+          "start": 83,
+          "end": 225,
+          "uri": "\\hyoo\\js\\opt\\example\\test.js"
+        },
+        "points": [
+          {
+            "type": "NativeCall",
+            "pos": 106,
+            "reasons": [
+              "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
+            ]
+          },
+          {
+            "type": "InlinedFun",
+            "pos": 187,
+            "name": "calc",
+            "source": {
+              "start": 13,
+              "end": 361,
+              "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+            },
+            "points": [
+              {
+                "type": "InlinedFun",
+                "pos": 66,
+                "name": "plus",
+                "source": {
+                  "start": 375,
+                  "end": 403,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+                },
+                "points": []
+              },
+              {
+                "type": "InlinedFun",
+                "pos": 131,
+                "name": "minus",
+                "source": {
+                  "start": 418,
+                  "end": 446,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+                },
+                "points": []
+              },
+              {
+                "type": "InlinedFun",
+                "pos": 197,
+                "name": "multiply",
+                "source": {
+                  "start": 464,
+                  "end": 492,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+                },
+                "points": []
+              },
+              {
+                "type": "InlinedFun",
+                "pos": 266,
+                "name": "divide",
+                "source": {
+                  "start": 508,
+                  "end": 536,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+                },
+                "points": []
+              },
+              {
+                "type": "InlinedFun",
+                "pos": 335,
+                "name": "mod",
+                "source": {
+                  "start": 549,
+                  "end": 577,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+                },
+                "points": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "InlinedFun",
+        "pos": 363,
+        "name": "test",
+        "source": {
+          "start": 83,
+          "end": 225,
+          "uri": "\\hyoo\\js\\opt\\example\\test.js"
+        },
+        "points": [
+          {
+            "type": "NativeCall",
+            "pos": 106,
+            "reasons": [
+              "Call[Code:StoreWithVector Descriptor:r1s0i7f1]"
+            ]
+          },
+          {
+            "type": "InlinedFun",
+            "pos": 187,
+            "name": "calc",
+            "source": {
+              "start": 13,
+              "end": 361,
+              "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+            },
+            "points": [
+              {
+                "type": "InlinedFun",
+                "pos": 66,
+                "name": "plus",
+                "source": {
+                  "start": 375,
+                  "end": 403,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+                },
+                "points": []
+              },
+              {
+                "type": "InlinedFun",
+                "pos": 131,
+                "name": "minus",
+                "source": {
+                  "start": 418,
+                  "end": 446,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+                },
+                "points": []
+              },
+              {
+                "type": "InlinedFun",
+                "pos": 197,
+                "name": "multiply",
+                "source": {
+                  "start": 464,
+                  "end": 492,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+                },
+                "points": []
+              },
+              {
+                "type": "InlinedFun",
+                "pos": 266,
+                "name": "divide",
+                "source": {
+                  "start": 508,
+                  "end": 536,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+                },
+                "points": []
+              },
+              {
+                "type": "InlinedFun",
+                "pos": 335,
+                "name": "mod",
+                "source": {
+                  "start": 549,
+                  "end": 577,
+                  "uri": "\\hyoo\\js\\opt\\example\\calc.js"
+                },
+                "points": []
+              }
+            ]
+          }
+        ]
       }
-    ]
+    ],
+    "sourceMapJSON": null
   }
 ])
 		</script>

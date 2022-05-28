@@ -8365,14 +8365,14 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $mol_icon_chevron_double_down extends $mol_icon {
+    class $mol_icon_bolt extends $mol_icon {
         path() {
-            return "M16.59,5.59L18,7L12,13L6,7L7.41,5.59L12,10.17L16.59,5.59M16.59,11.59L18,13L12,19L6,13L7.41,11.59L12,16.17L16.59,11.59Z";
+            return "M14,17.7V21H10V20.3L14,17.7M17,3H7V6H17V3M15,7L14,7.7V7H10V10.3L9,11V12L15,8.1V7M15,11L14,11.7V9.7L10,12.4V14.4L9,15V16L15,12.1V11M15,15L14,15.7V13.7L10,16.4V18.4L9,19V20L15,16.1V15Z";
         }
     }
-    $.$mol_icon_chevron_double_down = $mol_icon_chevron_double_down;
+    $.$mol_icon_bolt = $mol_icon_bolt;
 })($ || ($ = {}));
-//mol/icon/chevron/double/down/-view.tree/down.view.tree.ts
+//mol/icon/bolt/-view.tree/bolt.view.tree.ts
 ;
 "use strict";
 var $;
@@ -8544,6 +8544,18 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_icon_chevron_double_down extends $mol_icon {
+        path() {
+            return "M16.59,5.59L18,7L12,13L6,7L7.41,5.59L12,10.17L16.59,5.59M16.59,11.59L18,13L12,19L6,13L7.41,11.59L12,16.17L16.59,11.59Z";
+        }
+    }
+    $.$mol_icon_chevron_double_down = $mol_icon_chevron_double_down;
+})($ || ($ = {}));
+//mol/icon/chevron/double/down/-view.tree/down.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_icon_arrow_down extends $mol_icon {
         path() {
             return "M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z";
@@ -8652,10 +8664,7 @@ var $;
                 end: 0
             };
         }
-        inlines(id) {
-            return [];
-        }
-        natives(id) {
+        points(id) {
             return [];
         }
         script_path(id) {
@@ -8666,8 +8675,7 @@ var $;
             obj.title = () => this.script_title(id);
             obj.script = () => this.script(id);
             obj.source = () => this.script_source(id);
-            obj.inlines = () => this.inlines(id);
-            obj.natives = () => this.natives(id);
+            obj.points = () => this.points(id);
             obj.path = () => this.script_path(id);
             return obj;
         }
@@ -8701,10 +8709,7 @@ var $;
         path() {
             return [];
         }
-        natives() {
-            return [];
-        }
-        inlines() {
+        points() {
             return [];
         }
         script() {
@@ -8716,6 +8721,12 @@ var $;
                 start: 0,
                 end: 0
             };
+        }
+        point_offset(id) {
+            return [
+                0,
+                0
+            ];
         }
         tools() {
             return [
@@ -8760,12 +8771,31 @@ var $;
             obj.sidebar_showed = () => true;
             return obj;
         }
-        Native_anchor(id) {
+        Point_anchor(id) {
             const obj = new this.$.$mol_view();
             return obj;
         }
-        native_reason(id) {
+        point_hint(id) {
             return "";
+        }
+        Func_icon(id) {
+            const obj = new this.$.$mol_icon_bolt();
+            return obj;
+        }
+        Func_marker(id) {
+            const obj = new this.$.$mol_button();
+            obj.hint = () => this.point_hint(id);
+            obj.sub = () => [
+                this.Func_icon(id)
+            ];
+            return obj;
+        }
+        Func(id) {
+            const obj = new this.$.$mol_follower();
+            obj.Anchor = () => this.Point_anchor(id);
+            obj.Sub = () => this.Func_marker(id);
+            obj.offset = () => this.point_offset(id);
+            return obj;
         }
         Native_icon(id) {
             const obj = new this.$.$mol_icon_chevron_double_down();
@@ -8773,27 +8803,17 @@ var $;
         }
         Native_marker(id) {
             const obj = new this.$.$mol_button();
-            obj.hint = () => this.native_reason(id);
+            obj.hint = () => this.point_hint(id);
             obj.sub = () => [
                 this.Native_icon(id)
             ];
             return obj;
         }
-        native_offset(id) {
-            return [
-                0,
-                0
-            ];
-        }
         Native(id) {
             const obj = new this.$.$mol_follower();
-            obj.Anchor = () => this.Native_anchor(id);
+            obj.Anchor = () => this.Point_anchor(id);
             obj.Sub = () => this.Native_marker(id);
-            obj.offset = () => this.native_offset(id);
-            return obj;
-        }
-        Inline_anchor(id) {
-            const obj = new this.$.$mol_view();
+            obj.offset = () => this.point_offset(id);
             return obj;
         }
         inline_arg(id) {
@@ -8816,28 +8836,23 @@ var $;
             ];
             return obj;
         }
-        inline_offset(id) {
-            return [
-                0,
-                0
-            ];
-        }
         Inline(id) {
             const obj = new this.$.$mol_follower();
-            obj.Anchor = () => this.Inline_anchor(id);
+            obj.Anchor = () => this.Point_anchor(id);
             obj.Sub = () => this.Inline_button(id);
-            obj.offset = () => this.inline_offset(id);
+            obj.offset = () => this.point_offset(id);
             return obj;
         }
-        points() {
+        point_views() {
             return [
+                this.Func("0"),
                 this.Native("0"),
                 this.Inline("0")
             ];
         }
         Points() {
             const obj = new this.$.$mol_view();
-            obj.sub = () => this.points();
+            obj.sub = () => this.point_views();
             return obj;
         }
     }
@@ -8858,7 +8873,16 @@ var $;
     ], $hyoo_js_opt_script.prototype, "Code", null);
     __decorate([
         $mol_mem_key
-    ], $hyoo_js_opt_script.prototype, "Native_anchor", null);
+    ], $hyoo_js_opt_script.prototype, "Point_anchor", null);
+    __decorate([
+        $mol_mem_key
+    ], $hyoo_js_opt_script.prototype, "Func_icon", null);
+    __decorate([
+        $mol_mem_key
+    ], $hyoo_js_opt_script.prototype, "Func_marker", null);
+    __decorate([
+        $mol_mem_key
+    ], $hyoo_js_opt_script.prototype, "Func", null);
     __decorate([
         $mol_mem_key
     ], $hyoo_js_opt_script.prototype, "Native_icon", null);
@@ -8868,9 +8892,6 @@ var $;
     __decorate([
         $mol_mem_key
     ], $hyoo_js_opt_script.prototype, "Native", null);
-    __decorate([
-        $mol_mem_key
-    ], $hyoo_js_opt_script.prototype, "Inline_anchor", null);
     __decorate([
         $mol_mem_key
     ], $hyoo_js_opt_script.prototype, "Inline_icon", null);
@@ -8890,7 +8911,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu_page_body] {\n\tjustify-content: space-between;\n}\n\n[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_marker] {\n\tcolor: var(--mol_theme_special);\n\tpadding: var(--mol_gap_text);\n}\n");
+    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu_page_body] {\n\tjustify-content: space-between;\n}\n\n[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_marker],\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_special);\n\tpadding: var(--mol_gap_text);\n}\n");
 })($ || ($ = {}));
 //hyoo/js/opt/-css/opt.view.css.ts
 ;
@@ -8923,78 +8944,41 @@ var $;
                     return null;
                 return this.files().get(uri) ?? null;
             }
-            func_index() {
-                const index = this.$.$mol_state_arg.value('func');
-                return index ? Number(index) : null;
-            }
-            func() {
-                const index = this.func_index();
-                if (index === null)
-                    return null;
-                return this.file().functions[index] ?? null;
-            }
-            ver() {
-                const index = this.$.$mol_state_arg.value('ver');
-                if (!index)
-                    return null;
-                const func = this.func();
-                if (!func)
-                    return null;
-                const ver = {
-                    source: {
-                        uri: this.file().uri,
-                        ...func.source,
-                    },
-                    ...func.versions[Number(index)]
-                };
-                return ver;
-            }
             inline_path() {
                 const path = this.$.$mol_state_arg.value('inline');
                 if (!path)
                     return [];
                 return path.split(',').map(Number);
             }
-            inline(deep) {
+            point(deep) {
                 if (!deep) {
                     const file = this.file();
-                    const natives = [];
-                    const inlines = [];
-                    for (const func of file.functions) {
-                        if (!func.optimized)
-                            continue;
-                        const version = func.versions.at(-1);
-                        natives.push(...version.nativeCalls);
-                        inlines.push(...version.inlinedFuns);
-                    }
                     return {
+                        type: 'InlinedFun',
+                        points: file.points,
                         name: file.uri,
-                        inlinedFuns: inlines,
-                        nativeCalls: natives,
                         pos: 0,
-                        source: { uri: file.uri, start: 0, end: file.code.length }
+                        reasons: undefined,
+                        source: { uri: file.uri, start: 0, end: file.code.length },
                     };
                 }
-                return this.inline(deep - 1).inlinedFuns[this.inline_path()[deep - 1]];
+                return this.point(deep - 1).points[this.inline_path()[deep - 1]];
             }
             script_title(deep) {
                 if (!deep)
                     return this.file().uri;
-                const index = this.inline_path()[deep - 1];
-                return this.inline(deep).name || `Inlined #${index}`;
+                const point = this.point(deep);
+                return point.name || `Inlined #${this.inline_path()[deep - 1]}`;
             }
             script(deep) {
                 const source = this.script_source(deep);
                 return this.files().get(source.uri).code;
             }
             script_source(deep) {
-                return this.inline(deep).source;
+                return this.point(deep).source;
             }
-            natives(deep) {
-                return this.inline(deep).nativeCalls ?? [];
-            }
-            inlines(deep) {
-                return this.inline(deep).inlinedFuns ?? [];
+            points(deep) {
+                return this.point(deep).points;
             }
             script_path(deep) {
                 return this.inline_path().slice(0, deep);
@@ -9020,56 +9004,42 @@ var $;
         ], $hyoo_js_opt.prototype, "menu_content", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_js_opt.prototype, "inline", null);
+        ], $hyoo_js_opt.prototype, "point", null);
         __decorate([
             $mol_mem_key
         ], $hyoo_js_opt.prototype, "script_source", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_js_opt.prototype, "natives", null);
-        __decorate([
-            $mol_mem_key
-        ], $hyoo_js_opt.prototype, "inlines", null);
+        ], $hyoo_js_opt.prototype, "points", null);
         __decorate([
             $mol_mem
         ], $hyoo_js_opt.prototype, "pages", null);
         $$.$hyoo_js_opt = $hyoo_js_opt;
         class $hyoo_js_opt_script extends $.$hyoo_js_opt_script {
-            natives() {
-                return super.natives();
-            }
-            inlines() {
-                return super.inlines();
-            }
             points() {
-                return [
-                    ...this.natives().map((_, i) => this.Native(i)),
-                    ...this.inlines().map((_, i) => this.Inline(i)),
-                ];
+                return super.points();
+            }
+            point_views() {
+                return this.points().map((point, index) => {
+                    switch (point.type) {
+                        case 'InlinedFun': return this.Inline(index);
+                        case 'NativeCall': return this.Native(index);
+                        case 'Fun': return this.Func(index);
+                    }
+                });
             }
             code() {
                 const source = this.source();
                 return this.script().slice(source.start, source.end);
             }
-            native_pos(index) {
-                return this.Code().find_pos(this.natives()[index].pos - this.source().start);
+            point_pos(index) {
+                return this.Code().find_pos(this.points()[index].pos - this.source().start);
             }
-            inline_pos(index) {
-                return this.Code().find_pos(this.inlines()[index].pos - this.source().start);
+            Point_anchor(index) {
+                return this.point_pos(index).token;
             }
-            Native_anchor(index) {
-                return this.native_pos(index).token;
-            }
-            Inline_anchor(index) {
-                return this.inline_pos(index).token;
-            }
-            native_offset(index) {
-                const pos = this.native_pos(index);
-                const text = pos.token.haystack();
-                return [pos.offset / text.length, 0];
-            }
-            inline_offset(index) {
-                const pos = this.inline_pos(index);
+            point_offset(index) {
+                const pos = this.point_pos(index);
                 const text = pos.token.haystack();
                 return [pos.offset / text.length, 0];
             }
@@ -9078,18 +9048,21 @@ var $;
                     inline: [...this.path(), index].join(',')
                 };
             }
-            native_reason(index) {
-                return this.natives()[index].reasons.join('\n');
+            point_hint(index) {
+                const point = this.points()[index];
+                if (point.type === 'Fun') {
+                    return `${point.optimized ? 'OPT' : 'DEOPT'} ${point.optimizationCount}`;
+                }
+                return point.reasons.join('\n');
             }
             inline_current(index) {
                 return this.$.$mol_state_arg.value('inline')?.startsWith(this.inline_arg(index).inline) ?? false;
             }
-            anchors() {
-                return this.points().map(point => point.Anchor());
-            }
             jump_rows() {
                 const rows = new Set();
-                for (const anchor of this.anchors()) {
+                const points = this.points();
+                for (let i = 0; i < points.length; ++i) {
+                    const anchor = this.Point_anchor(i);
                     const row = $mol_owning_get(anchor).host;
                     rows.add(row);
                 }
@@ -9116,28 +9089,19 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $hyoo_js_opt_script.prototype, "points", null);
+        ], $hyoo_js_opt_script.prototype, "point_views", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_js_opt_script.prototype, "native_pos", null);
+        ], $hyoo_js_opt_script.prototype, "point_pos", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_js_opt_script.prototype, "inline_pos", null);
-        __decorate([
-            $mol_mem_key
-        ], $hyoo_js_opt_script.prototype, "native_offset", null);
-        __decorate([
-            $mol_mem_key
-        ], $hyoo_js_opt_script.prototype, "inline_offset", null);
+        ], $hyoo_js_opt_script.prototype, "point_offset", null);
         __decorate([
             $mol_mem_key
         ], $hyoo_js_opt_script.prototype, "inline_arg", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_js_opt_script.prototype, "native_reason", null);
-        __decorate([
-            $mol_mem
-        ], $hyoo_js_opt_script.prototype, "anchors", null);
+        ], $hyoo_js_opt_script.prototype, "point_hint", null);
         __decorate([
             $mol_mem
         ], $hyoo_js_opt_script.prototype, "jump_rows", null);
