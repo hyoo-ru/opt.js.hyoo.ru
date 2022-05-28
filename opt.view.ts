@@ -1,34 +1,32 @@
 namespace $.$$ {
 	
-	type File = {
+	export type File = {
 		uri: string;
 		code: string;
-		functions: readonly Fun[];
+		points: (Fun | NativeCall | InlinedFun)[];
 	};
-	
-	type Fun = {
-		source: {start: number; end: number};
+	export type Fun = {
+		type: 'Fun';
+		pos: number;
+		source: {uri: string; start: number; end: number};
+		optimizationCount: number;
+		reasons: string[];
 		optimized: boolean;
-		name: string;
-		root: boolean;
-		versions: {
-			deoptReason: string;
-			nativeCalls: readonly NativeCall[];
-			inlinedFuns: readonly InlinedFun[];
-		}[];
+		points: undefined
 	};
-	
-	type NativeCall = {
+	export type NativeCall = {
+		type: 'NativeCall';
 		reasons: string[];
 		pos: number;
+		points: undefined
 	};
-	
-	type InlinedFun = {
-		pos: number;
+	export type InlinedFun = {
+		type: 'InlinedFun';
+		points: (Fun | NativeCall | InlinedFun)[];
 		name: string;
+		pos: number;
+		reasons: undefined;
 		source: {uri: string; start: number; end: number};
-		nativeCalls: readonly NativeCall[];
-		inlinedFuns: readonly InlinedFun[];
 	};
 
 	export class $hyoo_js_opt extends $.$hyoo_js_opt {
@@ -60,76 +58,12 @@ namespace $.$$ {
 			return uri
 		}
 		
-		// @ $mol_mem_key
-		// file_content( file: string ) {
-		// 	return this.files().get( file )!.functions
-		// 		.map( ( _, func )=> this.Func({ file, func }) )
-		// }
-		
-		// func_id( { file, func }: { file: string, func: number } ) {
-		// 	return 'Function ' + (
-		// 		this.files().get( file )!.functions[ func ].name
-		// 		|| `#${func}`
-		// 	)
-		// }
-		
-		// @ $mol_mem_key
-		// func_content( { file, func }: { file: string, func: number } ) {
-		// 	return this.files().get( file )!.functions[ func ].versions
-		// 		.map( ( _, ver )=> this.Ver({ file, func, ver }) )
-		// }
-		
-		// ver_id( { file, func, ver }: { file: string, func: number, ver: number } ) {
-		// 	return `Version #${ver}`
-		// }
-		
-		// ver_arg( { file, func, ver }: { file: string, func: number, ver: number } ) {
-		// 	return {
-		// 		file,
-		// 		func: String( func ),
-		// 		ver: String( ver ),
-		// 		inline: null,
-		// 	}
-		// }
-		
 		file() {
 			
 			const uri = this.$.$mol_state_arg.value( 'file' )
 			if( !uri ) return null
 			
 			return this.files().get( uri ) ?? null
-		}
-		
-		func_index() {
-			const index = this.$.$mol_state_arg.value( 'func' )
-			return index ? Number( index ) : null
-		}
-		
-		func() {
-			
-			const index = this.func_index()
-			if( index === null ) return null
-			
-			return this.file()!.functions[ index ] ?? null
-		}
-		
-		ver() {
-			
-			const index = this.$.$mol_state_arg.value( 'ver' )
-			if( !index ) return null
-			
-			const func = this.func()
-			if( !func ) return null
-			
-			const ver = {
-				source: {
-					uri: this.file()!.uri,
-					... func.source,
-				},
-				... func.versions[ Number( index ) ]
-			}
-			
-			return ver
 		}
 		
 		inline_path() {
@@ -141,38 +75,25 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem_key
-		inline( deep: number ): InlinedFun {
-			
+		point( deep: number ): InlinedFun {
 			if( !deep ) {
-				
 				const file = this.file()!
-				const natives = [] as NativeCall[]
-				const inlines = [] as InlinedFun[]
-				
-				for( const func of file.functions ) {
-					if( !func.optimized ) continue
-					const version = func.versions.at(-1)!
-					natives.push( ... version.nativeCalls )
-					inlines.push( ... version.inlinedFuns )
-				}
-				
 				return {
+					type: 'InlinedFun',
+					points: file.points,
 					name: file.uri,
-					inlinedFuns: inlines,
-					nativeCalls: natives,
 					pos: 0,
-					source: { uri: file.uri, start: 0, end: file.code.length }
+					reasons: undefined,
+					source: { uri: file.uri, start: 0, end: file.code.length },
 				}
-				
 			}
-			
-			return this.inline( deep - 1 ).inlinedFuns![ this.inline_path()[ deep - 1 ] ]
+			return this.point( deep - 1 ).points![ this.inline_path()[ deep - 1 ] ] as InlinedFun
 		}
 		
 		script_title( deep: number ) {
 			if( !deep ) return this.file()!.uri
-			const index = this.inline_path()[ deep - 1 ]
-			return this.inline( deep ).name || `Inlined #${index}`
+			const point = this.point( deep )
+			return point.name || `Inlined #${ this.inline_path()[ deep - 1 ]}`
 		}
 		
 		script( deep: number ) {
@@ -182,17 +103,12 @@ namespace $.$$ {
 		
 		@ $mol_mem_key
 		script_source( deep: number ) {
-			return this.inline( deep ).source
+			return this.point( deep ).source
 		}
 		
 		@ $mol_mem_key
-		natives( deep: number ) {
-			return this.inline( deep ).nativeCalls ?? []
-		}
-		
-		@ $mol_mem_key
-		inlines( deep: number ) {
-			return this.inline( deep ).inlinedFuns ?? []
+		points( deep: number ) {
+			return this.point( deep ).points
 		}
 		
 		script_path( deep: number ) {
@@ -214,20 +130,19 @@ namespace $.$$ {
 	
 	export class $hyoo_js_opt_script extends $.$hyoo_js_opt_script {
 		
-		natives() {
-			return super.natives() as readonly NativeCall[]
-		}
-		
-		inlines() {
-			return super.inlines() as readonly InlinedFun[]
+		points() {
+			return super.points() as readonly ( Fun | NativeCall | InlinedFun )[]
 		}
 		
 		@ $mol_mem
-		points() {
-			return [
-				... this.natives().map( (_,i)=> this.Native(i) ),
-				... this.inlines().map( (_,i)=> this.Inline(i) ),
-			]
+		point_views() {
+			return this.points().map( ( point, index )=> {
+				switch( point.type ) {
+					case 'InlinedFun': return this.Inline( index )
+					case 'NativeCall': return this.Native( index )
+					case 'Fun': return this.Func( index )
+				}
+			} )
 		}
 		
 		code() {
@@ -236,33 +151,17 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem_key
-		native_pos( index: number ) {
-			return this.Code().find_pos( this.natives()[ index ].pos - this.source().start )
+		point_pos( index: number ) {
+			return this.Code().find_pos( this.points()[ index ].pos - this.source().start )
+		}
+		
+		Point_anchor( index: number ) {
+			return this.point_pos( index )!.token
 		}
 		
 		@ $mol_mem_key
-		inline_pos( index: number ) {
-			return this.Code().find_pos( this.inlines()[ index ].pos - this.source().start )
-		}
-		
-		Native_anchor( index: number ) {
-			return this.native_pos( index )!.token
-		}
-		
-		Inline_anchor( index: number ) {
-			return this.inline_pos( index )!.token
-		}
-		
-		@ $mol_mem_key
-		native_offset( index: number ) {
-			const pos = this.native_pos( index )!
-			const text = pos.token.haystack()
-			return [ pos.offset / text.length, 0 ]
-		}
-		
-		@ $mol_mem_key
-		inline_offset( index: number ) {
-			const pos = this.inline_pos( index )!
+		point_offset( index: number ) {
+			const pos = this.point_pos( index )!
 			const text = pos.token.haystack()
 			return [ pos.offset / text.length, 0 ]
 		}
@@ -275,8 +174,12 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem_key
-		native_reason( index: number ) {
-			return this.natives()[ index ].reasons.join( '\n' )
+		point_hint( index: number ) {
+			const point = this.points()[ index ]
+			if( point.type === 'Fun' ) {
+				return `${ point.optimized ? 'OPT' : 'DEOPT' } ${ point.optimizationCount }`
+			}
+			return point.reasons!.join( '\n' )
 		}
 		
 		inline_current( index: number ) {
@@ -284,16 +187,13 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem
-		anchors() {
-			return this.points().map( point => point.Anchor() )
-		}
-		
-		@ $mol_mem
 		jump_rows() {
 			
 			const rows = new Set<$mol_text_code_row>()
 			
-			for( const anchor of this.anchors() ) {
+			const points = this.points()
+			for( let i =0; i < points.length; ++ i ) {
+				const anchor = this.Point_anchor( i )
 				const row = ( $mol_owning_get( anchor ) as $mol_wire_atom<any,any,any> ).host
 				rows.add( row )
 			}

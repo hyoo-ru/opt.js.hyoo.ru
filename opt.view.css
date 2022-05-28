@@ -18,7 +18,8 @@
 	padding: var(--mol_gap_block);
 }
 
-[hyoo_js_opt_script_native_marker] {
+[hyoo_js_opt_script_native_marker],
+[hyoo_js_opt_script_func_marker] {
 	color: var(--mol_theme_special);
 	padding: var(--mol_gap_text);
 }

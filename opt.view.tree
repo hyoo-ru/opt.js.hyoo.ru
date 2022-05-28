@@ -42,19 +42,20 @@ $hyoo_js_opt $mol_book2
 				uri \
 				start 0
 				end 0
-			inlines <= inlines* /
-			natives <= natives* /
+			points <= points* /
 			path <= script_path* /number
 
 $hyoo_js_opt_script $mol_page
 	path /number
-	natives /
-	inlines /
+	points /
 	script \
 	source *
 		uri \
 		start 0
 		end 0
+	point_offset* /
+		0
+		0
 	tools /
 		<= Jump $mol_paginator
 			value? <=> jump? 0
@@ -66,24 +67,27 @@ $hyoo_js_opt_script $mol_page
 			text <= code \
 			highlight <= search
 			sidebar_showed true
-		<= Points $mol_view sub <= points /
+		<= Points $mol_view sub <= point_views /
+			<= Func*0 $mol_follower
+				Anchor <= Point_anchor* $mol_view
+				Sub <= Func_marker* $mol_button
+					hint <= point_hint* \
+					sub /
+						<= Func_icon* $mol_icon_bolt
+				offset <= point_offset*
 			<= Native*0 $mol_follower
-				Anchor <= Native_anchor* $mol_view
+				Anchor <= Point_anchor* $mol_view
 				Sub <= Native_marker* $mol_button
-					hint <= native_reason* \
+					hint <= point_hint* \
 					sub /
 						<= Native_icon* $mol_icon_chevron_double_down
-				offset <= native_offset* /
-					0
-					0
+				offset <= point_offset*
 			<= Inline*0 $mol_follower
-				Anchor <= Inline_anchor* $mol_view
+				Anchor <= Point_anchor* $mol_view
 				Sub <= Inline_button* $mol_link
 					hint \Inlined Function
 					arg <= inline_arg* *
 					current <= inline_current* false
 					sub /
 						<= Inline_icon* $mol_icon_arrow_down_thick
-				offset <= inline_offset* /
-					0
-					0
+				offset <= point_offset*
