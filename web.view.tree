@@ -565,20 +565,10 @@ $hyoo_js_opt $mol_book2
 							arg *
 								file <= file_uri* \
 								inline null
-						- <= File*uri $mol_expander
-							title <= file_uri* \
-							expanded? <=> file_expanded*? true
-							content <= file_content* /
-								<= Func*id $mol_expander
-									title <= func_id* \
-									expanded? <=> func_expanded*? true
-									content <= func_content* /
-										<= Ver*id $mol_link
-											title <= ver_id* \
-											arg <= ver_arg* *
 				<= Hint $mol_text text \
 					\### Analyze your script
 					\	npx turbotracer path/to/script.js
+					\	npx turbotracer https://example.org
 					\### Other tools
 					\- [JS Benchmarking](https://perf.js.hyoo.ru)
 					\- [JS Sandbox](https://eval.js.hyoo.ru)

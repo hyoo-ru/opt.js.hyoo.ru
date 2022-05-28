@@ -5202,9 +5202,9 @@ var $;
     $.$mol_syntax2_md_code = new $mol_syntax2({
         'code-docs': /\/\/\/.*?$/,
         'code-comment-block': /(?:\/\*[^]*?\*\/|\/\+[^]*?\+\/|<![^]*?>)/,
-        'code-link': /(?:\w+:\/\/|#|\?)\S+?(?=\s|\\\\|""|$)/,
+        'code-link': /(?:\w+:\/\/|#)\S+?(?=\s|\\\\|""|$)/,
         'code-comment-inline': /\/\/.*?$/,
-        'code-string': /(?:".*?"|'.*?'|`.*?`|\/.+?\/[gmi]*\b|(?:^|[ \t])\\[^\n]*\n)/,
+        'code-string': /(?:".*?"|'.*?'|`.*?`|(?<!\w)\/.+?\/[dygimsu]*(?!\w)|(?:^|[ \t])\\[^\n]*\n)/,
         'code-number': /[+-]?(?:\d*\.)?\d+\w*/,
         'code-call': /\.?\w+ *(?=\()/,
         'code-field': /(?:\.\w+|[\w-]+\??\s*:(?!\/\/))/,
@@ -8351,7 +8351,7 @@ var $;
         }
         Hint() {
             const obj = new this.$.$mol_text();
-            obj.text = () => "### Analyze your script\n\tnpx turbotracer path/to/script.js\n### Other tools\n- [JS Benchmarking](https://perf.js.hyoo.ru)\n- [JS Sandbox](https://eval.js.hyoo.ru)";
+            obj.text = () => "### Analyze your script\n\tnpx turbotracer path/to/script.js\n\tnpx turbotracer https://example.org\n### Other tools\n- [JS Benchmarking](https://perf.js.hyoo.ru)\n- [JS Sandbox](https://eval.js.hyoo.ru)";
             return obj;
         }
         Menu_page() {
