@@ -1,3 +1,3 @@
 # opt.js.hyoo.ru
 
-V8 JS inlining analizer.
+UI for analyze V8 JS inlining. Use [turbotracer](https://www.npmjs.com/package/turbotracer) to generate report.
