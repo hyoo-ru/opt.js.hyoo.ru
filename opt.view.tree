@@ -80,7 +80,7 @@ $hyoo_js_opt_script $mol_page
 				Sub <= Native_marker* $mol_button
 					hint <= point_hint* \
 					sub /
-						<= Native_icon* $mol_icon_chevron_double_down
+						<= Native_icon* $mol_icon_flash
 				offset <= point_offset*
 			<= Inline*0 $mol_follower
 				Anchor <= Point_anchor* $mol_view
@@ -89,5 +89,5 @@ $hyoo_js_opt_script $mol_page
 					arg <= inline_arg* *
 					current <= inline_current* false
 					sub /
-						<= Inline_icon* $mol_icon_arrow_down_thick
+						<= Inline_icon* $mol_icon_map_marker_check
 				offset <= point_offset*

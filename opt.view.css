@@ -31,4 +31,5 @@
 [hyoo_js_opt_script_func_marker] {
 	color: var(--mol_theme_special);
 	font-size: .75rem;
+	text-shadow: 0 0;
 }
