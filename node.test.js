@@ -8705,6 +8705,7 @@ var $;
             const obj = new this.$.$mol_text_code();
             obj.text = () => this.code();
             obj.highlight = () => this.search();
+            obj.sidebar_showed = () => true;
             return obj;
         }
         Native_anchor(id) {

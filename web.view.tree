@@ -599,6 +599,7 @@ $hyoo_js_opt_script $mol_page
 		<= Code $mol_text_code
 			text <= code \
 			highlight <= search
+			sidebar_showed true
 		<= Native*0 $mol_follower
 			Anchor <= Native_anchor* $mol_view
 			Sub <= Native_marker* $mol_button
