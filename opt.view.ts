@@ -135,14 +135,17 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem
-		point_views() {
-			return this.points().map( ( point, index )=> {
-				switch( point.type ) {
-					case 'InlinedFun': return this.Inline( index )
-					case 'NativeCall': return this.Native( index )
-					case 'Fun': return this.Func( index )
-				}
-			} )
+		body() {
+			return [
+				this.Code(),
+				... this.points().map( ( point, index )=> {
+					switch( point.type ) {
+						case 'InlinedFun': return this.Inline( index )
+						case 'NativeCall': return this.Native( index )
+						case 'Fun': return this.Func( index )
+					}
+				} )
+			]
 		}
 		
 		code() {

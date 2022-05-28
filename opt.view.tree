@@ -11,20 +11,21 @@ $hyoo_js_opt $mol_book2
 					uri \https://github.com/hyoo-ru/opt.js.hyoo.ru
 				<= Lights $mol_lights_toggle
 			body /
-				<= Menu $mol_list
-					rows <= menu_content /
-						<= File*uri $mol_link
-							title <= file_uri* \
-							arg *
-								file <= file_uri* \
-								inline null
-				<= Hint $mol_text text \
-					\### Analyze your script
-					\	npx turbotracer path/to/script.js
-					\	npx turbotracer https://example.org
-					\### Other tools
-					\- [JS Benchmarking](https://perf.js.hyoo.ru)
-					\- [JS Sandbox](https://eval.js.hyoo.ru)
+				<= Menu_content $mol_list rows /
+					<= Menu $mol_list
+						rows <= menu_content /
+							<= File*uri $mol_link
+								title <= file_uri* \
+								arg *
+									file <= file_uri* \
+									inline null
+					<= Hint $mol_text text \
+						\### Analyze your script
+						\	npx turbotracer path/to/script.js
+						\	npx turbotracer https://example.org
+						\### Other tools
+						\- [JS Benchmarking](https://perf.js.hyoo.ru)
+						\- [JS Sandbox](https://eval.js.hyoo.ru)
 		<= Script*0 $hyoo_js_opt_script
 			title <= script_title* \
 			script <= script* \
@@ -57,30 +58,29 @@ $hyoo_js_opt_script $mol_page
 			text <= code \
 			highlight <= search
 			sidebar_showed true
-		<= Points $mol_view sub <= point_views /
-			<= Func*0 $mol_follower
-				Anchor <= Point_anchor* $mol_view
-				Sub <= Func_marker* $hyoo_js_opt_script_func_marker
-					attempts <= func_attempts* 0
-					optimized <= func_optimized* true
-					hint <= point_hint* \
-				offset <= point_offset*
-			<= Native*0 $mol_follower
-				Anchor <= Point_anchor* $mol_view
-				Sub <= Native_marker* $mol_button
-					hint <= point_hint* \
-					sub /
-						<= Native_icon* $mol_icon_flash
-				offset <= point_offset*
-			<= Inline*0 $mol_follower
-				Anchor <= Point_anchor* $mol_view
-				Sub <= Inline_button* $mol_link
-					hint \Inlined
-					arg <= inline_arg* *
-					current <= inline_current* false
-					sub /
-						<= Inline_icon* $mol_icon_map_marker_check
-				offset <= point_offset*
+		<= Func*0 $mol_follower
+			Anchor <= Point_anchor* $mol_view
+			Sub <= Func_marker* $hyoo_js_opt_script_func_marker
+				attempts <= func_attempts* 0
+				optimized <= func_optimized* true
+				hint <= point_hint* \
+			offset <= point_offset*
+		<= Native*0 $mol_follower
+			Anchor <= Point_anchor* $mol_view
+			Sub <= Native_marker* $mol_button
+				hint <= point_hint* \
+				sub /
+					<= Native_icon* $mol_icon_flash
+			offset <= point_offset*
+		<= Inline*0 $mol_follower
+			Anchor <= Point_anchor* $mol_view
+			Sub <= Inline_button* $mol_link
+				hint \Inlined
+				arg <= inline_arg* *
+				current <= inline_current* false
+				sub /
+					<= Inline_icon* $mol_icon_map_marker_check
+			offset <= point_offset*
 
 $hyoo_js_opt_script_func_marker $mol_button
 	attr *
