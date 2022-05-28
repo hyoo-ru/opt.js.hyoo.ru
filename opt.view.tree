@@ -85,7 +85,7 @@ $hyoo_js_opt_script $mol_page
 			<= Inline*0 $mol_follower
 				Anchor <= Point_anchor* $mol_view
 				Sub <= Inline_button* $mol_link
-					hint \Inlined Function
+					hint \Inlined
 					arg <= inline_arg* *
 					current <= inline_current* false
 					sub /
