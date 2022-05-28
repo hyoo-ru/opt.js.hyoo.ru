@@ -183,7 +183,7 @@ namespace $.$$ {
 		}
 		
 		func_attempts( index: number ) {
-			return this.points()[ index ].optimizationCount
+			return ( this.points()[ index ] as Fun ).optimizationCount
 		}
 		
 		inline_current( index: number ) {
