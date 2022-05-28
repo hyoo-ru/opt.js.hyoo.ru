@@ -8445,7 +8445,7 @@ var $;
             const obj = new this.$.$mol_button();
             obj.hint = () => this.native_reason(id);
             obj.sub = () => [
-                "₸"
+                "⎖"
             ];
             return obj;
         }

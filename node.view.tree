@@ -607,7 +607,7 @@ $hyoo_js_opt_script $mol_page
 				Anchor <= Native_anchor* $mol_view
 				Sub <= Native_marker* $mol_button
 					hint <= native_reason* \
-					sub / \₸
+					sub / \⎖
 				offset <= native_offset* /
 					0
 					0
