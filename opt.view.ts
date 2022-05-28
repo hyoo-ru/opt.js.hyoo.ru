@@ -176,10 +176,12 @@ namespace $.$$ {
 		@ $mol_mem_key
 		point_hint( index: number ) {
 			const point = this.points()[ index ]
-			if( point.type === 'Fun' ) {
-				return `${ point.optimized ? 'Optimized' : 'Deoptimized' } after ${ point.optimizationCount } attempts`
-			}
-			return point.reasons!.join( '\n' )
+			return [
+				... point.type === 'Fun'
+					? [ `${ point.optimized ? 'Optimized' : 'Deoptimized' } after ${ point.optimizationCount } attempts` ]
+					: [],
+				... point.reasons!
+			].join( '\n' )
 		}
 		
 		func_attempts( index: number ) {
