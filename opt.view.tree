@@ -20,12 +20,12 @@ $hyoo_js_opt $mol_book2
 									file <= file_uri* \
 									inline null
 					<= Hint $mol_text text \
-						\### Analyze your script
+						\### How to Use
 						\	npx turbotracer path/to/script.js
-						\	npx turbotracer https://example.org
-						\### Other tools
-						\- [JS Benchmarking](https://perf.js.hyoo.ru)
-						\- [JS Sandbox](https://eval.js.hyoo.ru)
+						\	npx turbotracer "https://example.org"
+						\### Other JS Tools
+						\- [Benchmarks](https://perf.js.hyoo.ru)
+						\- [Sandbox](https://eval.js.hyoo.ru)
 		<= Script*0 $hyoo_js_opt_script
 			title <= script_title* \
 			script <= script* \
