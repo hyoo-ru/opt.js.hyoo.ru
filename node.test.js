@@ -8365,18 +8365,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $mol_icon_bolt extends $mol_icon {
-        path() {
-            return "M14,17.7V21H10V20.3L14,17.7M17,3H7V6H17V3M15,7L14,7.7V7H10V10.3L9,11V12L15,8.1V7M15,11L14,11.7V9.7L10,12.4V14.4L9,15V16L15,12.1V11M15,15L14,15.7V13.7L10,16.4V18.4L9,19V20L15,16.1V15Z";
-        }
-    }
-    $.$mol_icon_bolt = $mol_icon_bolt;
-})($ || ($ = {}));
-//mol/icon/bolt/-view.tree/bolt.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
     class $mol_ghost extends $mol_view {
         Sub() {
             const obj = new this.$.$mol_view();
@@ -8544,38 +8532,50 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $mol_icon_chevron_double_down extends $mol_icon {
+    class $mol_icon_flash extends $mol_icon {
         path() {
-            return "M16.59,5.59L18,7L12,13L6,7L7.41,5.59L12,10.17L16.59,5.59M16.59,11.59L18,13L12,19L6,13L7.41,11.59L12,16.17L16.59,11.59Z";
+            return "M7,2V13H10V22L17,10H13L17,2H7Z";
         }
     }
-    $.$mol_icon_chevron_double_down = $mol_icon_chevron_double_down;
+    $.$mol_icon_flash = $mol_icon_flash;
 })($ || ($ = {}));
-//mol/icon/chevron/double/down/-view.tree/down.view.tree.ts
+//mol/icon/flash/-view.tree/flash.view.tree.ts
 ;
 "use strict";
 var $;
 (function ($) {
-    class $mol_icon_arrow_down extends $mol_icon {
+    class $mol_icon_map extends $mol_icon {
         path() {
-            return "M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z";
+            return "M15,19L9,16.89V5L15,7.11M20.5,3C20.44,3 20.39,3 20.34,3L15,5.1L9,3L3.36,4.9C3.15,4.97 3,5.15 3,5.38V20.5C3,20.78 3.22,21 3.5,21C3.55,21 3.61,21 3.66,20.97L9,18.9L15,21L20.64,19.1C20.85,19 21,18.85 21,18.62V3.5C21,3.22 20.78,3 20.5,3Z";
         }
     }
-    $.$mol_icon_arrow_down = $mol_icon_arrow_down;
+    $.$mol_icon_map = $mol_icon_map;
 })($ || ($ = {}));
-//mol/icon/arrow/down/-view.tree/down.view.tree.ts
+//mol/icon/map/-view.tree/map.view.tree.ts
 ;
 "use strict";
 var $;
 (function ($) {
-    class $mol_icon_arrow_down_thick extends $mol_icon {
+    class $mol_icon_map_marker extends $mol_icon {
         path() {
-            return "M10,4H14V13L17.5,9.5L19.92,11.92L12,19.84L4.08,11.92L6.5,9.5L10,13V4Z";
+            return "M12,11.5C10.62,11.5 9.5,10.38 9.5,9C9.5,7.62 10.62,6.5 12,6.5C13.38,6.5 14.5,7.62 14.5,9C14.5,10.38 13.38,11.5 12,11.5M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2Z";
         }
     }
-    $.$mol_icon_arrow_down_thick = $mol_icon_arrow_down_thick;
+    $.$mol_icon_map_marker = $mol_icon_map_marker;
 })($ || ($ = {}));
-//mol/icon/arrow/down/thick/-view.tree/thick.view.tree.ts
+//mol/icon/map/marker/-view.tree/marker.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_icon_map_marker_check extends $mol_icon {
+        path() {
+            return "M12,2C15.86,2 19,5.14 19,9C19,14.25 12,22 12,22C12,22 5,14.25 5,9C5,5.14 8.14,2 12,2M10.47,14L17,7.41L15.6,6L10.47,11.18L8.4,9.09L7,10.5L10.47,14Z";
+        }
+    }
+    $.$mol_icon_map_marker_check = $mol_icon_map_marker_check;
+})($ || ($ = {}));
+//mol/icon/map/marker/check/-view.tree/check.view.tree.ts
 ;
 "use strict";
 var $;
@@ -8778,15 +8778,14 @@ var $;
         point_hint(id) {
             return "";
         }
-        Func_icon(id) {
-            const obj = new this.$.$mol_icon_bolt();
-            return obj;
+        func_attempts(id) {
+            return 0;
         }
         Func_marker(id) {
             const obj = new this.$.$mol_button();
             obj.hint = () => this.point_hint(id);
             obj.sub = () => [
-                this.Func_icon(id)
+                this.func_attempts(id)
             ];
             return obj;
         }
@@ -8798,7 +8797,7 @@ var $;
             return obj;
         }
         Native_icon(id) {
-            const obj = new this.$.$mol_icon_chevron_double_down();
+            const obj = new this.$.$mol_icon_flash();
             return obj;
         }
         Native_marker(id) {
@@ -8823,12 +8822,12 @@ var $;
             return false;
         }
         Inline_icon(id) {
-            const obj = new this.$.$mol_icon_arrow_down_thick();
+            const obj = new this.$.$mol_icon_map_marker_check();
             return obj;
         }
         Inline_button(id) {
             const obj = new this.$.$mol_link();
-            obj.hint = () => "Inlined Function";
+            obj.hint = () => "Inlined";
             obj.arg = () => this.inline_arg(id);
             obj.current = () => this.inline_current(id);
             obj.sub = () => [
@@ -8876,9 +8875,6 @@ var $;
     ], $hyoo_js_opt_script.prototype, "Point_anchor", null);
     __decorate([
         $mol_mem_key
-    ], $hyoo_js_opt_script.prototype, "Func_icon", null);
-    __decorate([
-        $mol_mem_key
     ], $hyoo_js_opt_script.prototype, "Func_marker", null);
     __decorate([
         $mol_mem_key
@@ -8911,7 +8907,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu_page_body] {\n\tjustify-content: space-between;\n}\n\n[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_marker],\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_special);\n\tpadding: var(--mol_gap_text);\n}\n");
+    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu_page_body] {\n\tjustify-content: space-between;\n}\n\n[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_marker],\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_special);\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_native_marker] {\n\tcolor: var(--mol_theme_focus);\n}\n\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_special);\n\tfont-size: .75rem;\n\ttext-shadow: 0 0;\n}\n");
 })($ || ($ = {}));
 //hyoo/js/opt/-css/opt.view.css.ts
 ;
@@ -9051,9 +9047,12 @@ var $;
             point_hint(index) {
                 const point = this.points()[index];
                 if (point.type === 'Fun') {
-                    return `${point.optimized ? 'OPT' : 'DEOPT'} ${point.optimizationCount}`;
+                    return `${point.optimized ? 'Optimized' : 'Deoptimized'} after ${point.optimizationCount} attempts`;
                 }
                 return point.reasons.join('\n');
+            }
+            func_attempts(index) {
+                return this.points()[index].optimizationCount;
             }
             inline_current(index) {
                 return this.$.$mol_state_arg.value('inline')?.startsWith(this.inline_arg(index).inline) ?? false;

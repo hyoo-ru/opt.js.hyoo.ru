@@ -2499,12 +2499,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $mol_icon_bolt extends $mol_icon {
-        path(): string;
-    }
-}
-
-declare namespace $ {
     class $mol_ghost extends $mol_view {
         Sub(): $mol_view;
     }
@@ -2554,19 +2548,25 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $mol_icon_chevron_double_down extends $mol_icon {
+    class $mol_icon_flash extends $mol_icon {
         path(): string;
     }
 }
 
 declare namespace $ {
-    class $mol_icon_arrow_down extends $mol_icon {
+    class $mol_icon_map extends $mol_icon {
         path(): string;
     }
 }
 
 declare namespace $ {
-    class $mol_icon_arrow_down_thick extends $mol_icon {
+    class $mol_icon_map_marker extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_icon_map_marker_check extends $mol_icon {
         path(): string;
     }
 }
@@ -2617,15 +2617,15 @@ declare namespace $ {
         Code(): $$.$mol_text_code;
         Point_anchor(id: any): $mol_view;
         point_hint(id: any): string;
-        Func_icon(id: any): $mol_icon_bolt;
+        func_attempts(id: any): number;
         Func_marker(id: any): $$.$mol_button;
         Func(id: any): $$.$mol_follower;
-        Native_icon(id: any): $mol_icon_chevron_double_down;
+        Native_icon(id: any): $mol_icon_flash;
         Native_marker(id: any): $$.$mol_button;
         Native(id: any): $$.$mol_follower;
         inline_arg(id: any): {};
         inline_current(id: any): boolean;
-        Inline_icon(id: any): $mol_icon_arrow_down_thick;
+        Inline_icon(id: any): $mol_icon_map_marker_check;
         Inline_button(id: any): $$.$mol_link;
         Inline(id: any): $$.$mol_follower;
         point_views(): readonly any[];
@@ -2706,6 +2706,7 @@ declare namespace $.$$ {
             inline: string;
         };
         point_hint(index: number): string;
+        func_attempts(index: number): number;
         inline_current(index: number): boolean;
         jump_rows(): $mol_text_code_row[];
         jump(next?: number): number;
