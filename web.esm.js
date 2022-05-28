@@ -8590,6 +8590,8 @@ var $;
                     const natives = [];
                     const inlines = [];
                     for (const func of file.functions) {
+                        if (!func.optimized)
+                            continue;
                         const version = func.versions.at(-1);
                         natives.push(...version.nativeCalls);
                         inlines.push(...version.inlinedFuns);
