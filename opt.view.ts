@@ -163,7 +163,7 @@ namespace $.$$ {
 		point_offset( index: number ) {
 			const pos = this.point_pos( index )!
 			const text = pos.token.haystack()
-			return [ pos.offset / text.length, 0 ]
+			return [ pos.offset / text.length, .1 ]
 		}
 		
 		@ $mol_mem_key
@@ -184,6 +184,10 @@ namespace $.$$ {
 		
 		func_attempts( index: number ) {
 			return ( this.points()[ index ] as Fun ).optimizationCount
+		}
+		
+		func_optimized( index: number ) {
+			return ( this.points()[ index ] as Fun ).optimized
 		}
 		
 		inline_current( index: number ) {

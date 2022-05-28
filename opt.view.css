@@ -20,16 +20,15 @@
 
 [hyoo_js_opt_script_native_marker],
 [hyoo_js_opt_script_func_marker] {
-	color: var(--mol_theme_special);
+	color: var(--mol_theme_focus);
 	padding: var(--mol_gap_text);
 }
 
-[hyoo_js_opt_script_native_marker] {
-	color: var(--mol_theme_focus);
-}
-
 [hyoo_js_opt_script_func_marker] {
-	color: var(--mol_theme_special);
 	font-size: .75rem;
 	text-shadow: 0 0;
+}
+
+[hyoo_js_opt_script_func_marker_optimized="true"] {
+	color: var(--mol_theme_special);
 }
