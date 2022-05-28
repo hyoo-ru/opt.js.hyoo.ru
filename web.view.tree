@@ -371,6 +371,22 @@ $mol_page $mol_view
 			dom_name \footer
 			sub <= foot /$mol_view
 
+$mol_icon_chevron_left $mol_icon path \M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z
+
+$mol_icon_chevron_right $mol_icon path \M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z
+
+$mol_paginator $mol_view
+	sub /
+		<= Backward $mol_button_minor
+			hint <= backward_hint @ \Назад
+			click?event <=> backward?event null
+			sub / <= Backward_icon $mol_icon_chevron_left
+		<= Value $mol_view sub / <= value?val 0
+		<= Forward $mol_button_minor
+			hint <= forward_hint @ \Вперёд
+			click?event <=> forward?event null
+			sub / <= Forward_icon $mol_icon_chevron_right
+
 $mol_pop $mol_view
 	showed?val false
 	align_vert \
@@ -489,22 +505,6 @@ $mol_search $mol_pop
 				haystack <= suggest_label* \
 				needle <= query?val \
 
-$mol_icon_chevron_left $mol_icon path \M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z
-
-$mol_icon_chevron_right $mol_icon path \M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z
-
-$mol_paginator $mol_view
-	sub /
-		<= Backward $mol_button_minor
-			hint <= backward_hint @ \Назад
-			click?event <=> backward?event null
-			sub / <= Backward_icon $mol_icon_chevron_left
-		<= Value $mol_view sub / <= value?val 0
-		<= Forward $mol_button_minor
-			hint <= forward_hint @ \Вперёд
-			click?event <=> forward?event null
-			sub / <= Forward_icon $mol_icon_chevron_right
-
 $mol_search_jumper $mol_search
 	Root $mol_view
 	Index $mol_paginator
@@ -592,6 +592,8 @@ $hyoo_js_opt_script $mol_page
 		start 0
 		end 0
 	tools /
+		<= Jump $mol_paginator
+			value? <=> jump? 0
 		<= Search $mol_search_jumper
 			query? <=> search? \
 			Root <= Body
@@ -600,21 +602,22 @@ $hyoo_js_opt_script $mol_page
 			text <= code \
 			highlight <= search
 			sidebar_showed true
-		<= Native*0 $mol_follower
-			Anchor <= Native_anchor* $mol_view
-			Sub <= Native_marker* $mol_button
-				hint <= native_reason* \
-				sub / \₸
-			offset <= native_offset* /
-				0
-				0
-		<= Inline*0 $mol_follower
-			Anchor <= Inline_anchor* $mol_view
-			Sub <= Inline_button* $mol_link
-				hint \Inlined Function
-				arg <= inline_arg* *
-				current <= inline_current* false
-				sub / \▼
-			offset <= inline_offset* /
-				0
-				0
+		<= Points $mol_view sub <= points /
+			<= Native*0 $mol_follower
+				Anchor <= Native_anchor* $mol_view
+				Sub <= Native_marker* $mol_button
+					hint <= native_reason* \
+					sub / \₸
+				offset <= native_offset* /
+					0
+					0
+			<= Inline*0 $mol_follower
+				Anchor <= Inline_anchor* $mol_view
+				Sub <= Inline_button* $mol_link
+					hint \Inlined Function
+					arg <= inline_arg* *
+					current <= inline_current* false
+					sub / \▼
+				offset <= inline_offset* /
+					0
+					0

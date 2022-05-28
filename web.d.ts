@@ -2091,6 +2091,44 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $mol_icon_chevron_left extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_icon_chevron_right extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_paginator extends $mol_view {
+        sub(): readonly any[];
+        backward_hint(): string;
+        backward(event?: any): any;
+        Backward_icon(): $mol_icon_chevron_left;
+        Backward(): $mol_button_minor;
+        value(val?: any): number;
+        Value(): $mol_view;
+        forward_hint(): string;
+        forward(event?: any): any;
+        Forward_icon(): $mol_icon_chevron_right;
+        Forward(): $mol_button_minor;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $.$$ {
+    class $mol_paginator extends $.$mol_paginator {
+        backward(event: Event): void;
+        forward(event: Event): void;
+    }
+}
+
+declare namespace $ {
     class $mol_pop extends $mol_view {
         showed(val?: any): boolean;
         align_vert(): string;
@@ -2417,44 +2455,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $mol_icon_chevron_left extends $mol_icon {
-        path(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_icon_chevron_right extends $mol_icon {
-        path(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_paginator extends $mol_view {
-        sub(): readonly any[];
-        backward_hint(): string;
-        backward(event?: any): any;
-        Backward_icon(): $mol_icon_chevron_left;
-        Backward(): $mol_button_minor;
-        value(val?: any): number;
-        Value(): $mol_view;
-        forward_hint(): string;
-        forward(event?: any): any;
-        Forward_icon(): $mol_icon_chevron_right;
-        Forward(): $mol_button_minor;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $.$$ {
-    class $mol_paginator extends $.$mol_paginator {
-        backward(event: Event): void;
-        forward(event: Event): void;
-    }
-}
-
-declare namespace $ {
     class $mol_search_jumper extends $mol_search {
         Root(): $mol_view;
         forward(event?: any): void;
@@ -2472,7 +2472,7 @@ declare namespace $.$$ {
     class $mol_search_jumper extends $.$mol_search_jumper {
         results(): $mol_view[][];
         index(next?: number): number;
-        anchor_content(): ($mol_button_minor | $mol_string | $mol_paginator)[];
+        anchor_content(): ($mol_button_minor | $mol_paginator | $mol_string)[];
     }
 }
 
@@ -2564,6 +2564,8 @@ declare namespace $ {
         };
         tools(): readonly any[];
         body(): readonly any[];
+        jump(next?: any): number;
+        Jump(): $$.$mol_paginator;
         search(next?: any): string;
         Search(): $$.$mol_search_jumper;
         code(): string;
@@ -2579,6 +2581,8 @@ declare namespace $ {
         Inline_button(id: any): $$.$mol_link;
         inline_offset(id: any): readonly any[];
         Inline(id: any): $$.$mol_follower;
+        points(): readonly any[];
+        Points(): $mol_view;
     }
 }
 
@@ -2655,7 +2659,7 @@ declare namespace $.$$ {
     export class $hyoo_js_opt_script extends $.$hyoo_js_opt_script {
         natives(): readonly NativeCall[];
         inlines(): readonly InlinedFun[];
-        body(): ($mol_text_code | $mol_follower)[];
+        points(): $mol_follower[];
         code(): string;
         native_pos(index: number): {
             token: $mol_text_code_token;
@@ -2674,6 +2678,10 @@ declare namespace $.$$ {
         };
         native_reason(index: number): string;
         inline_current(index: number): boolean;
+        anchors(): $mol_view[];
+        jump_rows(): $mol_text_code_row[];
+        jump(next?: number): number;
+        tools(): ($mol_paginator | $mol_search_jumper)[];
     }
     export {};
 }
