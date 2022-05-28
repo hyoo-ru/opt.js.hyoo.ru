@@ -177,9 +177,13 @@ namespace $.$$ {
 		point_hint( index: number ) {
 			const point = this.points()[ index ]
 			if( point.type === 'Fun' ) {
-				return `${ point.optimized ? 'OPT' : 'DEOPT' } ${ point.optimizationCount }`
+				return `${ point.optimized ? 'Optimized' : 'Deoptimized' } after ${ point.optimizationCount } attempts`
 			}
 			return point.reasons!.join( '\n' )
+		}
+		
+		func_attempts( index: number ) {
+			return this.points()[ index ].optimizationCount
 		}
 		
 		inline_current( index: number ) {

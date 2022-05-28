@@ -73,7 +73,7 @@ $hyoo_js_opt_script $mol_page
 				Sub <= Func_marker* $mol_button
 					hint <= point_hint* \
 					sub /
-						<= Func_icon* $mol_icon_bolt
+						<= func_attempts* 0
 				offset <= point_offset*
 			<= Native*0 $mol_follower
 				Anchor <= Point_anchor* $mol_view
