@@ -2616,9 +2616,10 @@ declare namespace $ {
         code(): string;
         Code(): $$.$mol_text_code;
         Point_anchor(id: any): $mol_view;
-        point_hint(id: any): string;
         func_attempts(id: any): number;
-        Func_marker(id: any): $$.$mol_button;
+        func_optimized(id: any): boolean;
+        point_hint(id: any): string;
+        Func_marker(id: any): $hyoo_js_opt_script_func_marker;
         Func(id: any): $$.$mol_follower;
         Native_icon(id: any): $mol_icon_flash;
         Native_marker(id: any): $$.$mol_button;
@@ -2630,6 +2631,18 @@ declare namespace $ {
         Inline(id: any): $$.$mol_follower;
         point_views(): readonly any[];
         Points(): $mol_view;
+    }
+    class $hyoo_js_opt_script_func_marker extends $mol_button {
+        attr(): {
+            hyoo_js_opt_script_func_marker_optimized: boolean;
+            disabled: boolean;
+            role: string;
+            tabindex: number;
+            title: string;
+        };
+        sub(): readonly any[];
+        optimized(): boolean;
+        attempts(): number;
     }
 }
 
@@ -2707,6 +2720,7 @@ declare namespace $.$$ {
         };
         point_hint(index: number): string;
         func_attempts(index: number): number;
+        func_optimized(index: number): boolean;
         inline_current(index: number): boolean;
         jump_rows(): $mol_text_code_row[];
         jump(next?: number): number;

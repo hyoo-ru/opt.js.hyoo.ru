@@ -8783,18 +8783,20 @@ var $;
             const obj = new this.$.$mol_view();
             return obj;
         }
-        point_hint(id) {
-            return "";
-        }
         func_attempts(id) {
             return 0;
         }
+        func_optimized(id) {
+            return true;
+        }
+        point_hint(id) {
+            return "";
+        }
         Func_marker(id) {
-            const obj = new this.$.$mol_button();
+            const obj = new this.$.$hyoo_js_opt_script_func_marker();
+            obj.attempts = () => this.func_attempts(id);
+            obj.optimized = () => this.func_optimized(id);
             obj.hint = () => this.point_hint(id);
-            obj.sub = () => [
-                this.func_attempts(id)
-            ];
             return obj;
         }
         Func(id) {
@@ -8909,13 +8911,33 @@ var $;
         $mol_mem
     ], $hyoo_js_opt_script.prototype, "Points", null);
     $.$hyoo_js_opt_script = $hyoo_js_opt_script;
+    class $hyoo_js_opt_script_func_marker extends $mol_button {
+        attr() {
+            return {
+                ...super.attr(),
+                hyoo_js_opt_script_func_marker_optimized: this.optimized()
+            };
+        }
+        sub() {
+            return [
+                this.attempts()
+            ];
+        }
+        optimized() {
+            return true;
+        }
+        attempts() {
+            return 0;
+        }
+    }
+    $.$hyoo_js_opt_script_func_marker = $hyoo_js_opt_script_func_marker;
 })($ || ($ = {}));
 //hyoo/js/opt/-view.tree/opt.view.tree.ts
 ;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu_page_body] {\n\tjustify-content: space-between;\n}\n\n[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_marker],\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_special);\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_native_marker] {\n\tcolor: var(--mol_theme_focus);\n}\n\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_special);\n\tfont-size: .75rem;\n\ttext-shadow: 0 0;\n}\n");
+    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu_page_body] {\n\tjustify-content: space-between;\n}\n\n[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_marker],\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_focus);\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_func_marker] {\n\tfont-size: .75rem;\n\ttext-shadow: 0 0;\n}\n\n[hyoo_js_opt_script_func_marker_optimized=\"true\"] {\n\tcolor: var(--mol_theme_special);\n}\n");
 })($ || ($ = {}));
 //hyoo/js/opt/-css/opt.view.css.ts
 ;
@@ -9045,7 +9067,7 @@ var $;
             point_offset(index) {
                 const pos = this.point_pos(index);
                 const text = pos.token.haystack();
-                return [pos.offset / text.length, 0];
+                return [pos.offset / text.length, .1];
             }
             inline_arg(index) {
                 return {
@@ -9061,6 +9083,9 @@ var $;
             }
             func_attempts(index) {
                 return this.points()[index].optimizationCount;
+            }
+            func_optimized(index) {
+                return this.points()[index].optimized;
             }
             inline_current(index) {
                 return this.$.$mol_state_arg.value('inline')?.startsWith(this.inline_arg(index).inline) ?? false;
