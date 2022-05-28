@@ -1,3 +1,7 @@
-# opt.js.hyoo.ru
+# [opt.js.hyoo.ru](https://opt.js.hyoo.ru/)
 
-V8 JS inlining analizer.
+UI for analyze V8 JS inlining by [TurboFan](https://v8.dev/docs/turbofan).
+
+Use [turbotracer](https://www.npmjs.com/package/turbotracer) to generate report.
+
+![](https://i.imgur.com/tZbldrZ.png)
