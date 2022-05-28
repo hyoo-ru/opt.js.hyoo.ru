@@ -1996,6 +1996,7 @@ declare namespace $ {
         Link_http(id: any): $$.$mol_link_iconed;
         Image(id: any): $$.$mol_embed_native;
         block_content(id: any): readonly any[];
+        uri_resolve(id: any): any;
         quote_text(id: any): string;
         list_text(id: any): string;
         header_level(id: any): string;
@@ -2477,6 +2478,12 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $mol_icon_chevron_double_down extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
     class $mol_ghost extends $mol_view {
         Sub(): $mol_view;
     }
@@ -2522,6 +2529,18 @@ declare namespace $.$$ {
     class $mol_follower extends $.$mol_follower {
         left(): number;
         top(): number;
+    }
+}
+
+declare namespace $ {
+    class $mol_icon_arrow_down extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_icon_arrow_down_thick extends $mol_icon {
+        path(): string;
     }
 }
 
@@ -2572,12 +2591,14 @@ declare namespace $ {
         Code(): $$.$mol_text_code;
         Native_anchor(id: any): $mol_view;
         native_reason(id: any): string;
+        Native_icon(id: any): $mol_icon_chevron_double_down;
         Native_marker(id: any): $$.$mol_button;
         native_offset(id: any): readonly any[];
         Native(id: any): $$.$mol_follower;
         Inline_anchor(id: any): $mol_view;
         inline_arg(id: any): {};
         inline_current(id: any): boolean;
+        Inline_icon(id: any): $mol_icon_arrow_down_thick;
         Inline_button(id: any): $$.$mol_link;
         inline_offset(id: any): readonly any[];
         Inline(id: any): $$.$mol_follower;

@@ -6552,11 +6552,13 @@ var $;
         }
         Quote(id) {
             const obj = new this.$.$mol_text();
+            obj.uri_resolve = (id) => this.uri_resolve(id);
             obj.text = () => this.quote_text(id);
             return obj;
         }
         List(id) {
             const obj = new this.$.$mol_text();
+            obj.uri_resolve = (id) => this.uri_resolve(id);
             obj.text = () => this.list_text(id);
             return obj;
         }
@@ -6586,6 +6588,7 @@ var $;
         }
         Table_cell(id) {
             const obj = new this.$.$mol_text();
+            obj.uri_resolve = (id) => this.uri_resolve(id);
             obj.text = () => this.table_cell_text(id);
             return obj;
         }
@@ -6632,6 +6635,9 @@ var $;
         }
         block_content(id) {
             return [];
+        }
+        uri_resolve(id) {
+            return null;
         }
         quote_text(id) {
             return "";
@@ -8367,6 +8373,18 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_icon_chevron_double_down extends $mol_icon {
+        path() {
+            return "M16.59,5.59L18,7L12,13L6,7L7.41,5.59L12,10.17L16.59,5.59M16.59,11.59L18,13L12,19L6,13L7.41,11.59L12,16.17L16.59,11.59Z";
+        }
+    }
+    $.$mol_icon_chevron_double_down = $mol_icon_chevron_double_down;
+})($ || ($ = {}));
+//mol/icon/chevron/double/down/-view.tree/down.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_ghost extends $mol_view {
         Sub() {
             const obj = new this.$.$mol_view();
@@ -8530,6 +8548,30 @@ var $;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 //mol/follower/follower.view.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_icon_arrow_down extends $mol_icon {
+        path() {
+            return "M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z";
+        }
+    }
+    $.$mol_icon_arrow_down = $mol_icon_arrow_down;
+})($ || ($ = {}));
+//mol/icon/arrow/down/-view.tree/down.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_icon_arrow_down_thick extends $mol_icon {
+        path() {
+            return "M10,4H14V13L17.5,9.5L19.92,11.92L12,19.84L4.08,11.92L6.5,9.5L10,13V4Z";
+        }
+    }
+    $.$mol_icon_arrow_down_thick = $mol_icon_arrow_down_thick;
+})($ || ($ = {}));
+//mol/icon/arrow/down/thick/-view.tree/thick.view.tree.ts
 ;
 "use strict";
 var $;
@@ -8733,11 +8775,15 @@ var $;
         native_reason(id) {
             return "";
         }
+        Native_icon(id) {
+            const obj = new this.$.$mol_icon_chevron_double_down();
+            return obj;
+        }
         Native_marker(id) {
             const obj = new this.$.$mol_button();
             obj.hint = () => this.native_reason(id);
             obj.sub = () => [
-                "⎖"
+                this.Native_icon(id)
             ];
             return obj;
         }
@@ -8764,13 +8810,17 @@ var $;
         inline_current(id) {
             return false;
         }
+        Inline_icon(id) {
+            const obj = new this.$.$mol_icon_arrow_down_thick();
+            return obj;
+        }
         Inline_button(id) {
             const obj = new this.$.$mol_link();
             obj.hint = () => "Inlined Function";
             obj.arg = () => this.inline_arg(id);
             obj.current = () => this.inline_current(id);
             obj.sub = () => [
-                "▼"
+                this.Inline_icon(id)
             ];
             return obj;
         }
@@ -8819,6 +8869,9 @@ var $;
     ], $hyoo_js_opt_script.prototype, "Native_anchor", null);
     __decorate([
         $mol_mem_key
+    ], $hyoo_js_opt_script.prototype, "Native_icon", null);
+    __decorate([
+        $mol_mem_key
     ], $hyoo_js_opt_script.prototype, "Native_marker", null);
     __decorate([
         $mol_mem_key
@@ -8826,6 +8879,9 @@ var $;
     __decorate([
         $mol_mem_key
     ], $hyoo_js_opt_script.prototype, "Inline_anchor", null);
+    __decorate([
+        $mol_mem_key
+    ], $hyoo_js_opt_script.prototype, "Inline_icon", null);
     __decorate([
         $mol_mem_key
     ], $hyoo_js_opt_script.prototype, "Inline_button", null);
