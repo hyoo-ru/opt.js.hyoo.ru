@@ -1,4 +1,4 @@
-# opt.js.hyoo.ru
+# [opt.js.hyoo.ru](https://opt.js.hyoo.ru/)
 
 UI for analyze V8 JS inlining by [TurboFan](https://v8.dev/docs/turbofan).
 
