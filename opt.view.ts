@@ -223,9 +223,8 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem
-		body() {
+		points() {
 			return [
-				this.Code(),
 				... this.natives().map( (_,i)=> this.Native(i) ),
 				... this.inlines().map( (_,i)=> this.Inline(i) ),
 			]
@@ -282,6 +281,42 @@ namespace $.$$ {
 		
 		inline_current( index: number ) {
 			return this.$.$mol_state_arg.value( 'inline' )?.startsWith( this.inline_arg( index ).inline ) ?? false
+		}
+		
+		@ $mol_mem
+		anchors() {
+			return this.points().map( point => point.Anchor() )
+		}
+		
+		@ $mol_mem
+		jump_rows() {
+			
+			const rows = new Set<$mol_text_code_row>()
+			
+			for( const anchor of this.anchors() ) {
+				const row = ( $mol_owning_get( anchor ) as $mol_wire_atom<any,any,any> ).host
+				rows.add( row )
+			}
+			
+			return [ ... rows ]
+		}
+		
+		@ $mol_mem
+		jump( next?: number ) {
+			const rows = this.jump_rows()
+			if( next === undefined ) return rows.length
+			if( next > rows.length ) next = 1
+			if( next < 1 ) next = rows.length
+			if( next ) this.Code().ensure_visible( rows[ next - 1 ] )
+			return next
+		}
+		
+		@ $mol_mem
+		tools() {
+			return [
+				this.Search(),
+				... this.search() ? [] : [ this.Jump() ]
+			]
 		}
 		
 	}

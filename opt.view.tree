@@ -56,6 +56,8 @@ $hyoo_js_opt_script $mol_page
 		start 0
 		end 0
 	tools /
+		<= Jump $mol_paginator
+			value? <=> jump? 0
 		<= Search $mol_search_jumper
 			query? <=> search? \
 			Root <= Body
@@ -64,21 +66,22 @@ $hyoo_js_opt_script $mol_page
 			text <= code \
 			highlight <= search
 			sidebar_showed true
-		<= Native*0 $mol_follower
-			Anchor <= Native_anchor* $mol_view
-			Sub <= Native_marker* $mol_button
-				hint <= native_reason* \
-				sub / \₸
-			offset <= native_offset* /
-				0
-				0
-		<= Inline*0 $mol_follower
-			Anchor <= Inline_anchor* $mol_view
-			Sub <= Inline_button* $mol_link
-				hint \Inlined Function
-				arg <= inline_arg* *
-				current <= inline_current* false
-				sub / \▼
-			offset <= inline_offset* /
-				0
-				0
+		<= Points $mol_view sub <= points /
+			<= Native*0 $mol_follower
+				Anchor <= Native_anchor* $mol_view
+				Sub <= Native_marker* $mol_button
+					hint <= native_reason* \
+					sub / \₸
+				offset <= native_offset* /
+					0
+					0
+			<= Inline*0 $mol_follower
+				Anchor <= Inline_anchor* $mol_view
+				Sub <= Inline_button* $mol_link
+					hint \Inlined Function
+					arg <= inline_arg* *
+					current <= inline_current* false
+					sub / \▼
+				offset <= inline_offset* /
+					0
+					0
