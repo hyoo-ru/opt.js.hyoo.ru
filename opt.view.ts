@@ -170,9 +170,15 @@ namespace $.$$ {
 		@ $mol_mem
 		body() {
 			return [
-				this.Content(),
+				this.Code(),
 				... this.points_followers_filtered(),
 			]
+		}
+		
+		@ $mol_mem
+		Foot() {
+			if( !this.points().length ) return null as any
+			return super.Foot()
 		}
 		
 		code() {
@@ -249,14 +255,6 @@ namespace $.$$ {
 			if( next < 1 ) next = rows.length
 			if( next ) this.Code().ensure_visible( rows[ next - 1 ] )
 			return next
-		}
-		
-		@ $mol_mem
-		tools() {
-			return [
-				this.Search(),
-				... this.search() ? [] : [ this.Jump() ]
-			]
 		}
 		
 	}

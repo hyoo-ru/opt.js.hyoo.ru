@@ -19,6 +19,10 @@
 	padding: var(--mol_gap_block);
 }
 
+[hyoo_js_opt_script_foot] {
+	padding: var(--mol_gap_block);
+}
+
 [hyoo_js_opt_script_native_anchor] {
 	color: var(--mol_theme_focus);
 	padding: var(--mol_gap_text);

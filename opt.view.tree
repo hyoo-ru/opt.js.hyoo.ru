@@ -48,20 +48,20 @@ $hyoo_js_opt_script $mol_page
 		0
 		0
 	tools /
-		<= Jump $mol_paginator
-			value? <=> jump? 0
 		<= Search $mol_search_jumper
 			query? <=> search? \
 			Root <= Body
+	foot /
+		<= Filters $mol_check_list
+			options <= filters *
+			option_checked*? <=> filter_enabled*? true
+		<= Jump $mol_paginator
+			value? <=> jump? 0
 	body /
-		<= Content $mol_list rows /
-			<= Filters $mol_check_list
-				options <= filters *
-				option_checked*? <=> filter_enabled*? true
-			<= Code $mol_text_code
-				text <= code \
-				highlight <= search
-				sidebar_showed true
+		<= Code $mol_text_code
+			text <= code \
+			highlight <= search
+			sidebar_showed true
 		<= Func*0 $mol_follower
 			Anchor <= Point_anchor* $mol_view
 			Sub <= Func_marker* $hyoo_js_opt_script_func_marker
