@@ -621,17 +621,15 @@ $hyoo_js_opt_script $mol_page
 		<= Search $mol_search_jumper
 			query? <=> search? \
 			Root <= Body
-	sub /
-		<= Head
-		<= Filters $mol_check_list
-			options <= filters *
-			option_checked*? <=> filter_enabled*? true
-		<= Body
 	body /
-		<= Code $mol_text_code
-			text <= code \
-			highlight <= search
-			sidebar_showed true
+		<= Content $mol_list rows /
+			<= Filters $mol_check_list
+				options <= filters *
+				option_checked*? <=> filter_enabled*? true
+			<= Code $mol_text_code
+				text <= code \
+				highlight <= search
+				sidebar_showed true
 		<= Func*0 $mol_follower
 			Anchor <= Point_anchor* $mol_view
 			Sub <= Func_marker* $hyoo_js_opt_script_func_marker

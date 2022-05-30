@@ -8656,16 +8656,9 @@ var $;
                 this.Search()
             ];
         }
-        sub() {
-            return [
-                this.Head(),
-                this.Filters(),
-                this.Body()
-            ];
-        }
         body() {
             return [
-                this.Code(),
+                this.Content(),
                 this.Func("0"),
                 this.Native("0"),
                 this.Inline("0")
@@ -8714,6 +8707,14 @@ var $;
             obj.text = () => this.code();
             obj.highlight = () => this.search();
             obj.sidebar_showed = () => true;
+            return obj;
+        }
+        Content() {
+            const obj = new this.$.$mol_list();
+            obj.rows = () => [
+                this.Filters(),
+                this.Code()
+            ];
             return obj;
         }
         Point_anchor(id) {
@@ -8823,6 +8824,9 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_js_opt_script.prototype, "Code", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_js_opt_script.prototype, "Content", null);
     __decorate([
         $mol_mem_key
     ], $hyoo_js_opt_script.prototype, "Point_anchor", null);
@@ -9022,7 +9026,7 @@ var $;
             }
             body() {
                 return [
-                    this.Code(),
+                    this.Content(),
                     ...this.points_followers_filtered(),
                 ];
             }

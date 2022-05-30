@@ -2647,7 +2647,6 @@ declare namespace $ {
         };
         point_offset(id: any): readonly any[];
         tools(): readonly any[];
-        sub(): readonly any[];
         body(): readonly any[];
         jump(next?: any): number;
         Jump(): $$.$mol_paginator;
@@ -2658,6 +2657,7 @@ declare namespace $ {
         Filters(): $$.$mol_check_list;
         code(): string;
         Code(): $$.$mol_text_code;
+        Content(): $$.$mol_list;
         Point_anchor(id: any): $mol_view;
         func_attempts(id: any): number;
         func_optimized(id: any): boolean;
@@ -2753,7 +2753,7 @@ declare namespace $.$$ {
         filters(): Record<string, string>;
         points_followers(): $mol_follower[];
         points_followers_filtered(): $mol_follower[];
-        body(): ($mol_text_code | $mol_follower)[];
+        body(): ($mol_list | $mol_follower)[];
         code(): string;
         point_pos(index: number): {
             token: $mol_text_code_token;
