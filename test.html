@@ -116,7 +116,17 @@
           "end": 536,
           "uri": "\\hyoo\\js\\opt\\example\\calc.js"
         },
-        "points": []
+        "points": [
+          {
+            "type": "NativeCall",
+            "pos": 530,
+            "reasons": [
+              "Float64Div",
+              "ChangeInt32ToFloat64",
+              "ChangeInt32ToFloat64"
+            ]
+          }
+        ]
       },
       {
         "type": "NativeCall",
@@ -130,6 +140,16 @@
         "pos": 284,
         "reasons": [
           "Load"
+        ]
+      },
+      {
+        "type": "NativeCall",
+        "pos": 287,
+        "reasons": [
+          "Store[kRepFloat64, NoWriteBarrier]",
+          "RoundFloat64ToInt32",
+          "Float64Equal",
+          "ChangeInt32ToFloat64"
         ]
       },
       {
@@ -271,6 +291,16 @@
         "optimizationCount": 2,
         "optimized": true,
         "name": "testSum"
+      },
+      {
+        "type": "NativeCall",
+        "pos": 286,
+        "reasons": [
+          "Store[kRepFloat64, NoWriteBarrier]",
+          "Float64Equal",
+          "RoundFloat64ToInt32",
+          "ChangeInt32ToFloat64"
+        ]
       },
       {
         "type": "InlinedFun",
@@ -445,6 +475,14 @@
         ]
       },
       {
+        "type": "NativeCall",
+        "pos": 349,
+        "reasons": [
+          "Float64Add",
+          "ChangeInt32ToFloat64"
+        ]
+      },
+      {
         "type": "InlinedFun",
         "pos": 351,
         "name": "test",
@@ -513,7 +551,16 @@
                   "end": 536,
                   "uri": "\\hyoo\\js\\opt\\example\\calc.js"
                 },
-                "points": []
+                "points": [
+                  {
+                    "type": "NativeCall",
+                    "pos": 530,
+                    "reasons": [
+                      "Float64Constant[0.5]",
+                      "Float64Constant[1]"
+                    ]
+                  }
+                ]
               },
               {
                 "type": "InlinedFun",
@@ -528,6 +575,15 @@
               }
             ]
           }
+        ]
+      },
+      {
+        "type": "NativeCall",
+        "pos": 361,
+        "reasons": [
+          "Float64Add",
+          "ChangeInt32ToFloat64",
+          "Float64Add"
         ]
       },
       {

@@ -8559,6 +8559,83 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_pop_over extends $mol_pop {
+        showed() {
+            return this.hovered();
+        }
+        attr() {
+            return {
+                ...super.attr(),
+                tabindex: 0
+            };
+        }
+        event() {
+            return {
+                ...super.event(),
+                mouseenter: (event) => this.event_show(event),
+                mouseleave: (event) => this.event_hide(event)
+            };
+        }
+        hovered(val) {
+            if (val !== undefined)
+                return val;
+            return false;
+        }
+        event_show(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        event_hide(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_pop_over.prototype, "hovered", null);
+    __decorate([
+        $mol_mem
+    ], $mol_pop_over.prototype, "event_show", null);
+    __decorate([
+        $mol_mem
+    ], $mol_pop_over.prototype, "event_hide", null);
+    $.$mol_pop_over = $mol_pop_over;
+})($ || ($ = {}));
+//mol/pop/over/-view.tree/over.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/pop/over/over.view.css", "[mol_pop_over]:focus {\r\n\toutline: none;\r\n}");
+})($ || ($ = {}));
+//mol/pop/over/-css/over.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_pop_over extends $.$mol_pop_over {
+            event_show(event) {
+                this.hovered(true);
+            }
+            event_hide(event) {
+                this.hovered(false);
+            }
+            showed() {
+                return this.focused() || this.hovered();
+            }
+        }
+        $$.$mol_pop_over = $mol_pop_over;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//mol/pop/over/over.view.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_icon_map extends $mol_icon {
         path() {
             return "M15,19L9,16.89V5L15,7.11M20.5,3C20.44,3 20.39,3 20.34,3L15,5.1L9,3L3.36,4.9C3.15,4.97 3,5.15 3,5.38V20.5C3,20.78 3.22,21 3.5,21C3.55,21 3.61,21 3.66,20.97L9,18.9L15,21L20.64,19.1C20.85,19 21,18.85 21,18.62V3.5C21,3.22 20.78,3 20.5,3Z";
@@ -8829,11 +8906,23 @@ var $;
             const obj = new this.$.$mol_icon_flash();
             return obj;
         }
-        Native_marker(id) {
-            const obj = new this.$.$mol_button();
-            obj.hint = () => this.point_hint(id);
+        Native_anchor(id) {
+            const obj = new this.$.$mol_view();
             obj.sub = () => [
                 this.Native_icon(id)
+            ];
+            return obj;
+        }
+        Point_hint(id) {
+            const obj = new this.$.$mol_text_code();
+            obj.text = () => this.point_hint(id);
+            return obj;
+        }
+        Native_marker(id) {
+            const obj = new this.$.$mol_pop_over();
+            obj.Anchor = () => this.Native_anchor(id);
+            obj.bubble_content = () => [
+                this.Point_hint(id)
             ];
             return obj;
         }
@@ -8901,6 +8990,12 @@ var $;
     ], $hyoo_js_opt_script.prototype, "Native_icon", null);
     __decorate([
         $mol_mem_key
+    ], $hyoo_js_opt_script.prototype, "Native_anchor", null);
+    __decorate([
+        $mol_mem_key
+    ], $hyoo_js_opt_script.prototype, "Point_hint", null);
+    __decorate([
+        $mol_mem_key
     ], $hyoo_js_opt_script.prototype, "Native_marker", null);
     __decorate([
         $mol_mem_key
@@ -8941,7 +9036,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_menu_content] {\n\tjustify-content: space-between;\n\tflex: 1 0 auto;\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_marker],\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_focus);\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_func_marker] {\n\tfont-size: .75rem;\n\ttext-shadow: 0 0;\n}\n\n[hyoo_js_opt_script_func_marker_optimized=\"true\"] {\n\tcolor: var(--mol_theme_special);\n}\n");
+    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_menu_content] {\n\tjustify-content: space-between;\n\tflex: 1 0 auto;\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_anchor] {\n\tcolor: var(--mol_theme_focus);\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_point_hint] {\n\twhite-space: pre;\n}\n\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_focus);\n\tfont-size: .75rem;\n\ttext-shadow: 0 0;\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_func_marker_optimized=\"true\"] {\n\tcolor: var(--mol_theme_special);\n}\n");
 })($ || ($ = {}));
 //hyoo/js/opt/-css/opt.view.css.ts
 ;

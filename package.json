@@ -171,6 +171,7 @@
     "$mol_ghost",
     "$mol_dom_render_events",
     "$mol_icon_flash",
+    "$mol_pop_over",
     "$mol_icon_map_marker_check",
     "$mol_icon_map_marker",
     "$mol_icon_map"

@@ -2556,6 +2556,33 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $mol_pop_over extends $mol_pop {
+        showed(): boolean;
+        attr(): {
+            tabindex: number;
+        };
+        event(): {
+            mouseenter: (event?: any) => any;
+            mouseleave: (event?: any) => any;
+        };
+        hovered(val?: any): boolean;
+        event_show(event?: any): any;
+        event_hide(event?: any): any;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $.$$ {
+    class $mol_pop_over extends $.$mol_pop_over {
+        event_show(event?: MouseEvent): void;
+        event_hide(event?: MouseEvent): void;
+        showed(): boolean;
+    }
+}
+
+declare namespace $ {
     class $mol_icon_map extends $mol_icon {
         path(): string;
     }
@@ -2625,7 +2652,9 @@ declare namespace $ {
         Func_marker(id: any): $hyoo_js_opt_script_func_marker;
         Func(id: any): $$.$mol_follower;
         Native_icon(id: any): $mol_icon_flash;
-        Native_marker(id: any): $$.$mol_button;
+        Native_anchor(id: any): $mol_view;
+        Point_hint(id: any): $$.$mol_text_code;
+        Native_marker(id: any): $$.$mol_pop_over;
         Native(id: any): $$.$mol_follower;
         inline_arg(id: any): {};
         inline_current(id: any): boolean;
