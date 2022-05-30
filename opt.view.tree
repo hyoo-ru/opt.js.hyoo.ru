@@ -67,10 +67,13 @@ $hyoo_js_opt_script $mol_page
 			offset <= point_offset*
 		<= Native*0 $mol_follower
 			Anchor <= Point_anchor* $mol_view
-			Sub <= Native_marker* $mol_button
-				hint <= point_hint* \
-				sub /
-					<= Native_icon* $mol_icon_flash
+			Sub <= Native_marker* $mol_pop_over
+				Anchor <= Native_anchor* $mol_view
+					sub /
+						<= Native_icon* $mol_icon_flash
+				bubble_content /
+					<= Point_hint* $mol_text_code
+						text <= point_hint* \
 			offset <= point_offset*
 		<= Inline*0 $mol_follower
 			Anchor <= Point_anchor* $mol_view

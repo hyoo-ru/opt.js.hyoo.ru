@@ -19,15 +19,20 @@
 	padding: var(--mol_gap_block);
 }
 
-[hyoo_js_opt_script_native_marker],
-[hyoo_js_opt_script_func_marker] {
+[hyoo_js_opt_script_native_anchor] {
 	color: var(--mol_theme_focus);
 	padding: var(--mol_gap_text);
 }
 
+[hyoo_js_opt_script_point_hint] {
+	white-space: pre;
+}
+
 [hyoo_js_opt_script_func_marker] {
+	color: var(--mol_theme_focus);
 	font-size: .75rem;
 	text-shadow: 0 0;
+	padding: var(--mol_gap_text);
 }
 
 [hyoo_js_opt_script_func_marker_optimized="true"] {
