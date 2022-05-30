@@ -241,8 +241,11 @@ namespace $.$$ {
 			return ( this.points()[ index ] as Fun ).optimized
 		}
 		
+		@ $mol_mem_key
 		inline_current( index: number ) {
-			return this.$.$mol_state_arg.value( 'inline' )?.startsWith( this.inline_arg( index ).inline ) ?? false
+			const current = this.$.$mol_state_arg.value( 'inline' ) ?? ''
+			const self = this.inline_arg( index ).inline
+			return current === self || current.startsWith( self + ',' )
 		}
 		
 		@ $mol_mem
