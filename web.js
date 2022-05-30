@@ -6870,155 +6870,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $mol_icon_chevron_left extends $mol_icon {
-        path() {
-            return "M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z";
-        }
-    }
-    $.$mol_icon_chevron_left = $mol_icon_chevron_left;
-})($ || ($ = {}));
-//mol/icon/chevron/left/-view.tree/left.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_icon_chevron_right extends $mol_icon {
-        path() {
-            return "M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z";
-        }
-    }
-    $.$mol_icon_chevron_right = $mol_icon_chevron_right;
-})($ || ($ = {}));
-//mol/icon/chevron/right/-view.tree/right.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_paginator extends $mol_view {
-        sub() {
-            return [
-                this.Backward(),
-                this.Value(),
-                this.Forward()
-            ];
-        }
-        backward_hint() {
-            return this.$.$mol_locale.text('$mol_paginator_backward_hint');
-        }
-        backward(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-        Backward_icon() {
-            const obj = new this.$.$mol_icon_chevron_left();
-            return obj;
-        }
-        Backward() {
-            const obj = new this.$.$mol_button_minor();
-            obj.hint = () => this.backward_hint();
-            obj.click = (event) => this.backward(event);
-            obj.sub = () => [
-                this.Backward_icon()
-            ];
-            return obj;
-        }
-        value(val) {
-            if (val !== undefined)
-                return val;
-            return 0;
-        }
-        Value() {
-            const obj = new this.$.$mol_view();
-            obj.sub = () => [
-                this.value()
-            ];
-            return obj;
-        }
-        forward_hint() {
-            return this.$.$mol_locale.text('$mol_paginator_forward_hint');
-        }
-        forward(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-        Forward_icon() {
-            const obj = new this.$.$mol_icon_chevron_right();
-            return obj;
-        }
-        Forward() {
-            const obj = new this.$.$mol_button_minor();
-            obj.hint = () => this.forward_hint();
-            obj.click = (event) => this.forward(event);
-            obj.sub = () => [
-                this.Forward_icon()
-            ];
-            return obj;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_paginator.prototype, "backward", null);
-    __decorate([
-        $mol_mem
-    ], $mol_paginator.prototype, "Backward_icon", null);
-    __decorate([
-        $mol_mem
-    ], $mol_paginator.prototype, "Backward", null);
-    __decorate([
-        $mol_mem
-    ], $mol_paginator.prototype, "value", null);
-    __decorate([
-        $mol_mem
-    ], $mol_paginator.prototype, "Value", null);
-    __decorate([
-        $mol_mem
-    ], $mol_paginator.prototype, "forward", null);
-    __decorate([
-        $mol_mem
-    ], $mol_paginator.prototype, "Forward_icon", null);
-    __decorate([
-        $mol_mem
-    ], $mol_paginator.prototype, "Forward", null);
-    $.$mol_paginator = $mol_paginator;
-})($ || ($ = {}));
-//mol/paginator/-view.tree/paginator.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/paginator/paginator.view.css", "[mol_paginator_value] {\n\tpadding: .5rem 0;\n}\n");
-})($ || ($ = {}));
-//mol/paginator/-css/paginator.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_paginator extends $.$mol_paginator {
-            backward(event) {
-                if (event.defaultPrevented)
-                    return;
-                event.preventDefault();
-                this.value(this.value() - 1);
-            }
-            forward(event) {
-                if (event.defaultPrevented)
-                    return;
-                event.preventDefault();
-                this.value(this.value() + 1);
-            }
-        }
-        $$.$mol_paginator = $mol_paginator;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//mol/paginator/paginator.view.ts
-;
-"use strict";
-var $;
-(function ($) {
     class $mol_pop extends $mol_view {
         showed(val) {
             if (val !== undefined)
@@ -7971,6 +7822,155 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_icon_chevron_left extends $mol_icon {
+        path() {
+            return "M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z";
+        }
+    }
+    $.$mol_icon_chevron_left = $mol_icon_chevron_left;
+})($ || ($ = {}));
+//mol/icon/chevron/left/-view.tree/left.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_icon_chevron_right extends $mol_icon {
+        path() {
+            return "M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z";
+        }
+    }
+    $.$mol_icon_chevron_right = $mol_icon_chevron_right;
+})($ || ($ = {}));
+//mol/icon/chevron/right/-view.tree/right.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_paginator extends $mol_view {
+        sub() {
+            return [
+                this.Backward(),
+                this.Value(),
+                this.Forward()
+            ];
+        }
+        backward_hint() {
+            return this.$.$mol_locale.text('$mol_paginator_backward_hint');
+        }
+        backward(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        Backward_icon() {
+            const obj = new this.$.$mol_icon_chevron_left();
+            return obj;
+        }
+        Backward() {
+            const obj = new this.$.$mol_button_minor();
+            obj.hint = () => this.backward_hint();
+            obj.click = (event) => this.backward(event);
+            obj.sub = () => [
+                this.Backward_icon()
+            ];
+            return obj;
+        }
+        value(val) {
+            if (val !== undefined)
+                return val;
+            return 0;
+        }
+        Value() {
+            const obj = new this.$.$mol_view();
+            obj.sub = () => [
+                this.value()
+            ];
+            return obj;
+        }
+        forward_hint() {
+            return this.$.$mol_locale.text('$mol_paginator_forward_hint');
+        }
+        forward(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        Forward_icon() {
+            const obj = new this.$.$mol_icon_chevron_right();
+            return obj;
+        }
+        Forward() {
+            const obj = new this.$.$mol_button_minor();
+            obj.hint = () => this.forward_hint();
+            obj.click = (event) => this.forward(event);
+            obj.sub = () => [
+                this.Forward_icon()
+            ];
+            return obj;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_paginator.prototype, "backward", null);
+    __decorate([
+        $mol_mem
+    ], $mol_paginator.prototype, "Backward_icon", null);
+    __decorate([
+        $mol_mem
+    ], $mol_paginator.prototype, "Backward", null);
+    __decorate([
+        $mol_mem
+    ], $mol_paginator.prototype, "value", null);
+    __decorate([
+        $mol_mem
+    ], $mol_paginator.prototype, "Value", null);
+    __decorate([
+        $mol_mem
+    ], $mol_paginator.prototype, "forward", null);
+    __decorate([
+        $mol_mem
+    ], $mol_paginator.prototype, "Forward_icon", null);
+    __decorate([
+        $mol_mem
+    ], $mol_paginator.prototype, "Forward", null);
+    $.$mol_paginator = $mol_paginator;
+})($ || ($ = {}));
+//mol/paginator/-view.tree/paginator.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/paginator/paginator.view.css", "[mol_paginator_value] {\n\tpadding: .5rem 0;\n}\n");
+})($ || ($ = {}));
+//mol/paginator/-css/paginator.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_paginator extends $.$mol_paginator {
+            backward(event) {
+                if (event.defaultPrevented)
+                    return;
+                event.preventDefault();
+                this.value(this.value() - 1);
+            }
+            forward(event) {
+                if (event.defaultPrevented)
+                    return;
+                event.preventDefault();
+                this.value(this.value() + 1);
+            }
+        }
+        $$.$mol_paginator = $mol_paginator;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//mol/paginator/paginator.view.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_search_jumper extends $mol_search {
         Root() {
             const obj = new this.$.$mol_view();
@@ -8652,27 +8652,22 @@ var $;
         }
         tools() {
             return [
-                this.Jump(),
                 this.Search()
+            ];
+        }
+        foot() {
+            return [
+                this.Filters(),
+                this.Jump()
             ];
         }
         body() {
             return [
-                this.Content(),
+                this.Code(),
                 this.Func("0"),
                 this.Native("0"),
                 this.Inline("0")
             ];
-        }
-        jump(next) {
-            if (next !== undefined)
-                return next;
-            return 0;
-        }
-        Jump() {
-            const obj = new this.$.$mol_paginator();
-            obj.value = (next) => this.jump(next);
-            return obj;
         }
         search(next) {
             if (next !== undefined)
@@ -8699,6 +8694,16 @@ var $;
             obj.option_checked = (id, next) => this.filter_enabled(id, next);
             return obj;
         }
+        jump(next) {
+            if (next !== undefined)
+                return next;
+            return 0;
+        }
+        Jump() {
+            const obj = new this.$.$mol_paginator();
+            obj.value = (next) => this.jump(next);
+            return obj;
+        }
         code() {
             return "";
         }
@@ -8707,14 +8712,6 @@ var $;
             obj.text = () => this.code();
             obj.highlight = () => this.search();
             obj.sidebar_showed = () => true;
-            return obj;
-        }
-        Content() {
-            const obj = new this.$.$mol_list();
-            obj.rows = () => [
-                this.Filters(),
-                this.Code()
-            ];
             return obj;
         }
         Point_anchor(id) {
@@ -8805,12 +8802,6 @@ var $;
     }
     __decorate([
         $mol_mem
-    ], $hyoo_js_opt_script.prototype, "jump", null);
-    __decorate([
-        $mol_mem
-    ], $hyoo_js_opt_script.prototype, "Jump", null);
-    __decorate([
-        $mol_mem
     ], $hyoo_js_opt_script.prototype, "search", null);
     __decorate([
         $mol_mem
@@ -8823,10 +8814,13 @@ var $;
     ], $hyoo_js_opt_script.prototype, "Filters", null);
     __decorate([
         $mol_mem
-    ], $hyoo_js_opt_script.prototype, "Code", null);
+    ], $hyoo_js_opt_script.prototype, "jump", null);
     __decorate([
         $mol_mem
-    ], $hyoo_js_opt_script.prototype, "Content", null);
+    ], $hyoo_js_opt_script.prototype, "Jump", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_js_opt_script.prototype, "Code", null);
     __decorate([
         $mol_mem_key
     ], $hyoo_js_opt_script.prototype, "Point_anchor", null);
@@ -8887,7 +8881,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_menu_content] {\n\tjustify-content: space-between;\n\tflex: 1 0 auto;\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_anchor] {\n\tcolor: var(--mol_theme_focus);\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_point_hint] {\n\twhite-space: pre;\n}\n\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_focus);\n\tfont-size: .75rem;\n\ttext-shadow: 0 0;\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_func_marker_optimized=\"true\"] {\n\tcolor: var(--mol_theme_special);\n}\n");
+    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_menu_content] {\n\tjustify-content: space-between;\n\tflex: 1 0 auto;\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_foot] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_native_anchor] {\n\tcolor: var(--mol_theme_focus);\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_point_hint] {\n\twhite-space: pre;\n}\n\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_focus);\n\tfont-size: .75rem;\n\ttext-shadow: 0 0;\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_func_marker_optimized=\"true\"] {\n\tcolor: var(--mol_theme_special);\n}\n");
 })($ || ($ = {}));
 //hyoo/js/opt/-css/opt.view.css.ts
 ;
@@ -9026,9 +9020,14 @@ var $;
             }
             body() {
                 return [
-                    this.Content(),
+                    this.Code(),
                     ...this.points_followers_filtered(),
                 ];
+            }
+            Foot() {
+                if (!this.points().length)
+                    return null;
+                return super.Foot();
             }
             code() {
                 const source = this.source();
@@ -9090,12 +9089,6 @@ var $;
                     this.Code().ensure_visible(rows[next - 1]);
                 return next;
             }
-            tools() {
-                return [
-                    this.Search(),
-                    ...this.search() ? [] : [this.Jump()]
-                ];
-            }
         }
         __decorate([
             $mol_mem
@@ -9109,6 +9102,9 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_js_opt_script.prototype, "body", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_js_opt_script.prototype, "Foot", null);
         __decorate([
             $mol_mem_key
         ], $hyoo_js_opt_script.prototype, "point_pos", null);
@@ -9127,9 +9123,6 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_js_opt_script.prototype, "jump", null);
-        __decorate([
-            $mol_mem
-        ], $hyoo_js_opt_script.prototype, "tools", null);
         $$.$hyoo_js_opt_script = $hyoo_js_opt_script;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
