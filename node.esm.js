@@ -9074,7 +9074,7 @@ var $;
         }
         Native_marker(id) {
             const obj = new this.$.$mol_pop_over();
-            obj.align = () => "right_bottom";
+            obj.align = () => "bottom_right";
             obj.Anchor = () => this.Native_anchor(id);
             obj.bubble_content = () => [
                 this.Point_hint(id)
