@@ -165,6 +165,7 @@
     "$mol_fiber",
     "$mol_action",
     "$mol_paginator",
+    "$mol_bar",
     "$mol_icon_chevron_left",
     "$mol_icon_chevron_right",
     "$mol_check_list",

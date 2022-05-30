@@ -2419,6 +2419,14 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $mol_bar extends $mol_view {
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_icon_chevron_left extends $mol_icon {
         path(): string;
     }
@@ -2431,7 +2439,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $mol_paginator extends $mol_view {
+    class $mol_paginator extends $mol_bar {
         sub(): readonly any[];
         backward_hint(): string;
         backward(event?: any): any;
