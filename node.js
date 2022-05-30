@@ -8951,7 +8951,8 @@ var $;
         }
         tools() {
             return [
-                this.Search()
+                this.Search(),
+                this.Close()
             ];
         }
         foot() {
@@ -8977,6 +8978,21 @@ var $;
             const obj = new this.$.$mol_search_jumper();
             obj.query = (next) => this.search(next);
             obj.Root = () => this.Body();
+            return obj;
+        }
+        close_arg() {
+            return {};
+        }
+        Close_icon() {
+            const obj = new this.$.$mol_icon_cross();
+            return obj;
+        }
+        Close() {
+            const obj = new this.$.$mol_link();
+            obj.arg = () => this.close_arg();
+            obj.sub = () => [
+                this.Close_icon()
+            ];
             return obj;
         }
         filters() {
@@ -9106,6 +9122,12 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_js_opt_script.prototype, "Search", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_js_opt_script.prototype, "Close_icon", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_js_opt_script.prototype, "Close", null);
     __decorate([
         $mol_mem_key
     ], $hyoo_js_opt_script.prototype, "filter_enabled", null);
@@ -9349,6 +9371,17 @@ var $;
                     inline: [...this.path(), index].join(',')
                 };
             }
+            close_arg() {
+                const path = this.path();
+                return path.length
+                    ? {
+                        inline: this.path().slice(0, -1).join(',')
+                    }
+                    : {
+                        inline: null,
+                        file: null,
+                    };
+            }
             point_hint(index) {
                 const point = this.points()[index];
                 return [
@@ -9417,6 +9450,9 @@ var $;
         __decorate([
             $mol_mem_key
         ], $hyoo_js_opt_script.prototype, "inline_arg", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_js_opt_script.prototype, "close_arg", null);
         __decorate([
             $mol_mem_key
         ], $hyoo_js_opt_script.prototype, "point_hint", null);

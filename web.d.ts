@@ -2659,6 +2659,9 @@ declare namespace $ {
         body(): readonly any[];
         search(next?: any): string;
         Search(): $$.$mol_search_jumper;
+        close_arg(): {};
+        Close_icon(): $mol_icon_cross;
+        Close(): $$.$mol_link;
         filters(): {};
         filter_enabled(id: any, next?: any): boolean;
         Filters(): $$.$mol_check_list;
@@ -2772,6 +2775,13 @@ declare namespace $.$$ {
         point_offset(index: number): number[];
         inline_arg(index: number): {
             inline: string;
+        };
+        close_arg(): {
+            inline: string;
+            file?: undefined;
+        } | {
+            inline: null;
+            file: null;
         };
         point_hint(index: number): string;
         func_attempts(index: number): number;
