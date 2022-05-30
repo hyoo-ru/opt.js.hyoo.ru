@@ -21,6 +21,8 @@
 
 [hyoo_js_opt_script_foot] {
 	padding: var(--mol_gap_block);
+	flex-wrap: wrap;
+	justify-content: flex-end;
 }
 
 [hyoo_js_opt_script_native_anchor] {
