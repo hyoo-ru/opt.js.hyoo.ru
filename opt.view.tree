@@ -76,7 +76,7 @@ $hyoo_js_opt_script $mol_page
 		<= Native*0 $mol_follower
 			Anchor <= Point_anchor* $mol_view
 			Sub <= Native_marker* $mol_pop_over
-				align \right_bottom
+				align \bottom_right
 				Anchor <= Native_anchor* $mol_view
 					sub /
 						<= Native_icon* $mol_icon_flash
