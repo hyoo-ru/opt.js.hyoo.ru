@@ -170,7 +170,7 @@ namespace $.$$ {
 		@ $mol_mem
 		body() {
 			return [
-				this.Code(),
+				this.Content(),
 				... this.points_followers_filtered(),
 			]
 		}
