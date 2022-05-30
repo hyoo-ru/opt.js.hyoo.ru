@@ -257,6 +257,10 @@ namespace $.$$ {
 			return next
 		}
 		
+		filter_enabled( id: string, next?: boolean ) {
+			return this.$.$mol_state_local.value( `filter_enabled(${id})`, next ) ?? super.filter_enabled( id )
+		}
+		
 	}
 	
 }
