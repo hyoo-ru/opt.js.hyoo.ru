@@ -135,16 +135,43 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem
+		filters() {
+			const next = {} as Record< string, string >
+			for( const point of this.points() ) {
+				for( const reason of ( point.reasons ?? [] ) ) {
+					next[ reason ] = reason
+				}
+			}
+			return next
+		}
+		
+		@ $mol_mem
+		points_followers() {
+			return this.points().map( ( point, index )=> {
+				switch( point.type ) {
+					case 'InlinedFun': return this.Inline( index )
+					case 'NativeCall': return this.Native( index )
+					case 'Fun': return this.Func( index )
+				}
+			} )
+		}
+		
+		@ $mol_mem
+		points_followers_filtered() {
+			const points = this.points()
+			return this.points_followers().filter( (_, index ) => {
+				const point = points[ index ]
+				if( !point.reasons ) return true
+				if( !point.reasons.length ) return true
+				return point.reasons.some( reason => this.filter_enabled( reason ) )
+			} )
+		}
+		
+		@ $mol_mem
 		body() {
 			return [
 				this.Code(),
-				... this.points().map( ( point, index )=> {
-					switch( point.type ) {
-						case 'InlinedFun': return this.Inline( index )
-						case 'NativeCall': return this.Native( index )
-						case 'Fun': return this.Func( index )
-					}
-				} )
+				... this.points_followers_filtered(),
 			]
 		}
 		

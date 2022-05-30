@@ -122,7 +122,6 @@
             "pos": 530,
             "reasons": [
               "Float64Div",
-              "ChangeInt32ToFloat64",
               "ChangeInt32ToFloat64"
             ]
           }
@@ -146,7 +145,7 @@
         "type": "NativeCall",
         "pos": 287,
         "reasons": [
-          "Store[kRepFloat64, NoWriteBarrier]",
+          "StoreFloat64",
           "RoundFloat64ToInt32",
           "Float64Equal",
           "ChangeInt32ToFloat64"
@@ -296,7 +295,7 @@
         "type": "NativeCall",
         "pos": 286,
         "reasons": [
-          "Store[kRepFloat64, NoWriteBarrier]",
+          "StoreFloat64",
           "Float64Equal",
           "RoundFloat64ToInt32",
           "ChangeInt32ToFloat64"
@@ -551,16 +550,7 @@
                   "end": 536,
                   "uri": "\\hyoo\\js\\opt\\example\\calc.js"
                 },
-                "points": [
-                  {
-                    "type": "NativeCall",
-                    "pos": 530,
-                    "reasons": [
-                      "Float64Constant[0.5]",
-                      "Float64Constant[1]"
-                    ]
-                  }
-                ]
+                "points": []
               },
               {
                 "type": "InlinedFun",
@@ -582,8 +572,7 @@
         "pos": 361,
         "reasons": [
           "Float64Add",
-          "ChangeInt32ToFloat64",
-          "Float64Add"
+          "ChangeInt32ToFloat64"
         ]
       },
       {
