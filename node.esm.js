@@ -9042,6 +9042,7 @@ var $;
         }
         Native_marker(id) {
             const obj = new this.$.$mol_pop_over();
+            obj.align = () => "bottom_right";
             obj.Anchor = () => this.Native_anchor(id);
             obj.bubble_content = () => [
                 this.Point_hint(id)
@@ -9371,6 +9372,9 @@ var $;
                 if (next)
                     this.Code().ensure_visible(rows[next - 1]);
                 return next;
+            }
+            filter_enabled(id, next) {
+                return this.$.$mol_state_local.value(`filter_enabled(${id})`, next) ?? super.filter_enabled(id);
             }
         }
         __decorate([

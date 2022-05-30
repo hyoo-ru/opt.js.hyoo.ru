@@ -2792,6 +2792,7 @@ declare namespace $.$$ {
         inline_current(index: number): boolean;
         jump_rows(): $mol_text_code_row[];
         jump(next?: number): number;
+        filter_enabled(id: string, next?: boolean): boolean;
     }
 }
 
