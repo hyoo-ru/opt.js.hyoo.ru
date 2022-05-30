@@ -9398,7 +9398,9 @@ var $;
                 return this.points()[index].optimized;
             }
             inline_current(index) {
-                return this.$.$mol_state_arg.value('inline')?.startsWith(this.inline_arg(index).inline) ?? false;
+                const current = this.$.$mol_state_arg.value('inline') ?? '';
+                const self = this.inline_arg(index).inline;
+                return current === self || current.startsWith(self + ',');
             }
             jump_rows() {
                 const rows = new Set();
@@ -9456,6 +9458,9 @@ var $;
         __decorate([
             $mol_mem_key
         ], $hyoo_js_opt_script.prototype, "point_hint", null);
+        __decorate([
+            $mol_mem_key
+        ], $hyoo_js_opt_script.prototype, "inline_current", null);
         __decorate([
             $mol_mem
         ], $hyoo_js_opt_script.prototype, "jump_rows", null);
