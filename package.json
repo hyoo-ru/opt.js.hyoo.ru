@@ -167,6 +167,7 @@
     "$mol_icon_cross",
     "$mol_fiber",
     "$mol_action",
+    "$mol_check_list",
     "$mol_follower",
     "$mol_ghost",
     "$mol_dom_render_events",

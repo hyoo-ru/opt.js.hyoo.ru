@@ -524,6 +524,18 @@ $mol_search_jumper $mol_search
 				enter?event <=> forward?event
 				escape?val <=> escape?val null
 
+$mol_check_list $mol_view
+	Option* $mol_check
+		checked?val <=> option_checked*?val false
+		label <= option_label* /
+			<= option_title* \
+		enabled <= option_enabled* <= enabled true
+		hint <= option_hint* \
+		minimal_height 24
+	options *
+	keys /string
+	sub <= items /$mol_check
+
 $mol_ghost $mol_view
 	Sub $mol_view
 
@@ -609,6 +621,12 @@ $hyoo_js_opt_script $mol_page
 		<= Search $mol_search_jumper
 			query? <=> search? \
 			Root <= Body
+	sub /
+		<= Head
+		<= Filters $mol_check_list
+			options <= filters *
+			option_checked*? <=> filter_enabled*? true
+		<= Body
 	body /
 		<= Code $mol_text_code
 			text <= code \

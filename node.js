@@ -8389,6 +8389,101 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_check_list extends $mol_view {
+        Option(id) {
+            const obj = new this.$.$mol_check();
+            obj.checked = (val) => this.option_checked(id, val);
+            obj.label = () => this.option_label(id);
+            obj.enabled = () => this.option_enabled(id);
+            obj.hint = () => this.option_hint(id);
+            obj.minimal_height = () => 24;
+            return obj;
+        }
+        options() {
+            return {};
+        }
+        keys() {
+            return [];
+        }
+        sub() {
+            return this.items();
+        }
+        option_checked(id, val) {
+            if (val !== undefined)
+                return val;
+            return false;
+        }
+        option_title(id) {
+            return "";
+        }
+        option_label(id) {
+            return [
+                this.option_title(id)
+            ];
+        }
+        enabled() {
+            return true;
+        }
+        option_enabled(id) {
+            return this.enabled();
+        }
+        option_hint(id) {
+            return "";
+        }
+        items() {
+            return [];
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $mol_check_list.prototype, "Option", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_check_list.prototype, "option_checked", null);
+    $.$mol_check_list = $mol_check_list;
+})($ || ($ = {}));
+//mol/check/list/-view.tree/list.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/list/list.view.css", "[mol_check_list] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tgap: 1px;\n}\n\n[mol_check_list_option] {\n\tflex: 0 1 auto;\n}\n\n[mol_check_list_option][mol_check_checked=\"true\"] {\n\ttext-shadow: 0 0;\n\tcolor: var(--mol_theme_current);\n}\n\n[mol_check_list_option][mol_check_checked=\"true\"][disabled] {\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+//mol/check/list/-css/list.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_check_list extends $.$mol_check_list {
+            options() {
+                return {};
+            }
+            keys() {
+                return Object.keys(this.options());
+            }
+            items() {
+                return this.keys().map(key => this.Option(key));
+            }
+            option_title(key) {
+                return this.options()[key];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "keys", null);
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "items", null);
+        $$.$mol_check_list = $mol_check_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//mol/check/list/list.view.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_ghost extends $mol_view {
         Sub() {
             const obj = new this.$.$mol_view();
@@ -8844,6 +8939,13 @@ var $;
                 this.Search()
             ];
         }
+        sub() {
+            return [
+                this.Head(),
+                this.Filters(),
+                this.Body()
+            ];
+        }
         body() {
             return [
                 this.Code(),
@@ -8871,6 +8973,20 @@ var $;
             const obj = new this.$.$mol_search_jumper();
             obj.query = (next) => this.search(next);
             obj.Root = () => this.Body();
+            return obj;
+        }
+        filters() {
+            return {};
+        }
+        filter_enabled(id, next) {
+            if (next !== undefined)
+                return next;
+            return true;
+        }
+        Filters() {
+            const obj = new this.$.$mol_check_list();
+            obj.options = () => this.filters();
+            obj.option_checked = (id, next) => this.filter_enabled(id, next);
             return obj;
         }
         code() {
@@ -8981,6 +9097,12 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_js_opt_script.prototype, "Search", null);
+    __decorate([
+        $mol_mem_key
+    ], $hyoo_js_opt_script.prototype, "filter_enabled", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_js_opt_script.prototype, "Filters", null);
     __decorate([
         $mol_mem
     ], $hyoo_js_opt_script.prototype, "Code", null);
@@ -9152,16 +9274,39 @@ var $;
             points() {
                 return super.points();
             }
+            filters() {
+                const next = {};
+                for (const point of this.points()) {
+                    for (const reason of (point.reasons ?? [])) {
+                        next[reason] = reason;
+                    }
+                }
+                return next;
+            }
+            points_followers() {
+                return this.points().map((point, index) => {
+                    switch (point.type) {
+                        case 'InlinedFun': return this.Inline(index);
+                        case 'NativeCall': return this.Native(index);
+                        case 'Fun': return this.Func(index);
+                    }
+                });
+            }
+            points_followers_filtered() {
+                const points = this.points();
+                return this.points_followers().filter((_, index) => {
+                    const point = points[index];
+                    if (!point.reasons)
+                        return true;
+                    if (!point.reasons.length)
+                        return true;
+                    return point.reasons.some(reason => this.filter_enabled(reason));
+                });
+            }
             body() {
                 return [
                     this.Code(),
-                    ...this.points().map((point, index) => {
-                        switch (point.type) {
-                            case 'InlinedFun': return this.Inline(index);
-                            case 'NativeCall': return this.Native(index);
-                            case 'Fun': return this.Func(index);
-                        }
-                    })
+                    ...this.points_followers_filtered(),
                 ];
             }
             code() {
@@ -9231,6 +9376,15 @@ var $;
                 ];
             }
         }
+        __decorate([
+            $mol_mem
+        ], $hyoo_js_opt_script.prototype, "filters", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_js_opt_script.prototype, "points_followers", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_js_opt_script.prototype, "points_followers_filtered", null);
         __decorate([
             $mol_mem
         ], $hyoo_js_opt_script.prototype, "body", null);

@@ -2500,6 +2500,36 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $mol_check_list extends $mol_view {
+        Option(id: any): $$.$mol_check;
+        options(): {};
+        keys(): readonly string[];
+        sub(): readonly $mol_check[];
+        option_checked(id: any, val?: any): boolean;
+        option_title(id: any): string;
+        option_label(id: any): readonly any[];
+        enabled(): boolean;
+        option_enabled(id: any): boolean;
+        option_hint(id: any): string;
+        items(): readonly $mol_check[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $.$$ {
+    class $mol_check_list extends $.$mol_check_list {
+        options(): {
+            [key: string]: string;
+        };
+        keys(): string[];
+        items(): $mol_check[];
+        option_title(key: string): string;
+    }
+}
+
+declare namespace $ {
     class $mol_ghost extends $mol_view {
         Sub(): $mol_view;
     }
@@ -2638,11 +2668,15 @@ declare namespace $ {
         };
         point_offset(id: any): readonly any[];
         tools(): readonly any[];
+        sub(): readonly any[];
         body(): readonly any[];
         jump(next?: any): number;
         Jump(): $$.$mol_paginator;
         search(next?: any): string;
         Search(): $$.$mol_search_jumper;
+        filters(): {};
+        filter_enabled(id: any, next?: any): boolean;
+        Filters(): $$.$mol_check_list;
         code(): string;
         Code(): $$.$mol_text_code;
         Point_anchor(id: any): $mol_view;
@@ -2737,6 +2771,9 @@ declare namespace $.$$ {
     }
     class $hyoo_js_opt_script extends $.$hyoo_js_opt_script {
         points(): readonly (Fun | NativeCall | InlinedFun)[];
+        filters(): Record<string, string>;
+        points_followers(): $mol_follower[];
+        points_followers_filtered(): $mol_follower[];
         body(): ($mol_text_code | $mol_follower)[];
         code(): string;
         point_pos(index: number): {
