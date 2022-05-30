@@ -51,6 +51,10 @@ $hyoo_js_opt_script $mol_page
 		<= Search $mol_search_jumper
 			query? <=> search? \
 			Root <= Body
+		<= Close $mol_link
+			arg <= close_arg * 
+			sub /
+				<= Close_icon $mol_icon_cross
 	foot /
 		<= Filters $mol_check_list
 			options <= filters *

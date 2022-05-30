@@ -209,6 +209,19 @@ namespace $.$$ {
 			}
 		}
 		
+		@ $mol_mem
+		close_arg() {
+			const path = this.path()
+			return path.length
+				? {
+					inline: this.path().slice( 0, -1 ).join( ',' )
+				}
+				: {
+					inline: null,
+					file: null,
+				}
+		}
+		
 		@ $mol_mem_key
 		point_hint( index: number ) {
 			const point = this.points()[ index ]
