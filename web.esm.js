@@ -9029,9 +9029,18 @@ var $;
                 return super.points();
             }
             filters() {
+                const points = this.points();
                 const next = {};
+                if (points.some(point => point.type === 'Fun')) {
+                    next['Opt'] = 'Opt';
+                }
+                if (points.some(point => point.type === 'InlinedFun')) {
+                    next['Inlined'] = 'Inlined';
+                }
                 for (const point of this.points()) {
                     for (const reason of (point.reasons ?? [])) {
+                        if (!reason)
+                            continue;
                         next[reason] = reason;
                     }
                 }
@@ -9050,10 +9059,10 @@ var $;
                 const points = this.points();
                 return this.points_followers().filter((_, index) => {
                     const point = points[index];
-                    if (!point.reasons)
-                        return true;
-                    if (!point.reasons.length)
-                        return true;
+                    if (point.type === 'Fun')
+                        return this.filter_enabled('Opt');
+                    if (point.type === 'InlinedFun')
+                        return this.filter_enabled('Inlined');
                     return point.reasons.some(reason => this.filter_enabled(reason));
                 });
             }
