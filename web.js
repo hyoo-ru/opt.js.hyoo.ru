@@ -5223,6 +5223,7 @@ var $;
         'text-link-http': /\b(https?:\/\/[^\s,.;:!?")]+(?:[,.;:!?")][^\s,.;:!?")]+)+)/,
     });
     $.$mol_syntax2_md_code = new $mol_syntax2({
+        'code-indent': /\t+/,
         'code-docs': /\/\/\/.*?$/,
         'code-comment-block': /(?:\/\*[^]*?\*\/|\/\+[^]*?\+\/|<![^]*?>)/,
         'code-link': /(?:\w+:\/\/|#)\S+?(?=\s|\\\\|""|$)/,
@@ -8346,7 +8347,7 @@ var $;
             pos() {
                 const self_rect = this.view_rect();
                 const prev = $mol_wire_probe(() => this.pos());
-                const anchor_rect = this.Anchor().view_rect();
+                const anchor_rect = this.Anchor()?.view_rect();
                 if (!anchor_rect)
                     return null;
                 const left = Math.floor((prev?.left ?? 0)
@@ -9130,9 +9131,9 @@ var $;
             }
             jump_rows() {
                 const rows = new Set();
-                const points = this.points();
-                for (let i = 0; i < points.length; ++i) {
-                    const anchor = this.Point_anchor(i);
+                const followers = this.points_followers_filtered();
+                for (let i = 0; i < followers.length; ++i) {
+                    const anchor = followers[i].Anchor();
                     const row = $mol_owning_get(anchor).host;
                     rows.add(row);
                 }
