@@ -265,9 +265,9 @@ namespace $.$$ {
 			
 			const rows = new Set<$mol_text_code_row>()
 			
-			const points = this.points()
-			for( let i =0; i < points.length; ++ i ) {
-				const anchor = this.Point_anchor( i )
+			const followers = this.points_followers_filtered()
+			for( let i =0; i < followers.length; ++ i ) {
+				const anchor = followers[i].Anchor()
 				const row = ( $mol_owning_get( anchor ) as $mol_wire_atom<any,any,any> ).host
 				rows.add( row )
 			}
