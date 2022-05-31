@@ -594,8 +594,7 @@ $hyoo_js_opt $mol_book2
 						\	npx turbotracer path/to/script.js
 						\	npx turbotracer "https://example.org"
 						\### Other JS Tools
-						\- [Benchmarks](https://perf.js.hyoo.ru)
-						\- [Sandbox](https://eval.js.hyoo.ru)
+						\[Benchmarks](https://perf.js.hyoo.ru) [Sandbox](https://eval.js.hyoo.ru)
 		<= Script*0 $hyoo_js_opt_script
 			title <= script_title* \
 			script <= script* \

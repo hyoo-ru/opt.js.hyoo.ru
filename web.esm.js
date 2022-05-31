@@ -1313,26 +1313,7 @@ var $;
             }
         }
         resync(...args) {
-            let res;
-            try {
-                res = this.recall(...args);
-            }
-            catch (error) {
-                if (error instanceof Promise)
-                    $mol_fail_hidden(error);
-                res = error;
-            }
-            try {
-                this.once();
-            }
-            catch (error) {
-                if (error instanceof Promise)
-                    $mol_fail_hidden(error);
-            }
-            return this.put(res);
-        }
-        recall(...args) {
-            return this.task.call(this.host, ...args);
+            return this.put(this.task.call(this.host, ...args));
         }
         once() {
             return this.sync();
@@ -1381,9 +1362,6 @@ var $;
     __decorate([
         $mol_wire_method
     ], $mol_wire_atom.prototype, "resync", null);
-    __decorate([
-        $mol_wire_method
-    ], $mol_wire_atom.prototype, "recall", null);
     __decorate([
         $mol_wire_method
     ], $mol_wire_atom.prototype, "once", null);
@@ -8564,7 +8542,7 @@ var $;
         }
         Hint() {
             const obj = new this.$.$mol_text();
-            obj.text = () => "### How to Use\n\tnpx turbotracer path/to/script.js\n\tnpx turbotracer \"https://example.org\"\n### Other JS Tools\n- [Benchmarks](https://perf.js.hyoo.ru)\n- [Sandbox](https://eval.js.hyoo.ru)";
+            obj.text = () => "### How to Use\n\tnpx turbotracer path/to/script.js\n\tnpx turbotracer \"https://example.org\"\n### Other JS Tools\n[Benchmarks](https://perf.js.hyoo.ru) [Sandbox](https://eval.js.hyoo.ru)";
             return obj;
         }
         Menu_content() {
