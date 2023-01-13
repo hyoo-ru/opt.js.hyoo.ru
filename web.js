@@ -7732,6 +7732,7 @@ var $;
                     shrink: 1,
                     basis: per(100),
                 },
+                padding: $mol_gap.block,
             },
             Foot: {
                 display: 'flex',
@@ -7747,6 +7748,10 @@ var $;
                 },
                 boxShadow: `0 -0.5rem 0.5rem -0.5rem hsla(0,0%,0%,.25)`,
                 zIndex: 1,
+                padding: $mol_gap.block,
+                ':empty': {
+                    display: 'none',
+                },
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
@@ -9752,7 +9757,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_menu_content] {\n\tjustify-content: space-between;\n\tflex: 1 0 auto;\n}\n\n[hyoo_js_opt_hint] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_foot] {\n\tpadding: var(--mol_gap_block);\n\tjustify-content: flex-end;\n}\n\n[hyoo_js_opt_script_native_anchor] {\n\tcolor: var(--mol_theme_focus);\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_point_hint] {\n\twhite-space: pre;\n}\n\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_focus);\n\tfont-size: .75rem;\n\ttext-shadow: 0 0;\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_func_marker_optimized=\"true\"] {\n\tcolor: var(--mol_theme_special);\n}\n");
+    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu_content] {\n\tjustify-content: space-between;\n\tflex: 1 0 auto;\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_foot] {\n\tpadding: var(--mol_gap_block);\n\tjustify-content: flex-end;\n}\n\n[hyoo_js_opt_script_native_anchor] {\n\tcolor: var(--mol_theme_focus);\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_point_hint] {\n\twhite-space: pre;\n}\n\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_focus);\n\tfont-size: .75rem;\n\ttext-shadow: 0 0;\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_func_marker_optimized=\"true\"] {\n\tcolor: var(--mol_theme_special);\n}\n");
 })($ || ($ = {}));
 //hyoo/js/opt/-css/opt.view.css.ts
 ;
