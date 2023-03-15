@@ -3042,7 +3042,7 @@ declare namespace $.$$ {
             end: number;
         };
     };
-    class $hyoo_js_opt extends $.$hyoo_js_opt {
+    export class $hyoo_js_opt extends $.$hyoo_js_opt {
         data(next?: File[]): File[];
         files(): Map<string, File>;
         menu_content(): $mol_link[];
@@ -3061,7 +3061,7 @@ declare namespace $.$$ {
         script_path(deep: number): number[];
         pages(): ($mol_page | $hyoo_js_opt_script)[];
     }
-    class $hyoo_js_opt_script extends $.$hyoo_js_opt_script {
+    export class $hyoo_js_opt_script extends $.$hyoo_js_opt_script {
         points(): readonly (Fun | NativeCall | InlinedFun)[];
         filters(): Record<string, string>;
         points_followers(): $mol_follower[];
@@ -3093,6 +3093,7 @@ declare namespace $.$$ {
         jump(next?: number): number;
         filter_enabled(id: string, next?: boolean): boolean;
     }
+    export {};
 }
 
 declare namespace $ {
