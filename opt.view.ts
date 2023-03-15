@@ -1,11 +1,11 @@
 namespace $.$$ {
 	
-	export type File = {
+	type File = {
 		uri: string;
 		code: string;
 		points: (Fun | NativeCall | InlinedFun)[];
 	};
-	export type Fun = {
+	type Fun = {
 		type: 'Fun';
 		pos: number;
 		source: {uri: string; start: number; end: number};
@@ -14,13 +14,13 @@ namespace $.$$ {
 		optimized: boolean;
 		points: undefined
 	};
-	export type NativeCall = {
+	type NativeCall = {
 		type: 'NativeCall';
 		reasons: string[];
 		pos: number;
 		points: undefined
 	};
-	export type InlinedFun = {
+	type InlinedFun = {
 		type: 'InlinedFun';
 		points: (Fun | NativeCall | InlinedFun)[];
 		name: string;
