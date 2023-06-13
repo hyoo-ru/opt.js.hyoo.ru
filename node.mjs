@@ -11182,4 +11182,5 @@ var $;
 })($ || ($ = {}));
 //hyoo/js/opt/-css/opt.view.css.ts
 
+export default $
 //# sourceMappingURL=node.js.map
