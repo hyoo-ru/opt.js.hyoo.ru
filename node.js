@@ -891,11 +891,15 @@ var $;
 (function ($) {
     $.$mol_key_store = new WeakMap();
     function $mol_key(value) {
+        if (typeof value === 'bigint')
+            return value.toString() + 'n';
         if (!value)
             return JSON.stringify(value);
         if (typeof value !== 'object' && typeof value !== 'function')
             return JSON.stringify(value);
         return JSON.stringify(value, (field, value) => {
+            if (typeof value === 'bigint')
+                return value.toString() + 'n';
             if (!value)
                 return value;
             if (typeof value !== 'object' && typeof value !== 'function')
@@ -5294,7 +5298,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/check/check.css", "[mol_check] {\n\tflex: 0 0 auto;\n\tjustify-content: flex-start;\n\talign-content: center;\n\talign-items: flex-start;\n\tborder: none;\n\tfont-weight: inherit;\n\tbox-shadow: none;\n\ttext-align: left;\n\tdisplay: inline-flex;\n\tflex-wrap: nowrap;\n}\n\n[mol_check_title] {\n\tflex-shrink: 1;\n}\n");
+    $mol_style_attach("mol/check/check.css", "[mol_check] {\n\tflex: 0 0 auto;\n\tjustify-content: flex-start;\n\talign-content: center;\n\t/* align-items: flex-start; */\n\tborder: none;\n\tfont-weight: inherit;\n\tbox-shadow: none;\n\ttext-align: left;\n\tdisplay: inline-flex;\n\tflex-wrap: nowrap;\n}\n\n[mol_check_title] {\n\tflex-shrink: 1;\n}\n");
 })($ || ($ = {}));
 //mol/check/-css/check.css.ts
 ;
@@ -11326,7 +11330,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu_content] {\n\tjustify-content: space-between;\n\tflex: 1 0 auto;\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_body] {\n\tpadding: var(--mol_gap_block);\n}\n\n[hyoo_js_opt_script_foot] {\n\tpadding: var(--mol_gap_block);\n\tjustify-content: flex-end;\n}\n\n[hyoo_js_opt_script_native_anchor] {\n\tcolor: var(--mol_theme_focus);\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_point_hint] {\n\twhite-space: pre;\n}\n\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_focus);\n\tfont-size: .75rem;\n\ttext-shadow: 0 0;\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_func_marker_optimized=\"true\"] {\n\tcolor: var(--mol_theme_special);\n}\n");
+    $mol_style_attach("hyoo/js/opt/opt.view.css", "[hyoo_js_opt_menu_content] {\n\tjustify-content: space-between;\n\tflex: 1 0 auto;\n}\n\n[hyoo_js_opt_script] {\n\tflex: 1 0 60rem;\n}\n\n[hyoo_js_opt_script_foot] {\n\tpadding: var(--mol_gap_block);\n\tjustify-content: flex-end;\n}\n\n[hyoo_js_opt_script_native_anchor] {\n\tcolor: var(--mol_theme_focus);\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_point_hint] {\n\twhite-space: pre;\n}\n\n[hyoo_js_opt_script_func_marker] {\n\tcolor: var(--mol_theme_focus);\n\tfont-size: .75rem;\n\ttext-shadow: 0 0;\n\tpadding: var(--mol_gap_text);\n}\n\n[hyoo_js_opt_script_func_marker_optimized=\"true\"] {\n\tcolor: var(--mol_theme_special);\n}\n");
 })($ || ($ = {}));
 //hyoo/js/opt/-css/opt.view.css.ts
 
