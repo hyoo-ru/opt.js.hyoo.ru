@@ -310,18 +310,18 @@ $mol_grid_number $mol_grid_cell
 
 $mol_image $mol_view
 	dom_name \img
-	field *
+	field *any
 		^
 		src <= uri \
 		alt <= title
 		loading <= loading \eager
 		decoding <= decoding \async
 		crossOrigin <= cors null
-	attr *
+	attr *any
 		^
-		width <= natural_width? 0
-		height <= natural_height? 0
-	event *
+		width <= natural_width 0
+		height <= natural_height 0
+	event *any
 		load? <=> load? null
 	minimal_width 16
 	minimal_height 16
@@ -403,6 +403,7 @@ $mol_text $mol_list
 	text \
 	param \
 	flow_tokens /
+	block_text* \
 	auto /
 		<= auto_scroll null
 	- \Blocks
