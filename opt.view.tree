@@ -53,7 +53,7 @@ $hyoo_js_opt_script $mol_page
 		<= Close $mol_link
 			arg <= close_arg * 
 			sub /
-				<= Close_icon $mol_icon_cross
+				<= Close_icon $mol_icon_close
 	foot /
 		<= Filters $mol_check_list
 			options <= filters *
