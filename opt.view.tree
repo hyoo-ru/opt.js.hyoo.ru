@@ -71,6 +71,7 @@ $hyoo_js_opt_script $mol_page
 				attempts <= func_attempts* 0
 				optimized <= func_optimized* true
 				hint <= point_hint* \
+				arg <= inline_arg* *
 			offset <= point_offset*
 		<= Native*0 $mol_follower
 			Anchor <= Point_anchor* $mol_view
@@ -93,7 +94,7 @@ $hyoo_js_opt_script $mol_page
 					<= Inline_icon* $mol_icon_map_marker_check
 			offset <= point_offset*
 
-$hyoo_js_opt_script_func_marker $mol_button
+$hyoo_js_opt_script_func_marker $mol_link
 	attr *
 		^
 		hyoo_js_opt_script_func_marker_optimized <= optimized true

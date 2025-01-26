@@ -8,8 +8,10 @@ namespace $.$$ {
 	type Fun = {
 		type: 'Fun';
 		pos: number;
+		name: string;
 		source: {uri: string; start: number; end: number};
 		optimizationCount: number;
+		asm: string;
 		reasons: string[];
 		optimized: boolean;
 		points: undefined
@@ -66,6 +68,7 @@ namespace $.$$ {
 			return this.files().get( uri ) ?? null
 		}
 		
+		@ $mol_mem
 		inline_path() {
 			
 			const path = this.$.$mol_state_arg.value( 'inline' )
@@ -75,7 +78,7 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem_key
-		point( deep: number ): InlinedFun {
+		point( deep: number ): InlinedFun | Fun {
 			if( !deep ) {
 				const file = this.file()!
 				return {
@@ -87,7 +90,7 @@ namespace $.$$ {
 					source: { uri: file.uri, start: 0, end: file.code.length },
 				}
 			}
-			return this.point( deep - 1 ).points![ this.inline_path()[ deep - 1 ] ] as InlinedFun
+			return this.point( deep - 1 ).points![ this.inline_path()[ deep - 1 ] ] as InlinedFun | Fun
 		}
 		
 		script_title( deep: number ) {
@@ -97,18 +100,27 @@ namespace $.$$ {
 		}
 		
 		script( deep: number ) {
+			
+			const point = this.point( deep )
+			if( 'asm' in point ) {
+				console.log(point)
+				return point.asm
+			}
+			
 			const source = this.script_source( deep )
 			return this.files().get( source.uri )!.code
 		}
 		
 		@ $mol_mem_key
 		script_source( deep: number ) {
-			return this.point( deep ).source
+			const point = this.point( deep )
+			if( 'asm' in point  ) return { uri: 'ASM', start: 0, end: point.asm.length }
+			return point.source
 		}
 		
 		@ $mol_mem_key
 		points( deep: number ) {
-			return this.point( deep ).points
+			return this.point( deep ).points ?? []
 		}
 		
 		script_path( deep: number ) {
