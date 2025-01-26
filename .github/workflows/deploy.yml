@@ -19,9 +19,8 @@ jobs:
         token: ${{ secrets.GH_PAT }}
         package: 'hyoo/js/opt'
     
-    - name: Deploy on GitHub Pages
+    
+    - uses: hyoo-ru/gh-deploy@v4.4.1
       if: github.ref == 'refs/heads/master'
-      uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
       with:
-        repo-token: ${{ secrets.GH_PAT }}
-        site-directory: 'hyoo/js/opt/-'
+        folder: 'hyoo/js/opt/-'
