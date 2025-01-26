@@ -275,25 +275,25 @@ namespace $.$$ {
 		@ $mol_mem
 		jump_rows() {
 			
-			const rows = new Set<$mol_text_code_row>()
+			const lines = new Set<$mol_text_code_line>()
 			
 			const followers = this.points_followers_filtered()
 			for( let i =0; i < followers.length; ++ i ) {
 				const anchor = followers[i].Anchor()
-				const row = ( $mol_owning_get( anchor ) as $mol_wire_atom<any,any,any> ).host
-				rows.add( row )
+				const line = ( $mol_owning_get( anchor ) as $mol_wire_atom<any,any,any> ).host
+				lines.add( line )
 			}
 			
-			return [ ... rows ]
+			return [ ... lines ]
 		}
 		
 		@ $mol_mem
 		jump( next?: number ) {
-			const rows = this.jump_rows()
-			if( next === undefined ) return rows.length
-			if( next > rows.length ) next = 1
-			if( next < 1 ) next = rows.length
-			if( next ) this.Code().ensure_visible( rows[ next - 1 ] )
+			const lines = this.jump_rows()
+			if( next === undefined ) return lines.length
+			if( next > lines.length ) next = 1
+			if( next < 1 ) next = lines.length
+			if( next ) this.Code().ensure_visible( lines[ next - 1 ] )
 			return next
 		}
 		
