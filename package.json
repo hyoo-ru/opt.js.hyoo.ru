@@ -240,7 +240,6 @@
     "$mol_offline"
   ],
   "dependencies": {
-    "internal": "*",
     "jsdom": "*"
   }
 }
